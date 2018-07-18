@@ -11,3 +11,6 @@
 .DS_Store
 
 /src/debug
+vendor/*
+apidoc.html
+apidoc.html.json

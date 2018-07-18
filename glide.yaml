@@ -1,0 +1,8 @@
+package: .
+import:
+- package: github.com/kataras/iris
+  version: ^10.6.6
+  subpackages:
+  - middleware/logger
+  - middleware/recover
+- package: github.com/lib/pq
