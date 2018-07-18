@@ -1,0 +1,17 @@
+{
+  "go.goroot": "/usr/local/Cellar/go/1.10.3/libexec",// 你的Goroot
+  "go.gopath": "/Users/zhaowei/go",// 你的Gopath
+  "go.lintOnSave": true,
+  "go.vetOnSave": true,
+  "go.buildTags": "",
+  "go.buildFlags": [],
+  "go.lintTool": "golint",
+  "go.lintFlags": [],
+  "go.vetFlags": [],
+  "go.coverOnSave": false,
+  "go.useCodeSnippetsOnFunctionSuggest": false,
+  "go.formatOnSave": true,
+  "go.formatTool": "gofmt",
+  "go.formatFlags": [],
+  "go.gocodeAutoBuild": false
+}

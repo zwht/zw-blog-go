@@ -1,0 +1,1 @@
+CREATE TABLE _user(id VARCHAR(20),name VARCHAR(20),loginName VARCHAR(20),phone VARCHAR(11),email VARCHAR(30),password VARCHAR(30));
