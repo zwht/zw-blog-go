@@ -5,9 +5,9 @@ import (
 )
 
 type User struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-	Age  int    `json:"password"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
 }
 
 type LoginVo struct {
@@ -16,27 +16,27 @@ type LoginVo struct {
 }
 
 func (user *User) Insert() (err error) {
-	sql := "insert into _user(name,age) values($1,$2)"
-	_, err = Db.Exec(sql, user.Name, user.Age)
+	sql := "insert into _user(name,password) values($1,$2)"
+	_, err = Db.Exec(sql, user.Name, user.Password)
 	return
 }
 
-func Delete(id int) (err error) {
+func Delete(id string) (err error) {
 	sql := "delete from _user where id=$1"
 	_, err = Db.Exec(sql, id)
 	return
 }
 
 func (user *User) Update() (err error) {
-	sql := "update _user set name=$1,age=$2 where id=$3"
-	_, err = Db.Exec(sql, user.Name, user.Age, user.ID)
+	sql := "update _user set name=$1,Password=$2 where id=$3"
+	_, err = Db.Exec(sql, user.Name, user.Password, user.ID)
 	return
 }
 
-func Select(id int) (user User, err error) {
-	sql := "select id,name,age from _user where id=$1"
+func Select(id string) (user User, err error) {
+	sql := "select id,name,password from _user where id=$1"
 	user = User{}
-	err = Db.QueryRow(sql, id).Scan(&user.ID, &user.Name, &user.Age)
+	err = Db.QueryRow(sql, id).Scan(&user.ID, &user.Name, &user.Password)
 	return
 }
 
@@ -51,7 +51,7 @@ func SelectList() (users []User, err error) {
 	for rows.Next() {
 		rows.Columns()
 		var user User
-		err = rows.Scan(&user.ID, &user.Name, &user.Age)
+		err = rows.Scan(&user.ID, &user.Name, &user.Password)
 		if err != nil {
 			panic(err.Error)
 		}
@@ -60,22 +60,12 @@ func SelectList() (users []User, err error) {
 	return
 }
 
-func Logins(loginVo LoginVo) (users []User, err error) {
-	sql := "select id,name,password from _user where loginName=$1"
-	users = []User{}
-	rows, err := Db.Query(sql, loginVo.LoginName)
-	if err != nil {
-		panic(err.Error)
-	}
-	defer rows.Close()
-	for rows.Next() {
-		rows.Columns()
-		var user User
-		err = rows.Scan(&user.ID, &user.Name, &user.Age)
-		if err != nil {
-			panic(err.Error)
-		}
-		users = append(users, user)
-	}
+func Logins(loginVo LoginVo) (user User, err error) {
+	// sql := "select id,name,Password from _user where loginName=$1 AND password=$2"
+	// user = User{}
+	// err = Db.QueryRow(sql, loginVo.LoginName, loginVo.Password).Scan(&user.ID, &user.Name, &user.Password)
+	sql := "select id,name,password from _user where loginName=$1 AND password=$2"
+	user = User{}
+	err = Db.QueryRow(sql, loginVo.LoginName, loginVo.Password).Scan(&user.ID, &user.Name, &user.Password)
 	return
 }

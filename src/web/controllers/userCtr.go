@@ -4,7 +4,6 @@ import (
 	. "../../datamodels"
 	. "../../services"
 	"github.com/kataras/iris"
-	"strconv"
 )
 
 func CreateUser(ctx iris.Context) {
@@ -16,10 +15,10 @@ func CreateUser(ctx iris.Context) {
 	result := Result{}
 
 	if err != nil {
-		result.ErrorCode = 0
+		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.ErrorCode = 1
+		result.Code = 1
 		result.Msg = "成功保存用户信息"
 	}
 
@@ -27,16 +26,16 @@ func CreateUser(ctx iris.Context) {
 }
 
 func GetUserById(ctx iris.Context) {
-	id, _ := strconv.Atoi(ctx.Params().Get("id"))
+	id := ctx.Params().Get("id")
 	user, err := Select(id)
 
 	result := Result{}
 
 	if err != nil {
-		result.ErrorCode = 0
+		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.ErrorCode = 1
+		result.Code = 1
 		result.Msg = "成功获取用户信息"
 		result.Data = user
 	}
@@ -50,14 +49,14 @@ func GetUserList(ctx iris.Context) {
 	result := Result{}
 
 	if err != nil {
-		result.ErrorCode = 0
+		result.Code = 0
 		result.Msg = err.Error()
 	} else {
 		resultPage := ResultPage{}
 		resultPage.TotalCount = 10
 		resultPage.PageData = users
 
-		result.ErrorCode = 1
+		result.Code = 1
 		result.Msg = "成功获取用户列表信息"
 		result.Data = resultPage
 	}
@@ -66,16 +65,16 @@ func GetUserList(ctx iris.Context) {
 }
 
 func DeleteUserById(ctx iris.Context) {
-	id, _ := strconv.Atoi(ctx.Params().Get("id"))
+	id := ctx.Params().Get("id")
 	err := Delete(id)
 
 	result := Result{}
 
 	if err != nil {
-		result.ErrorCode = 0
+		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.ErrorCode = 1
+		result.Code = 1
 		result.Msg = "成功删除用户信息"
 	}
 
@@ -89,11 +88,11 @@ func Login(ctx iris.Context) {
 	result := Result{}
 
 	if err != nil {
-		result.ErrorCode = 0
+		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.ErrorCode = 1
-		result.Msg = "成功保存用户信息"
+		result.Code = 200
+		result.Msg = "登录成功"
 		result.Data = user
 	}
 

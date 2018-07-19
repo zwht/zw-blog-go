@@ -17,7 +17,7 @@ func main() {
 	app.Get("/", func(ctx iris.Context) {
 		ctx.View("index.html")
 	}) //users
-	usersRoutes := app.Party("/users", func(ctx iris.Context) {
+	usersRoutes := app.Party("/v1/user", func(ctx iris.Context) {
 		ctx.Next()
 	})
 	{
@@ -25,6 +25,7 @@ func main() {
 		usersRoutes.Delete("/{id:int}", DeleteUserById)
 		usersRoutes.Get("/{id:int}", GetUserById)
 		usersRoutes.Get("/", GetUserList)
+		usersRoutes.Post("/login", Login)
 	}
 
 	app.Run(iris.Addr(":8080"),
