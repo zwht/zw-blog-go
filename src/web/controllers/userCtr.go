@@ -24,6 +24,24 @@ func CreateUser(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
+func UpdateUser(ctx iris.Context) {
+	var user User
+	ctx.ReadJSON(&user)
+
+	err := user.Update()
+
+	result := Result{}
+
+	if err != nil {
+		result.Code = 0
+		result.Msg = err.Error()
+	} else {
+		result.Code = 1
+		result.Msg = "成功保存用户信息"
+	}
+
+	ctx.JSON(result)
+}
 
 func GetUserById(ctx iris.Context) {
 	id := ctx.Params().Get("id")
