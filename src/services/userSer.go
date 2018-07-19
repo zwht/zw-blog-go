@@ -61,9 +61,6 @@ func SelectList() (users []User, err error) {
 }
 
 func Logins(loginVo LoginVo) (user User, err error) {
-	// sql := "select id,name,Password from _user where loginName=$1 AND password=$2"
-	// user = User{}
-	// err = Db.QueryRow(sql, loginVo.LoginName, loginVo.Password).Scan(&user.ID, &user.Name, &user.Password)
 	sql := "select id,name,password from _user where loginName=$1 AND password=$2"
 	user = User{}
 	err = Db.QueryRow(sql, loginVo.LoginName, loginVo.Password).Scan(&user.ID, &user.Name, &user.Password)
