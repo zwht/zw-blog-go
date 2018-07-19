@@ -1,1 +1,5 @@
+psql -U zhaowei -d zhaowei -h 127.0.0.1
+
 CREATE TABLE _user(id VARCHAR(20),name VARCHAR(20),loginName VARCHAR(20),phone VARCHAR(11),email VARCHAR(30),password VARCHAR(30));
+
+CREATE TABLE _code(id int,name VARCHAR(20));

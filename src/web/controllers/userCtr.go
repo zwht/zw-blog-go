@@ -81,3 +81,21 @@ func DeleteUserById(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
+
+func Login(ctx iris.Context) {
+	var loginVo LoginVo
+	ctx.ReadJSON(&loginVo)
+	user, err := Logins(loginVo)
+	result := Result{}
+
+	if err != nil {
+		result.ErrorCode = 0
+		result.Msg = err.Error()
+	} else {
+		result.ErrorCode = 1
+		result.Msg = "成功保存用户信息"
+		result.Data = user
+	}
+
+	ctx.JSON(result)
+}

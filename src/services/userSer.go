@@ -10,6 +10,11 @@ type User struct {
 	Age  int    `json:"password"`
 }
 
+type LoginVo struct {
+	LoginName string `json:"loginName"`
+	Password  string `json:"password"`
+}
+
 func (user *User) Insert() (err error) {
 	sql := "insert into _user(name,age) values($1,$2)"
 	_, err = Db.Exec(sql, user.Name, user.Age)
@@ -39,6 +44,26 @@ func SelectList() (users []User, err error) {
 	sql := "select id,name,password from _user"
 	users = []User{}
 	rows, err := Db.Query(sql)
+	if err != nil {
+		panic(err.Error)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		rows.Columns()
+		var user User
+		err = rows.Scan(&user.ID, &user.Name, &user.Age)
+		if err != nil {
+			panic(err.Error)
+		}
+		users = append(users, user)
+	}
+	return
+}
+
+func Logins(loginVo LoginVo) (users []User, err error) {
+	sql := "select id,name,password from _user where loginName=$1"
+	users = []User{}
+	rows, err := Db.Query(sql, loginVo.LoginName)
 	if err != nil {
 		panic(err.Error)
 	}
