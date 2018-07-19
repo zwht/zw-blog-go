@@ -1,7 +1,7 @@
 package service
 
 import (
-	. "../data"
+	. "../config"
 )
 
 type User struct {

@@ -1,7 +1,7 @@
 package main
 
 import (
-	. "./controller"
+	. "./web/controllers"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/middleware/logger"
 	"github.com/kataras/iris/middleware/recover"

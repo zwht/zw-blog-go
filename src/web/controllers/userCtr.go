@@ -1,8 +1,8 @@
-package hh
+package controllers
 
 import (
-	. "../service"
-	. "../tool"
+	. "../../datamodels"
+	. "../../services"
 	"github.com/kataras/iris"
 	"strconv"
 )
@@ -16,10 +16,10 @@ func CreateUser(ctx iris.Context) {
 	result := Result{}
 
 	if err != nil {
-		result.No = 0
+		result.ErrorCode = 0
 		result.Msg = err.Error()
 	} else {
-		result.No = 1
+		result.ErrorCode = 1
 		result.Msg = "成功保存用户信息"
 	}
 
@@ -33,12 +33,12 @@ func GetUserById(ctx iris.Context) {
 	result := Result{}
 
 	if err != nil {
-		result.No = 0
+		result.ErrorCode = 0
 		result.Msg = err.Error()
 	} else {
-		result.No = 1
+		result.ErrorCode = 1
 		result.Msg = "成功获取用户信息"
-		result.Obj = user
+		result.Data = user
 	}
 
 	ctx.JSON(result)
@@ -50,12 +50,16 @@ func GetUserList(ctx iris.Context) {
 	result := Result{}
 
 	if err != nil {
-		result.No = 0
+		result.ErrorCode = 0
 		result.Msg = err.Error()
 	} else {
-		result.No = 1
+		resultPage := ResultPage{}
+		resultPage.TotalCount = 10
+		resultPage.PageData = users
+
+		result.ErrorCode = 1
 		result.Msg = "成功获取用户列表信息"
-		result.Obj = users
+		result.Data = resultPage
 	}
 
 	ctx.JSON(result)
@@ -68,10 +72,10 @@ func DeleteUserById(ctx iris.Context) {
 	result := Result{}
 
 	if err != nil {
-		result.No = 0
+		result.ErrorCode = 0
 		result.Msg = err.Error()
 	} else {
-		result.No = 1
+		result.ErrorCode = 1
 		result.Msg = "成功删除用户信息"
 	}
 
