@@ -5,9 +5,12 @@ import (
 )
 
 type User struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Password string `json:"password"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	LoginName string `json:"loginName"`
+	Password  string `json:"password"`
+	Phone     string `json:"phone"`
+	Email     string `json:"email"`
 }
 
 type LoginVo struct {
@@ -61,8 +64,8 @@ func SelectList() (users []User, err error) {
 }
 
 func Logins(loginVo LoginVo) (user User, err error) {
-	sql := "select id,name,password from _user where loginName=$1 AND password=$2"
+	sql := "select id,name,loginName,phone,email from _user where loginName=$1 AND password=$2"
 	user = User{}
-	err = Db.QueryRow(sql, loginVo.LoginName, loginVo.Password).Scan(&user.ID, &user.Name, &user.Password)
+	err = Db.QueryRow(sql, loginVo.LoginName, loginVo.Password).Scan(&user.ID, &user.Name, &user.LoginName, &user.Phone, &user.Email)
 	return
 }

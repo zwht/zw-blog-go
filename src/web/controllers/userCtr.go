@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	. "../../config"
 	. "../../datamodels"
 	. "../../services"
+	"fmt"
 	"github.com/kataras/iris"
 )
 
@@ -100,6 +102,11 @@ func DeleteUserById(ctx iris.Context) {
 }
 
 func Login(ctx iris.Context) {
+	s := Sess.Start(ctx)
+	//set session values
+	s.Set("name", "iris======")
+	fmt.Printf(s.GetString("name"))
+
 	var loginVo LoginVo
 	ctx.ReadJSON(&loginVo)
 	user, err := Logins(loginVo)

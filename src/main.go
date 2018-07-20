@@ -1,6 +1,7 @@
 package main
 
 import (
+	. "./config"
 	. "./web/routers"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/middleware/logger"
@@ -8,6 +9,7 @@ import (
 )
 
 func main() {
+
 	app := iris.New()
 	app.Logger().SetLevel("debug")
 	app.Use(recover.New())
@@ -20,6 +22,7 @@ func main() {
 		ctx.View("index.html")
 	})
 
+	RedisInit()
 	RouterInit(app)
 
 	app.Run(iris.Addr(":8080"),
