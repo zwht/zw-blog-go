@@ -4,7 +4,7 @@ import (
 	. "../../config"
 	. "../../datamodels"
 	. "../../services"
-	"fmt"
+	"encoding/json"
 	"github.com/kataras/iris"
 )
 
@@ -102,10 +102,6 @@ func DeleteUserById(ctx iris.Context) {
 }
 
 func Login(ctx iris.Context) {
-	s := Sess.Start(ctx)
-	//set session values
-	s.Set("name", "iris======")
-	fmt.Printf(s.GetString("name"))
 
 	var loginVo LoginVo
 	ctx.ReadJSON(&loginVo)
@@ -116,10 +112,29 @@ func Login(ctx iris.Context) {
 		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.Code = 200
-		result.Msg = "登录成功"
-		result.Data = user
-	}
+		userJson, _ := json.Marshal(user)
+		// var empList User
+		// err3 := json.Unmarshal([]byte(userJson), &empList)
+		tokenString, err1 := SetJwt(userJson)
+		if err1 != nil {
+			result.Code = 0
+			result.Msg = err1.Error()
+		} else {
+			result.Code = 200
+			result.Msg = "登录成功"
+			// 把token保存到redis
+			s := Sess.Start(ctx)
+			s.Set("token", tokenString)
+			//fmt.Printf(s.GetString("name"))
 
+			var userVo map[string]string /*创建集合 */
+			userVo = make(map[string]string)
+			userVo["name"] = user.Name
+			userVo["id"] = user.ID
+			userVo["token"] = tokenString
+			result.Data = userVo
+		}
+
+	}
 	ctx.JSON(result)
 }

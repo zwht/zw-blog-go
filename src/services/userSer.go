@@ -17,6 +17,10 @@ type LoginVo struct {
 	LoginName string `json:"loginName"`
 	Password  string `json:"password"`
 }
+type LoginUser struct {
+	User
+	Token string `json:"token"`
+}
 
 func (user *User) Insert() (err error) {
 	sql := "insert into _user(name,password) values($1,$2)"
