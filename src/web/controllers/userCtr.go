@@ -5,6 +5,7 @@ import (
 	. "../../datamodels"
 	. "../../services"
 	"encoding/json"
+	"fmt"
 	"github.com/kataras/iris"
 )
 
@@ -125,12 +126,15 @@ func Login(ctx iris.Context) {
 			// 把token保存到redis
 			s := Sess.Start(ctx)
 			s.Set("token", tokenString)
-			//fmt.Printf(s.GetString("name"))
+			fmt.Printf(s.GetString("token"))
 
 			var userVo map[string]string /*创建集合 */
 			userVo = make(map[string]string)
 			userVo["name"] = user.Name
 			userVo["id"] = user.ID
+			userVo["loginName"] = user.LoginName
+			userVo["phone"] = user.Phone
+			userVo["email"] = user.Email
 			userVo["token"] = tokenString
 			result.Data = userVo
 		}

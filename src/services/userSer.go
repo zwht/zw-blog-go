@@ -23,8 +23,8 @@ type LoginUser struct {
 }
 
 func (user *User) Insert() (err error) {
-	sql := "insert into _user(name,password) values($1,$2)"
-	_, err = Db.Exec(sql, user.Name, user.Password)
+	sql := "insert into _user(id,loginName,name,password,email,phone) values($1,$2,$3,$4,$5,$6)"
+	_, err = Db.Exec(sql, "123", user.LoginName, user.Name, user.Password, user.Email, user.Phone)
 	return
 }
 

@@ -28,7 +28,7 @@ func RedisInit() {
 	iris.RegisterOnInterrupt(func() {
 		db.Close()
 	})
-	Sess = sessions.New(sessions.Config{Cookie: "sessionscookieid", Expires: 45 * time.Minute})
+	Sess = sessions.New(sessions.Config{Cookie: "sessionscookieid", Expires: 1 * time.Minute})
 	Sess.UseDatabase(db)
 	// fmt.Printf("sess type:%T\n", sess)
 }
