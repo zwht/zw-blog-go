@@ -77,7 +77,7 @@ func GetUserList(ctx iris.Context) {
 		resultPage.TotalCount = 10
 		resultPage.PageData = users
 
-		result.Code = 1
+		result.Code = 200
 		result.Msg = "成功获取用户列表信息"
 		result.Data = resultPage
 	}
@@ -117,6 +117,11 @@ func Login(ctx iris.Context) {
 		// var empList User
 		// err3 := json.Unmarshal([]byte(userJson), &empList)
 		tokenString, err1 := SetJwt(userJson)
+		tokenStr33 := GetJwt(tokenString)
+		var empList User
+		err3 := json.Unmarshal(tokenStr33, &empList)
+		fmt.Printf(err3.Error())
+
 		if err1 != nil {
 			result.Code = 0
 			result.Msg = err1.Error()

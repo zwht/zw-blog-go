@@ -48,7 +48,7 @@ func Select(id string) (user User, err error) {
 }
 
 func SelectList() (users []User, err error) {
-	sql := "select id,name,password from _user"
+	sql := "select id,name,loginName,phone,email from _user"
 	users = []User{}
 	rows, err := Db.Query(sql)
 	if err != nil {
@@ -58,7 +58,7 @@ func SelectList() (users []User, err error) {
 	for rows.Next() {
 		rows.Columns()
 		var user User
-		err = rows.Scan(&user.ID, &user.Name, &user.Password)
+		err = rows.Scan(&user.ID, &user.Name, &user.LoginName, &user.Phone, &user.Email)
 		if err != nil {
 			panic(err.Error)
 		}
