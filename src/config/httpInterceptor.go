@@ -37,7 +37,7 @@ func HttpInterceptor(ctx iris.Context) {
 		ctx.Next()
 	} else {
 		result := Result{}
-		result.Code = 412
+		result.Code = 401
 		result.Msg = "没有权限"
 		ctx.JSON(result)
 	}

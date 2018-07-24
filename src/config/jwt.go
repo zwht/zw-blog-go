@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )
@@ -37,7 +36,7 @@ func GetJwt(tokenString string) (pass bool, tokenByte []byte) {
 		if claims, ok := token.Claims.(*MyCustomClaims); ok && token.Valid {
 			tokenByte = claims.Token
 			pass = true
-			fmt.Printf("%v %v", claims.Token, claims.StandardClaims.ExpiresAt)
+			//fmt.Printf("%v %v", claims.Token, claims.StandardClaims.ExpiresAt)
 		} else {
 			pass = false
 		}
