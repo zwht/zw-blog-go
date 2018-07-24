@@ -25,6 +25,8 @@ func main() {
 	RedisInit()
 	RouterInit(app)
 
+	app.UseGlobal(HttpInterceptor)
+
 	app.Run(iris.Addr(":8080"),
 		iris.WithCharset("UTF-8"),
 		iris.WithoutServerError(iris.ErrServerClosed))

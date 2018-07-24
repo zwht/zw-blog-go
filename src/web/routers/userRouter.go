@@ -18,4 +18,5 @@ func UserRouter(app *iris.Application) {
 		routes.Post("/list", GetUserList)
 		routes.Post("/login", Login)
 	}
+
 }

@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"time"
 )
 
 type MyCustomClaims struct {
@@ -14,27 +15,34 @@ var key = []byte("AllYourBase")
 
 func SetJwt(obj []byte) (tokenString string, err error) {
 	// Create the Claims
-	var claims = MyCustomClaims{
+	claims := MyCustomClaims{
 		obj,
 		jwt.StandardClaims{
-			ExpiresAt: 15000,
-			Issuer:    "test",
+			ExpiresAt: time.Now().Add(time.Minute * 1).Unix(),
 		},
 	}
+	// Create token with claims
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err = token.SignedString(key)
 	return
 }
-func GetJwt(tokenString string) (tokenByte []byte) {
-	token, err := jwt.ParseWithClaims(tokenString, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return key, nil
-	})
-
-	if claims, ok := token.Claims.(*MyCustomClaims); ok && token.Valid {
-		tokenByte = claims.Token
-		fmt.Printf("%v %v", claims.Token, claims.StandardClaims.ExpiresAt)
+func GetJwt(tokenString string) (pass bool, tokenByte []byte) {
+	if tokenString != "" {
+		token, err := jwt.ParseWithClaims(tokenString, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+			return key, nil
+		})
+		if err != nil {
+			pass = false
+		}
+		if claims, ok := token.Claims.(*MyCustomClaims); ok && token.Valid {
+			tokenByte = claims.Token
+			pass = true
+			fmt.Printf("%v %v", claims.Token, claims.StandardClaims.ExpiresAt)
+		} else {
+			pass = false
+		}
 	} else {
-		fmt.Println(err)
+		pass = false
 	}
 	return
 }
