@@ -17,7 +17,7 @@ func SetJwt(obj []byte) (tokenString string, err error) {
 	claims := MyCustomClaims{
 		obj,
 		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Minute * 1).Unix(),
+			ExpiresAt: time.Now().Add(time.Minute * 120).Unix(),
 		},
 	}
 	// Create token with claims

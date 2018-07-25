@@ -2,6 +2,7 @@ package service
 
 import (
 	. "../config"
+	"strconv"
 )
 
 type User struct {
@@ -12,7 +13,11 @@ type User struct {
 	Phone     string `json:"phone"`
 	Email     string `json:"email"`
 }
-
+type SearchUserVo struct {
+	Name  string `json:"name"`
+	Phone string `json:"phone"`
+	Emai  string `json:"emai"`
+}
 type LoginVo struct {
 	LoginName string `json:"loginName"`
 	Password  string `json:"password"`
@@ -47,8 +52,8 @@ func Select(id string) (user User, err error) {
 	return
 }
 
-func SelectList() (users []User, err error) {
-	sql := "select id,name,loginName,phone,email from _user"
+func SelectList(pageSize int, pageNum int, search SearchUserVo) (users []User, err error) {
+	sql := "select id,name,loginName,phone,email from _user limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
 	users = []User{}
 	rows, err := Db.Query(sql)
 	if err != nil {

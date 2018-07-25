@@ -15,7 +15,7 @@ func UserRouter(app *iris.Application) {
 		routes.Post("/update", UpdateUser)
 		routes.Get("/del/{id:int}", DeleteUserById)
 		routes.Get("/getById/{id:int}", GetUserById)
-		routes.Post("/list", GetUserList)
+		routes.Post("/list/{pageSize:int}/{pageNum:int}", GetUserList)
 		routes.Post("/login", Login)
 	}
 

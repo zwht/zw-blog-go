@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/kataras/iris"
+	"strconv"
 )
 
 func CreateUser(ctx iris.Context) {
@@ -65,16 +66,21 @@ func GetUserById(ctx iris.Context) {
 }
 
 func GetUserList(ctx iris.Context) {
-	users, err := SelectList()
-
+	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
+	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
+	var searchUserVo SearchUserVo
+	ctx.ReadJSON(&searchUserVo)
+	count, _ := SelectCount("_user")
+	users, err := SelectList(pageSize, pageNum, searchUserVo)
 	result := Result{}
-
 	if err != nil {
 		result.Code = 0
 		result.Msg = err.Error()
 	} else {
 		resultPage := ResultPage{}
-		resultPage.TotalCount = 10
+		resultPage.TotalCount = count
+		resultPage.PageSize = pageSize
+		resultPage.PageNum = pageNum
 		resultPage.PageData = users
 
 		result.Code = 200
