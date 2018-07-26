@@ -2,6 +2,7 @@ package service
 
 import (
 	. "../config"
+	"github.com/satori/go.uuid"
 	"strconv"
 )
 
@@ -29,7 +30,7 @@ type LoginUser struct {
 
 func (user *User) Insert() (err error) {
 	sql := "insert into _user(id,loginName,name,password,email,phone) values($1,$2,$3,$4,$5,$6)"
-	_, err = Db.Exec(sql, "123", user.LoginName, user.Name, user.Password, user.Email, user.Phone)
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), user.LoginName, user.Name, user.Password, user.Email, user.Phone)
 	return
 }
 
