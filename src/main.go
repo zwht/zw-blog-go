@@ -13,12 +13,12 @@ import (
 func main() {
 
 	app := iris.New()
-
+	//api文档配置
 	yaag.Init(&yaag.Config{ // <- IMPORTANT, init the middleware.
 		On:       true,
 		DocTitle: "restfull api Iris",
 		DocPath:  "web/views/api.html",
-		BaseUrls: map[string]string{"Production": "", "Staging": ""},
+		BaseUrls: map[string]string{"Production": "go restfull base", "Staging": "ris"},
 	})
 	app.Use(irisyaag.New()) // <- IMPORTANT, register the middleware.
 
