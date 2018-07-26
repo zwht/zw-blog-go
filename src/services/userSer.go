@@ -14,7 +14,7 @@ type User struct {
 	Phone     string `json:"phone"`
 	Email     string `json:"email"`
 }
-type UserSearchUserVo struct {
+type UserSearchVo struct {
 	Name  string `json:"name"`
 	Phone string `json:"phone"`
 	Emai  string `json:"emai"`
@@ -53,10 +53,10 @@ func UserSelect(id string) (user User, err error) {
 	return
 }
 
-func UserSelectList(pageSize int, pageNum int, search UserSearchUserVo) (users []User, err error) {
-	sql := "select id,name,loginName,phone,email from _user limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
+func UserSelectList(pageSize int, pageNum int, search UserSearchVo) (users []User, err error) {
+	sql := "select id,name,loginName,phone,email from _user where name=$1 limit $2 offset $3"
 	users = []User{}
-	rows, err := Db.Query(sql)
+	rows, err := Db.Query(sql, search.Name, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	if err != nil {
 		panic(err.Error)
 	}
