@@ -11,7 +11,7 @@ type Code struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 }
-type SearchCodeVo struct {
+type CodeSearchVo struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 }
@@ -41,7 +41,7 @@ func CodeSelect(id string) (code Code, err error) {
 	return
 }
 
-func CodeSelectList(pageSize int, pageNum int, search SearchCodeVo) (codes []Code, err error) {
+func CodeSelectList(pageSize int, pageNum int, search CodeSearchVo) (codes []Code, err error) {
 	sql := "select id,name,description from _code limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
 	codes = []Code{}
 	rows, err := Db.Query(sql)
