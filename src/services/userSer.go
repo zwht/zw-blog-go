@@ -14,7 +14,7 @@ type User struct {
 	Phone     string `json:"phone"`
 	Email     string `json:"email"`
 }
-type SearchUserVo struct {
+type UserSearchUserVo struct {
 	Name  string `json:"name"`
 	Phone string `json:"phone"`
 	Emai  string `json:"emai"`
@@ -28,32 +28,32 @@ type LoginUser struct {
 	Token string `json:"token"`
 }
 
-func (user *User) Insert() (err error) {
+func (user *User) UserInsert() (err error) {
 	sql := "insert into _user(id,loginName,name,password,email,phone) values($1,$2,$3,$4,$5,$6)"
 	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), user.LoginName, user.Name, user.Password, user.Email, user.Phone)
 	return
 }
 
-func Delete(id string) (err error) {
+func UserDelete(id string) (err error) {
 	sql := "delete from _user where id=$1"
 	_, err = Db.Exec(sql, id)
 	return
 }
 
-func (user *User) Update() (err error) {
-	sql := "update _user set name=$1,Password=$2 where id=$3"
-	_, err = Db.Exec(sql, user.Name, user.Password, user.ID)
+func (user *User) UserUpdate() (err error) {
+	sql := "update _user set name=$1,LoginName=$2,Phone=$3,Email=$4 where id=$5"
+	_, err = Db.Exec(sql, user.Name, user.LoginName, user.Phone, user.Email, user.ID)
 	return
 }
 
-func Select(id string) (user User, err error) {
-	sql := "select id,name,password from _user where id=$1"
+func UserSelect(id string) (user User, err error) {
+	sql := "select id,name,loginName,phone,email from _user where id=$1"
 	user = User{}
-	err = Db.QueryRow(sql, id).Scan(&user.ID, &user.Name, &user.Password)
+	err = Db.QueryRow(sql, id).Scan(&user.ID, &user.Name, &user.LoginName, &user.Phone, &user.Email)
 	return
 }
 
-func SelectList(pageSize int, pageNum int, search SearchUserVo) (users []User, err error) {
+func UserSelectList(pageSize int, pageNum int, search UserSearchUserVo) (users []User, err error) {
 	sql := "select id,name,loginName,phone,email from _user limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
 	users = []User{}
 	rows, err := Db.Query(sql)

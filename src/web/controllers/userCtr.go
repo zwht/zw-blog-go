@@ -10,11 +10,11 @@ import (
 	"strconv"
 )
 
-func CreateUser(ctx iris.Context) {
+func UserCreate(ctx iris.Context) {
 	var user User
 	ctx.ReadJSON(&user)
 
-	err := user.Insert()
+	err := user.UserInsert()
 
 	result := Result{}
 
@@ -22,17 +22,17 @@ func CreateUser(ctx iris.Context) {
 		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.Code = 1
+		result.Code = 200
 		result.Msg = "成功保存用户信息"
 	}
 
 	ctx.JSON(result)
 }
-func UpdateUser(ctx iris.Context) {
+func UserUpdate(ctx iris.Context) {
 	var user User
 	ctx.ReadJSON(&user)
 
-	err := user.Update()
+	err := user.UserUpdate()
 
 	result := Result{}
 
@@ -40,16 +40,16 @@ func UpdateUser(ctx iris.Context) {
 		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.Code = 1
+		result.Code = 200
 		result.Msg = "成功保存用户信息"
 	}
 
 	ctx.JSON(result)
 }
 
-func GetUserById(ctx iris.Context) {
+func UserGetById(ctx iris.Context) {
 	id := ctx.Params().Get("id")
-	user, err := Select(id)
+	user, err := UserSelect(id)
 
 	result := Result{}
 
@@ -57,7 +57,7 @@ func GetUserById(ctx iris.Context) {
 		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.Code = 1
+		result.Code = 200
 		result.Msg = "成功获取用户信息"
 		result.Data = user
 	}
@@ -65,13 +65,13 @@ func GetUserById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func GetUserList(ctx iris.Context) {
+func UserGetList(ctx iris.Context) {
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
-	var searchUserVo SearchUserVo
+	var searchUserVo UserSearchUserVo
 	ctx.ReadJSON(&searchUserVo)
 	count, _ := SelectCount("_user")
-	users, err := SelectList(pageSize, pageNum, searchUserVo)
+	users, err := UserSelectList(pageSize, pageNum, searchUserVo)
 	result := Result{}
 	if err != nil {
 		result.Code = 0
@@ -91,9 +91,9 @@ func GetUserList(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func DeleteUserById(ctx iris.Context) {
+func UserDeleteById(ctx iris.Context) {
 	id := ctx.Params().Get("id")
-	err := Delete(id)
+	err := UserDelete(id)
 
 	result := Result{}
 
@@ -101,7 +101,7 @@ func DeleteUserById(ctx iris.Context) {
 		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.Code = 1
+		result.Code = 200
 		result.Msg = "成功删除用户信息"
 	}
 

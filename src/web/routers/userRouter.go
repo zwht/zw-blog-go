@@ -11,11 +11,11 @@ func UserRouter(app *iris.Application) {
 		ctx.Next()
 	})
 	{
-		routes.Post("/add", CreateUser)
-		routes.Post("/update", UpdateUser)
-		routes.Get("/del/{id:int}", DeleteUserById)
-		routes.Get("/getById/{id:int}", GetUserById)
-		routes.Post("/list/{pageSize:int}/{pageNum:int}", GetUserList)
+		routes.Post("/add", UserCreate)
+		routes.Post("/update", UserUpdate)
+		routes.Get("/del/{id:string}", UserDeleteById)
+		routes.Get("/getById/{id:string}", UserGetById)
+		routes.Post("/list/{pageSize:int}/{pageNum:int}", UserGetList)
 		routes.Post("/login", Login)
 	}
 
