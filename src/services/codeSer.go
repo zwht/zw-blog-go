@@ -2,7 +2,6 @@ package service
 
 import (
 	. "../config"
-	"github.com/satori/go.uuid"
 	"strconv"
 )
 
@@ -18,7 +17,7 @@ type CodeSearchVo struct {
 
 func (code *Code) CodeInsert() (err error) {
 	sql := "insert into _code(id,name,description) values($1,$2,$3)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), code.Name, code.Description)
+	_, err = Db.Exec(sql, code.ID, code.Name, code.Description)
 	return
 }
 

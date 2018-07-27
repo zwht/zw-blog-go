@@ -5,7 +5,6 @@ import (
 	. "../../datamodels"
 	. "../../services"
 	"encoding/json"
-	"fmt"
 	"github.com/kataras/iris"
 	"strconv"
 )
@@ -66,6 +65,7 @@ func UserGetById(ctx iris.Context) {
 }
 
 func UserGetList(ctx iris.Context) {
+
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var userSearchVo UserSearchVo
@@ -131,9 +131,9 @@ func Login(ctx iris.Context) {
 			result.Code = 200
 			result.Msg = "登录成功"
 			// 把token保存到redis
-			s := Sess.Start(ctx)
-			s.Set("token", tokenString)
-			fmt.Printf(s.GetString("token"))
+			//s := Sess.Start(ctx)
+			//s.Set("token", tokenString)
+			//fmt.Printf(s.GetString("token"))
 
 			var userVo map[string]string /*创建集合 */
 			userVo = make(map[string]string)

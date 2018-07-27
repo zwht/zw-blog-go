@@ -39,12 +39,12 @@ func main() {
 		ctx.View("api.html")
 	})
 
-	RedisInit()
+	//RedisInit()
 	RouterInit(app)
 
 	app.UseGlobal(HttpInterceptor)
 
-	app.Run(iris.Addr(":8080"),
+	app.Run(iris.Addr(":8888"),
 		iris.WithCharset("UTF-8"),
 		iris.WithoutServerError(iris.ErrServerClosed))
 }

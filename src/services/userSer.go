@@ -2,6 +2,7 @@ package service
 
 import (
 	. "../config"
+	"fmt"
 	"github.com/satori/go.uuid"
 	"strconv"
 )
@@ -15,9 +16,9 @@ type User struct {
 	Email     string `json:"email"`
 }
 type UserSearchVo struct {
-	Name  string `json:"name"`
-	Phone string `json:"phone"`
-	Emai  string `json:"emai"`
+	Phone string `column:"and,phone,like"`
+	Name  string `column:"and,name,like"`
+	Emai  string `column:"and,email,like"`
 }
 type LoginVo struct {
 	LoginName string `json:"loginName"`
@@ -54,9 +55,12 @@ func UserSelect(id string) (user User, err error) {
 }
 
 func UserSelectList(pageSize int, pageNum int, search UserSearchVo) (users []User, err error) {
-	sql := "select id,name,loginName,phone,email from _user where name=$1 limit $2 offset $3"
+	whereStr, args := GenWhereByStruct(search)
+	sql, key := ReplaceQuestionToDollarInherit("select id,name,loginName,phone,email from _user "+whereStr+" limit ? offset ?", 0)
+	fmt.Println(sql, key)
 	users = []User{}
-	rows, err := Db.Query(sql, search.Name, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
+	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
+	rows, err := Db.Query(sql, args...)
 	if err != nil {
 		panic(err.Error)
 	}
