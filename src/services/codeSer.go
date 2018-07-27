@@ -11,8 +11,9 @@ type Code struct {
 	Description string `json:"description"`
 }
 type CodeSearchVo struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	ID          string `column:"and,id,like"`
+	Name        string `column:"and,name,like"`
+	Description string `column:"and,description,like"`
 }
 
 func (code *Code) CodeInsert() (err error) {
@@ -39,7 +40,12 @@ func CodeSelect(id string) (code Code, err error) {
 	err = Db.QueryRow(sql, id).Scan(&code.ID, &code.Name, &code.Description)
 	return
 }
-
+func CodeSelectCount(search CodeSearchVo) (count int, err error) {
+	whereStr, args := GenWhereByStruct(search)
+	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from _user"+whereStr, 0)
+	err = Db.QueryRow(sql, args...).Scan(&count)
+	return
+}
 func CodeSelectList(pageSize int, pageNum int, search CodeSearchVo) (codes []Code, err error) {
 	sql := "select id,name,description from _code limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
 	codes = []Code{}

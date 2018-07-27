@@ -67,7 +67,7 @@ func CodeGetList(ctx iris.Context) {
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var codeSearchVo CodeSearchVo
 	ctx.ReadJSON(&codeSearchVo)
-	count, _ := SelectCount("_code")
+	count, _ := CodeSelectCount(codeSearchVo)
 	codes, err := CodeSelectList(pageSize, pageNum, codeSearchVo)
 	result := Result{}
 	if err != nil {

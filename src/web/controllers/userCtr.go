@@ -70,7 +70,7 @@ func UserGetList(ctx iris.Context) {
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var userSearchVo UserSearchVo
 	ctx.ReadJSON(&userSearchVo)
-	count, _ := SelectCount("_user")
+	count, _ := UserSelectCount(userSearchVo)
 	users, err := UserSelectList(pageSize, pageNum, userSearchVo)
 	result := Result{}
 	if err != nil {

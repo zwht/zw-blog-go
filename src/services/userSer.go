@@ -16,9 +16,10 @@ type User struct {
 	Email     string `json:"email"`
 }
 type UserSearchVo struct {
-	Phone string `column:"and,phone,like"`
-	Name  string `column:"and,name,like"`
-	Emai  string `column:"and,email,like"`
+	Phone     string `column:"and,phone,like"`
+	Name      string `column:"and,name,like"`
+	Email     string `column:"and,email,like"`
+	LoginName string `column:"and,loginName,like"`
 }
 type LoginVo struct {
 	LoginName string `json:"loginName"`
@@ -54,10 +55,17 @@ func UserSelect(id string) (user User, err error) {
 	return
 }
 
+func UserSelectCount(search UserSearchVo) (count int, err error) {
+	whereStr, args := GenWhereByStruct(search)
+	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from _user"+whereStr, 0)
+	err = Db.QueryRow(sql, args...).Scan(&count)
+	return
+}
+
 func UserSelectList(pageSize int, pageNum int, search UserSearchVo) (users []User, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, key := ReplaceQuestionToDollarInherit("select id,name,loginName,phone,email from _user "+whereStr+" limit ? offset ?", 0)
-	fmt.Println(sql, key)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,name,loginName,phone,email from _user "+whereStr+" limit ? offset ?", 0)
+	fmt.Println(sql)
 	users = []User{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)
