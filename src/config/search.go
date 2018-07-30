@@ -119,7 +119,6 @@ func RemoveZero(slice []interface{}) []interface{} {
 		if IfZero(v) {
 			slice = append(slice[:i], slice[i+1:]...)
 			return RemoveZero(slice)
-			break
 		}
 	}
 	return slice

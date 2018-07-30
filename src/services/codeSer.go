@@ -2,6 +2,7 @@ package service
 
 import (
 	. "../config"
+	"github.com/satori/go.uuid"
 	"strconv"
 )
 
@@ -9,16 +10,20 @@ type Code struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	Code        string `json:"code"`
+	Groups      string `json:"groups"`
 }
 type CodeSearchVo struct {
 	ID          string `column:"and,id,like"`
 	Name        string `column:"and,name,like"`
 	Description string `column:"and,description,like"`
+	Code        string `column:"and,code,like"`
+	Groups      string `column:"and,groups,like"`
 }
 
 func (code *Code) CodeInsert() (err error) {
-	sql := "insert into _code(id,name,description) values($1,$2,$3)"
-	_, err = Db.Exec(sql, code.ID, code.Name, code.Description)
+	sql := "insert into _code(id,name,description,groups,code) values($1,$2,$3,$4,$5)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), code.Name, code.Description, code.Groups, code.Code)
 	return
 }
 
@@ -29,15 +34,15 @@ func CodeDelete(id string) (err error) {
 }
 
 func (code *Code) CodeUpdate() (err error) {
-	sql := "update _code set name=$1,description=$2 where id=$3"
-	_, err = Db.Exec(sql, code.Name, code.Description, code.ID)
+	sql := "update _code set name=$1,description=$2,groups=$3,code=$4 where id=$5"
+	_, err = Db.Exec(sql, code.Name, code.Description, code.Groups, code.Code, code.ID)
 	return
 }
 
 func CodeSelect(id string) (code Code, err error) {
-	sql := "select id,name,description from _code where id=$1"
+	sql := "select id,name,description,groups,code from _code where id=$1"
 	code = Code{}
-	err = Db.QueryRow(sql, id).Scan(&code.ID, &code.Name, &code.Description)
+	err = Db.QueryRow(sql, id).Scan(&code.ID, &code.Name, &code.Description, &code.Groups, &code.Code)
 	return
 }
 func CodeSelectCount(search CodeSearchVo) (count int, err error) {
@@ -47,7 +52,7 @@ func CodeSelectCount(search CodeSearchVo) (count int, err error) {
 	return
 }
 func CodeSelectList(pageSize int, pageNum int, search CodeSearchVo) (codes []Code, err error) {
-	sql := "select id,name,description from _code limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
+	sql := "select id,name,description,groups,code from _code limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
 	codes = []Code{}
 	rows, err := Db.Query(sql)
 	if err != nil {
@@ -57,7 +62,7 @@ func CodeSelectList(pageSize int, pageNum int, search CodeSearchVo) (codes []Cod
 	for rows.Next() {
 		rows.Columns()
 		var code Code
-		err = rows.Scan(&code.ID, &code.Name, &code.Description)
+		err = rows.Scan(&code.ID, &code.Name, &code.Description, &code.Groups, &code.Code)
 		if err != nil {
 			panic(err.Error)
 		}
