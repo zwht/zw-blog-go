@@ -4,46 +4,70 @@ import (
 	. "../../config"
 	. "../../datamodels"
 	. "../../services"
+	"crypto/md5"
+	"encoding/hex"
 	"encoding/json"
+
 	"github.com/kataras/iris"
 	"strconv"
 )
 
+func byteString(p []byte) string {
+	for i := 0; i < len(p); i++ {
+		if p[i] == 0 {
+			return string(p[0:i])
+		}
+	}
+	return string(p)
+}
 func UserCreate(ctx iris.Context) {
+	result := Result{}
 	var user User
 	ctx.ReadJSON(&user)
-
-	err := user.UserInsert()
-
-	result := Result{}
-
-	if err != nil {
-		result.Code = 0
-		result.Msg = err.Error()
+	_, err1 := UserSelectByName(user.LoginName)
+	if err1 == nil {
+		result.Code = 402
+		result.Msg = "登录名重复"
+		ctx.JSON(result)
 	} else {
-		result.Code = 200
-		result.Msg = "成功保存用户信息"
-	}
+		// md5加密密码
+		h := md5.New()
+		h.Write([]byte(user.Password))
+		user.Password = hex.EncodeToString(h.Sum(nil))
+		err := user.UserInsert()
 
-	ctx.JSON(result)
+		if err != nil {
+			result.Code = 0
+			result.Msg = err.Error()
+		} else {
+			result.Code = 200
+			result.Msg = "成功保存用户信息"
+		}
+
+		ctx.JSON(result)
+	}
 }
 func UserUpdate(ctx iris.Context) {
+	result := Result{}
 	var user User
 	ctx.ReadJSON(&user)
 
-	err := user.UserUpdate()
-
-	result := Result{}
-
-	if err != nil {
-		result.Code = 0
-		result.Msg = err.Error()
+	user1, err1 := UserSelectByName(user.LoginName)
+	if err1 == nil && user1.ID != user.ID {
+		result.Code = 402
+		result.Msg = "登录名重复"
+		ctx.JSON(result)
 	} else {
-		result.Code = 200
-		result.Msg = "成功保存用户信息"
+		err := user.UserUpdate()
+		if err != nil {
+			result.Code = 0
+			result.Msg = err.Error()
+		} else {
+			result.Code = 200
+			result.Msg = "成功保存用户信息"
+		}
+		ctx.JSON(result)
 	}
-
-	ctx.JSON(result)
 }
 
 func UserGetById(ctx iris.Context) {
@@ -112,6 +136,10 @@ func Login(ctx iris.Context) {
 
 	var loginVo LoginVo
 	ctx.ReadJSON(&loginVo)
+	h := md5.New()
+	h.Write([]byte(loginVo.Password))
+	loginVo.Password = hex.EncodeToString(h.Sum(nil))
+
 	user, err := Logins(loginVo)
 	result := Result{}
 

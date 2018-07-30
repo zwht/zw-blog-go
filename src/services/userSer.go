@@ -56,6 +56,12 @@ func UserSelect(id string) (user User, err error) {
 	err = Db.QueryRow(sql, id).Scan(&user.ID, &user.Name, &user.LoginName, &user.Phone, &user.Email, &user.Roles)
 	return
 }
+func UserSelectByName(loginName string) (user User, err error) {
+	sql := "select id,name,loginName,phone,email,roles from _user where loginName=$1"
+	user = User{}
+	err = Db.QueryRow(sql, loginName).Scan(&user.ID, &user.Name, &user.LoginName, &user.Phone, &user.Email, &user.Roles)
+	return
+}
 
 func UserSelectCount(search UserSearchVo) (count int, err error) {
 	whereStr, args := GenWhereByStruct(search)
