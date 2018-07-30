@@ -142,6 +142,7 @@ func Login(ctx iris.Context) {
 			userVo["loginName"] = user.LoginName
 			userVo["phone"] = user.Phone
 			userVo["email"] = user.Email
+			userVo["roles"] = user.Roles
 			userVo["token"] = tokenString
 			result.Data = userVo
 		}
