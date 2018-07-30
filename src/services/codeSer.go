@@ -47,7 +47,7 @@ func CodeSelect(id string) (code Code, err error) {
 }
 func CodeSelectCount(search CodeSearchVo) (count int, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from _user"+whereStr, 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from _code"+whereStr, 0)
 	err = Db.QueryRow(sql, args...).Scan(&count)
 	return
 }
