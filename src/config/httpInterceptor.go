@@ -8,6 +8,7 @@ import (
 
 var noTokenMap = [...]string{
 	"/v1/user/login",
+	"/v1/code/list",
 }
 
 func HttpInterceptor(ctx iris.Context) {
@@ -17,7 +18,7 @@ func HttpInterceptor(ctx iris.Context) {
 		var i int
 		isNext = false
 		for i = 0; i < len(noTokenMap); i++ {
-			if noTokenMap[i] == requestPath {
+			if strings.Contains(requestPath, noTokenMap[i]) {
 				isNext = true
 			}
 		}

@@ -15,7 +15,7 @@ func CodeRouter(app *iris.Application) {
 		routes.Post("/update", CodeUpdate)
 		routes.Get("/del/{id:string}", CodeDeleteById)
 		routes.Get("/getById/{id:string}", CodeGetById)
-		routes.Post("/list/{pageSize:int}/{pageNum:int}", CodeGetList)
+		routes.Post("/list/{pageNum:int}/{pageSize:int}", CodeGetList)
 	}
 
 }

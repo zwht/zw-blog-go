@@ -176,6 +176,14 @@
             
                 <li role="presentation"><a href="#38top" role="tab" data-toggle="tab">GET : /v1/user/getById/7960ea0a-3c8e-4bd1-9e01-0d18335905f0</a></li>
             
+                <li role="presentation"><a href="#39top" role="tab" data-toggle="tab">POST : /v1/code/list/1000/1</a></li>
+            
+                <li role="presentation"><a href="#40top" role="tab" data-toggle="tab">POST : /v1/code/list/1/1000</a></li>
+            
+                <li role="presentation"><a href="#41top" role="tab" data-toggle="tab">POST : /v1/user/list/1/10</a></li>
+            
+                <li role="presentation"><a href="#42top" role="tab" data-toggle="tab">POST : /v1/code/list/1/10</a></li>
+            
         <ul>
     </div>
     <div class="col-md-8 tab-content">
@@ -9173,6 +9181,166 @@
                         try {
                             var jsonStr = spaceJson("{\"code\":200,\"msg\":\"登录成功\",\"data\":{\"email\":\"1512763623@qq.com\",\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"loginName\":\"zw1\",\"name\":\"管理员\",\"phone\":\"13540416116\",\"roles\":\"\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4\"}}");
                             document.getElementById('response-body-1-36').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-1-37" class="prettyprint">{&#34;password&#34;:&#34;MTIzNDU2&#34;,&#34;loginName&#34;:&#34;zw&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"password\":\"MTIzNDU2\",\"loginName\":\"zw\"}");
+                            document.getElementById('request-body-1-37').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-37">{&#34;code&#34;:200,&#34;msg&#34;:&#34;登录成功&#34;,&#34;data&#34;:{&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;id&#34;:&#34;7960ea0a-3c8e-4bd1-9e01-0d18335905f0&#34;,&#34;loginName&#34;:&#34;zw&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;roles&#34;:&#34;&#34;,&#34;token&#34;:&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NjIzfQ.K24AJ4G8guNHxvHP8u8FE6qhMgihQ5skeuUdKU5_wZw&#34;}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"登录成功\",\"data\":{\"email\":\"1512763623@qq.com\",\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"loginName\":\"zw\",\"name\":\"zw\",\"phone\":\"13540416116\",\"roles\":\"\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NjIzfQ.K24AJ4G8guNHxvHP8u8FE6qhMgihQ5skeuUdKU5_wZw\"}}");
+                            document.getElementById('response-body-1-37').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NjIzfQ.K24AJ4G8guNHxvHP8u8FE6qhMgihQ5skeuUdKU5_wZw</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-1-38" class="prettyprint">{&#34;password&#34;:&#34;MTIzNDU2&#34;,&#34;loginName&#34;:&#34;zw&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NjIzfQ.K24AJ4G8guNHxvHP8u8FE6qhMgihQ5skeuUdKU5_wZw\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"password\":\"MTIzNDU2\",\"loginName\":\"zw\"}");
+                            document.getElementById('request-body-1-38').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-38">{&#34;code&#34;:200,&#34;msg&#34;:&#34;登录成功&#34;,&#34;data&#34;:{&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;id&#34;:&#34;7960ea0a-3c8e-4bd1-9e01-0d18335905f0&#34;,&#34;loginName&#34;:&#34;zw&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;roles&#34;:&#34;&#34;,&#34;token&#34;:&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NzUwfQ.ued8mhcDsvtajHyWDgk20hOKW-bdlAwpt0Ag5nHNVaE&#34;}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"登录成功\",\"data\":{\"email\":\"1512763623@qq.com\",\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"loginName\":\"zw\",\"name\":\"zw\",\"phone\":\"13540416116\",\"roles\":\"\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NzUwfQ.ued8mhcDsvtajHyWDgk20hOKW-bdlAwpt0Ag5nHNVaE\"}}");
+                            document.getElementById('response-body-1-38').innerHTML = syntaxHighlight(jsonStr);
                         } catch (e) {
                              
                         }
@@ -18931,6 +19099,86 @@
                 
                 <hr>
             
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-15-21" class="prettyprint">{}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{}");
+                            document.getElementById('request-body-15-21').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-15-21">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取code列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:2,&#34;pageSize&#34;:10,&#34;pageNum&#34;:1,&#34;pageData&#34;:[{&#34;id&#34;:&#34;36b06397-d83f-4f8f-be06-b9cdaf812161&#34;,&#34;name&#34;:&#34;超级管理员&#34;,&#34;description&#34;:&#34;牛逼&#34;,&#34;code&#34;:&#34;1001&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;b0935ff6-7ef3-41ac-938c-b6e535a98408&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;description&#34;:&#34;235&#34;,&#34;code&#34;:&#34;1002&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;10127f36-3bcd-4767-af17-d773ea9c2ce6&#34;,&#34;name&#34;:&#34;员工&#34;,&#34;description&#34;:&#34;235&#34;,&#34;code&#34;:&#34;1003&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;2f10a75f-41bf-4f7c-aca1-80d51b6940f4&#34;,&#34;name&#34;:&#34;客户&#34;,&#34;description&#34;:&#34;客户&#34;,&#34;code&#34;:&#34;1004&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;a09d80b0-2a33-4aff-86d2-65959f234c71&#34;,&#34;name&#34;:&#34;未提交&#34;,&#34;description&#34;:&#34;未提交&#34;,&#34;code&#34;:&#34;1101&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;af6bdf9b-dd96-4e84-b82e-117ec5787e4b&#34;,&#34;name&#34;:&#34;待审核&#34;,&#34;description&#34;:&#34;待审核&#34;,&#34;code&#34;:&#34;1102&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;d369afc8-9400-43d9-8fc6-b92394da542e&#34;,&#34;name&#34;:&#34;审核通过&#34;,&#34;description&#34;:&#34;审核通过&#34;,&#34;code&#34;:&#34;1103&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;86d75763-9445-4559-863f-e442a192d887&#34;,&#34;name&#34;:&#34;未通过审核&#34;,&#34;description&#34;:&#34;未通过审核&#34;,&#34;code&#34;:&#34;1104&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;e7de6d77-9d33-4d76-9eaf-75b077acfd98&#34;,&#34;name&#34;:&#34;发布上线&#34;,&#34;description&#34;:&#34;发布上线&#34;,&#34;code&#34;:&#34;1105&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;06012fed-e06f-4247-b959-d6d3d80343ee&#34;,&#34;name&#34;:&#34;下架&#34;,&#34;description&#34;:&#34;下架&#34;,&#34;code&#34;:&#34;1106&#34;,&#34;groups&#34;:&#34;11&#34;}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取code列表信息\",\"data\":{\"totalCount\":2,\"pageSize\":10,\"pageNum\":1,\"pageData\":[{\"id\":\"36b06397-d83f-4f8f-be06-b9cdaf812161\",\"name\":\"超级管理员\",\"description\":\"牛逼\",\"code\":\"1001\",\"groups\":\"10\"},{\"id\":\"b0935ff6-7ef3-41ac-938c-b6e535a98408\",\"name\":\"管理员\",\"description\":\"235\",\"code\":\"1002\",\"groups\":\"10\"},{\"id\":\"10127f36-3bcd-4767-af17-d773ea9c2ce6\",\"name\":\"员工\",\"description\":\"235\",\"code\":\"1003\",\"groups\":\"10\"},{\"id\":\"2f10a75f-41bf-4f7c-aca1-80d51b6940f4\",\"name\":\"客户\",\"description\":\"客户\",\"code\":\"1004\",\"groups\":\"10\"},{\"id\":\"a09d80b0-2a33-4aff-86d2-65959f234c71\",\"name\":\"未提交\",\"description\":\"未提交\",\"code\":\"1101\",\"groups\":\"11\"},{\"id\":\"af6bdf9b-dd96-4e84-b82e-117ec5787e4b\",\"name\":\"待审核\",\"description\":\"待审核\",\"code\":\"1102\",\"groups\":\"11\"},{\"id\":\"d369afc8-9400-43d9-8fc6-b92394da542e\",\"name\":\"审核通过\",\"description\":\"审核通过\",\"code\":\"1103\",\"groups\":\"11\"},{\"id\":\"86d75763-9445-4559-863f-e442a192d887\",\"name\":\"未通过审核\",\"description\":\"未通过审核\",\"code\":\"1104\",\"groups\":\"11\"},{\"id\":\"e7de6d77-9d33-4d76-9eaf-75b077acfd98\",\"name\":\"发布上线\",\"description\":\"发布上线\",\"code\":\"1105\",\"groups\":\"11\"},{\"id\":\"06012fed-e06f-4247-b959-d6d3d80343ee\",\"name\":\"下架\",\"description\":\"下架\",\"code\":\"1106\",\"groups\":\"11\"}]}}");
+                            document.getElementById('response-body-15-21').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
         </div>
         
         <div id="16top"  role="tabpanel" class="tab-pane col-md-10">
@@ -25959,6 +26207,422 @@
                         try {
                             var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户信息\",\"data\":{\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"name\":\"zw\",\"loginName\":\"zw\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"\"}}");
                             document.getElementById('response-body-38-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="39top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-39-0" class="prettyprint">{}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{}");
+                            document.getElementById('request-body-39-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-39-0">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取code列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:2,&#34;pageSize&#34;:1000,&#34;pageNum&#34;:1,&#34;pageData&#34;:[{&#34;id&#34;:&#34;36b06397-d83f-4f8f-be06-b9cdaf812161&#34;,&#34;name&#34;:&#34;超级管理员&#34;,&#34;description&#34;:&#34;牛逼&#34;,&#34;code&#34;:&#34;1001&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;b0935ff6-7ef3-41ac-938c-b6e535a98408&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;description&#34;:&#34;235&#34;,&#34;code&#34;:&#34;1002&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;10127f36-3bcd-4767-af17-d773ea9c2ce6&#34;,&#34;name&#34;:&#34;员工&#34;,&#34;description&#34;:&#34;235&#34;,&#34;code&#34;:&#34;1003&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;2f10a75f-41bf-4f7c-aca1-80d51b6940f4&#34;,&#34;name&#34;:&#34;客户&#34;,&#34;description&#34;:&#34;客户&#34;,&#34;code&#34;:&#34;1004&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;a09d80b0-2a33-4aff-86d2-65959f234c71&#34;,&#34;name&#34;:&#34;未提交&#34;,&#34;description&#34;:&#34;未提交&#34;,&#34;code&#34;:&#34;1101&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;af6bdf9b-dd96-4e84-b82e-117ec5787e4b&#34;,&#34;name&#34;:&#34;待审核&#34;,&#34;description&#34;:&#34;待审核&#34;,&#34;code&#34;:&#34;1102&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;d369afc8-9400-43d9-8fc6-b92394da542e&#34;,&#34;name&#34;:&#34;审核通过&#34;,&#34;description&#34;:&#34;审核通过&#34;,&#34;code&#34;:&#34;1103&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;86d75763-9445-4559-863f-e442a192d887&#34;,&#34;name&#34;:&#34;未通过审核&#34;,&#34;description&#34;:&#34;未通过审核&#34;,&#34;code&#34;:&#34;1104&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;e7de6d77-9d33-4d76-9eaf-75b077acfd98&#34;,&#34;name&#34;:&#34;发布上线&#34;,&#34;description&#34;:&#34;发布上线&#34;,&#34;code&#34;:&#34;1105&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;06012fed-e06f-4247-b959-d6d3d80343ee&#34;,&#34;name&#34;:&#34;下架&#34;,&#34;description&#34;:&#34;下架&#34;,&#34;code&#34;:&#34;1106&#34;,&#34;groups&#34;:&#34;11&#34;}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取code列表信息\",\"data\":{\"totalCount\":2,\"pageSize\":1000,\"pageNum\":1,\"pageData\":[{\"id\":\"36b06397-d83f-4f8f-be06-b9cdaf812161\",\"name\":\"超级管理员\",\"description\":\"牛逼\",\"code\":\"1001\",\"groups\":\"10\"},{\"id\":\"b0935ff6-7ef3-41ac-938c-b6e535a98408\",\"name\":\"管理员\",\"description\":\"235\",\"code\":\"1002\",\"groups\":\"10\"},{\"id\":\"10127f36-3bcd-4767-af17-d773ea9c2ce6\",\"name\":\"员工\",\"description\":\"235\",\"code\":\"1003\",\"groups\":\"10\"},{\"id\":\"2f10a75f-41bf-4f7c-aca1-80d51b6940f4\",\"name\":\"客户\",\"description\":\"客户\",\"code\":\"1004\",\"groups\":\"10\"},{\"id\":\"a09d80b0-2a33-4aff-86d2-65959f234c71\",\"name\":\"未提交\",\"description\":\"未提交\",\"code\":\"1101\",\"groups\":\"11\"},{\"id\":\"af6bdf9b-dd96-4e84-b82e-117ec5787e4b\",\"name\":\"待审核\",\"description\":\"待审核\",\"code\":\"1102\",\"groups\":\"11\"},{\"id\":\"d369afc8-9400-43d9-8fc6-b92394da542e\",\"name\":\"审核通过\",\"description\":\"审核通过\",\"code\":\"1103\",\"groups\":\"11\"},{\"id\":\"86d75763-9445-4559-863f-e442a192d887\",\"name\":\"未通过审核\",\"description\":\"未通过审核\",\"code\":\"1104\",\"groups\":\"11\"},{\"id\":\"e7de6d77-9d33-4d76-9eaf-75b077acfd98\",\"name\":\"发布上线\",\"description\":\"发布上线\",\"code\":\"1105\",\"groups\":\"11\"},{\"id\":\"06012fed-e06f-4247-b959-d6d3d80343ee\",\"name\":\"下架\",\"description\":\"下架\",\"code\":\"1106\",\"groups\":\"11\"}]}}");
+                            document.getElementById('response-body-39-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-39-1" class="prettyprint">{}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{}");
+                            document.getElementById('request-body-39-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-39-1">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取code列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:2,&#34;pageSize&#34;:1,&#34;pageNum&#34;:1000,&#34;pageData&#34;:[]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取code列表信息\",\"data\":{\"totalCount\":2,\"pageSize\":1,\"pageNum\":1000,\"pageData\":[]}}");
+                            document.getElementById('response-body-39-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="40top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-40-0" class="prettyprint">{}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSWlmUT09IiwiZXhwIjoxNTMyOTQ1MTA0fQ.-UlXDO3S2Tywx7B4SH3zVqASQaGo2C4vHHzyER-tHQ4\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{}");
+                            document.getElementById('request-body-40-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-40-0">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取code列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:2,&#34;pageSize&#34;:1000,&#34;pageNum&#34;:1,&#34;pageData&#34;:[{&#34;id&#34;:&#34;36b06397-d83f-4f8f-be06-b9cdaf812161&#34;,&#34;name&#34;:&#34;超级管理员&#34;,&#34;description&#34;:&#34;牛逼&#34;,&#34;code&#34;:&#34;1001&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;b0935ff6-7ef3-41ac-938c-b6e535a98408&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;description&#34;:&#34;235&#34;,&#34;code&#34;:&#34;1002&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;10127f36-3bcd-4767-af17-d773ea9c2ce6&#34;,&#34;name&#34;:&#34;员工&#34;,&#34;description&#34;:&#34;235&#34;,&#34;code&#34;:&#34;1003&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;2f10a75f-41bf-4f7c-aca1-80d51b6940f4&#34;,&#34;name&#34;:&#34;客户&#34;,&#34;description&#34;:&#34;客户&#34;,&#34;code&#34;:&#34;1004&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;a09d80b0-2a33-4aff-86d2-65959f234c71&#34;,&#34;name&#34;:&#34;未提交&#34;,&#34;description&#34;:&#34;未提交&#34;,&#34;code&#34;:&#34;1101&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;af6bdf9b-dd96-4e84-b82e-117ec5787e4b&#34;,&#34;name&#34;:&#34;待审核&#34;,&#34;description&#34;:&#34;待审核&#34;,&#34;code&#34;:&#34;1102&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;d369afc8-9400-43d9-8fc6-b92394da542e&#34;,&#34;name&#34;:&#34;审核通过&#34;,&#34;description&#34;:&#34;审核通过&#34;,&#34;code&#34;:&#34;1103&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;86d75763-9445-4559-863f-e442a192d887&#34;,&#34;name&#34;:&#34;未通过审核&#34;,&#34;description&#34;:&#34;未通过审核&#34;,&#34;code&#34;:&#34;1104&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;e7de6d77-9d33-4d76-9eaf-75b077acfd98&#34;,&#34;name&#34;:&#34;发布上线&#34;,&#34;description&#34;:&#34;发布上线&#34;,&#34;code&#34;:&#34;1105&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;06012fed-e06f-4247-b959-d6d3d80343ee&#34;,&#34;name&#34;:&#34;下架&#34;,&#34;description&#34;:&#34;下架&#34;,&#34;code&#34;:&#34;1106&#34;,&#34;groups&#34;:&#34;11&#34;}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取code列表信息\",\"data\":{\"totalCount\":2,\"pageSize\":1000,\"pageNum\":1,\"pageData\":[{\"id\":\"36b06397-d83f-4f8f-be06-b9cdaf812161\",\"name\":\"超级管理员\",\"description\":\"牛逼\",\"code\":\"1001\",\"groups\":\"10\"},{\"id\":\"b0935ff6-7ef3-41ac-938c-b6e535a98408\",\"name\":\"管理员\",\"description\":\"235\",\"code\":\"1002\",\"groups\":\"10\"},{\"id\":\"10127f36-3bcd-4767-af17-d773ea9c2ce6\",\"name\":\"员工\",\"description\":\"235\",\"code\":\"1003\",\"groups\":\"10\"},{\"id\":\"2f10a75f-41bf-4f7c-aca1-80d51b6940f4\",\"name\":\"客户\",\"description\":\"客户\",\"code\":\"1004\",\"groups\":\"10\"},{\"id\":\"a09d80b0-2a33-4aff-86d2-65959f234c71\",\"name\":\"未提交\",\"description\":\"未提交\",\"code\":\"1101\",\"groups\":\"11\"},{\"id\":\"af6bdf9b-dd96-4e84-b82e-117ec5787e4b\",\"name\":\"待审核\",\"description\":\"待审核\",\"code\":\"1102\",\"groups\":\"11\"},{\"id\":\"d369afc8-9400-43d9-8fc6-b92394da542e\",\"name\":\"审核通过\",\"description\":\"审核通过\",\"code\":\"1103\",\"groups\":\"11\"},{\"id\":\"86d75763-9445-4559-863f-e442a192d887\",\"name\":\"未通过审核\",\"description\":\"未通过审核\",\"code\":\"1104\",\"groups\":\"11\"},{\"id\":\"e7de6d77-9d33-4d76-9eaf-75b077acfd98\",\"name\":\"发布上线\",\"description\":\"发布上线\",\"code\":\"1105\",\"groups\":\"11\"},{\"id\":\"06012fed-e06f-4247-b959-d6d3d80343ee\",\"name\":\"下架\",\"description\":\"下架\",\"code\":\"1106\",\"groups\":\"11\"}]}}");
+                            document.getElementById('response-body-40-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="41top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NjIzfQ.K24AJ4G8guNHxvHP8u8FE6qhMgihQ5skeuUdKU5_wZw</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-41-0" class="prettyprint">{}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NjIzfQ.K24AJ4G8guNHxvHP8u8FE6qhMgihQ5skeuUdKU5_wZw\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{}");
+                            document.getElementById('request-body-41-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-41-0">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取用户列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:2,&#34;pageSize&#34;:10,&#34;pageNum&#34;:1,&#34;pageData&#34;:[{&#34;id&#34;:&#34;7960ea0a-3c8e-4bd1-9e01-0d18335905f0&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;zw&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;&#34;},{&#34;id&#34;:&#34;9b5f9893-e751-4edc-8f28-994761b20dc5&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;loginName&#34;:&#34;zw1&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;&#34;}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户列表信息\",\"data\":{\"totalCount\":2,\"pageSize\":10,\"pageNum\":1,\"pageData\":[{\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"name\":\"zw\",\"loginName\":\"zw\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"\"},{\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"name\":\"管理员\",\"loginName\":\"zw1\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"\"}]}}");
+                            document.getElementById('response-body-41-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="42top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NjIzfQ.K24AJ4G8guNHxvHP8u8FE6qhMgihQ5skeuUdKU5_wZw</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-42-0" class="prettyprint">{}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lJbjA9IiwiZXhwIjoxNTMyOTQ2NjIzfQ.K24AJ4G8guNHxvHP8u8FE6qhMgihQ5skeuUdKU5_wZw\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{}");
+                            document.getElementById('request-body-42-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-42-0">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取code列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:2,&#34;pageSize&#34;:10,&#34;pageNum&#34;:1,&#34;pageData&#34;:[{&#34;id&#34;:&#34;36b06397-d83f-4f8f-be06-b9cdaf812161&#34;,&#34;name&#34;:&#34;超级管理员&#34;,&#34;description&#34;:&#34;牛逼&#34;,&#34;code&#34;:&#34;1001&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;b0935ff6-7ef3-41ac-938c-b6e535a98408&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;description&#34;:&#34;235&#34;,&#34;code&#34;:&#34;1002&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;10127f36-3bcd-4767-af17-d773ea9c2ce6&#34;,&#34;name&#34;:&#34;员工&#34;,&#34;description&#34;:&#34;235&#34;,&#34;code&#34;:&#34;1003&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;2f10a75f-41bf-4f7c-aca1-80d51b6940f4&#34;,&#34;name&#34;:&#34;客户&#34;,&#34;description&#34;:&#34;客户&#34;,&#34;code&#34;:&#34;1004&#34;,&#34;groups&#34;:&#34;10&#34;},{&#34;id&#34;:&#34;a09d80b0-2a33-4aff-86d2-65959f234c71&#34;,&#34;name&#34;:&#34;未提交&#34;,&#34;description&#34;:&#34;未提交&#34;,&#34;code&#34;:&#34;1101&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;af6bdf9b-dd96-4e84-b82e-117ec5787e4b&#34;,&#34;name&#34;:&#34;待审核&#34;,&#34;description&#34;:&#34;待审核&#34;,&#34;code&#34;:&#34;1102&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;d369afc8-9400-43d9-8fc6-b92394da542e&#34;,&#34;name&#34;:&#34;审核通过&#34;,&#34;description&#34;:&#34;审核通过&#34;,&#34;code&#34;:&#34;1103&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;86d75763-9445-4559-863f-e442a192d887&#34;,&#34;name&#34;:&#34;未通过审核&#34;,&#34;description&#34;:&#34;未通过审核&#34;,&#34;code&#34;:&#34;1104&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;e7de6d77-9d33-4d76-9eaf-75b077acfd98&#34;,&#34;name&#34;:&#34;发布上线&#34;,&#34;description&#34;:&#34;发布上线&#34;,&#34;code&#34;:&#34;1105&#34;,&#34;groups&#34;:&#34;11&#34;},{&#34;id&#34;:&#34;06012fed-e06f-4247-b959-d6d3d80343ee&#34;,&#34;name&#34;:&#34;下架&#34;,&#34;description&#34;:&#34;下架&#34;,&#34;code&#34;:&#34;1106&#34;,&#34;groups&#34;:&#34;11&#34;}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取code列表信息\",\"data\":{\"totalCount\":2,\"pageSize\":10,\"pageNum\":1,\"pageData\":[{\"id\":\"36b06397-d83f-4f8f-be06-b9cdaf812161\",\"name\":\"超级管理员\",\"description\":\"牛逼\",\"code\":\"1001\",\"groups\":\"10\"},{\"id\":\"b0935ff6-7ef3-41ac-938c-b6e535a98408\",\"name\":\"管理员\",\"description\":\"235\",\"code\":\"1002\",\"groups\":\"10\"},{\"id\":\"10127f36-3bcd-4767-af17-d773ea9c2ce6\",\"name\":\"员工\",\"description\":\"235\",\"code\":\"1003\",\"groups\":\"10\"},{\"id\":\"2f10a75f-41bf-4f7c-aca1-80d51b6940f4\",\"name\":\"客户\",\"description\":\"客户\",\"code\":\"1004\",\"groups\":\"10\"},{\"id\":\"a09d80b0-2a33-4aff-86d2-65959f234c71\",\"name\":\"未提交\",\"description\":\"未提交\",\"code\":\"1101\",\"groups\":\"11\"},{\"id\":\"af6bdf9b-dd96-4e84-b82e-117ec5787e4b\",\"name\":\"待审核\",\"description\":\"待审核\",\"code\":\"1102\",\"groups\":\"11\"},{\"id\":\"d369afc8-9400-43d9-8fc6-b92394da542e\",\"name\":\"审核通过\",\"description\":\"审核通过\",\"code\":\"1103\",\"groups\":\"11\"},{\"id\":\"86d75763-9445-4559-863f-e442a192d887\",\"name\":\"未通过审核\",\"description\":\"未通过审核\",\"code\":\"1104\",\"groups\":\"11\"},{\"id\":\"e7de6d77-9d33-4d76-9eaf-75b077acfd98\",\"name\":\"发布上线\",\"description\":\"发布上线\",\"code\":\"1105\",\"groups\":\"11\"},{\"id\":\"06012fed-e06f-4247-b959-d6d3d80343ee\",\"name\":\"下架\",\"description\":\"下架\",\"code\":\"1106\",\"groups\":\"11\"}]}}");
+                            document.getElementById('response-body-42-0').innerHTML = syntaxHighlight(jsonStr);
                         } catch (e) {
                              
                         }
