@@ -1,5 +1,6 @@
 package config
 
+// 接口权限处理
 import (
 	. "../datamodels"
 	. "../models"
@@ -9,9 +10,6 @@ import (
 	"sync"
 )
 
-// Context is our custom context.
-// Let's implement a context which will give us access
-// to the client's Session with a trivial `ctx.Session()` call.
 type Context struct {
 	iris.Context
 	user User

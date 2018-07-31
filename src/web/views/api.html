@@ -208,6 +208,10 @@
             
                 <li role="presentation"><a href="#54top" role="tab" data-toggle="tab">GET : /v1/user/del/faa3316a-226a-41b7-8a96-b6ad172c145b</a></li>
             
+                <li role="presentation"><a href="#55top" role="tab" data-toggle="tab">GET : /v1/user/del/6975acf7-3e76-4d30-a92b-b8450dad2b75</a></li>
+            
+                <li role="presentation"><a href="#56top" role="tab" data-toggle="tab">GET : /v1/user/del/4f1f5ec8-499f-4f92-9786-f75b62601771</a></li>
+            
         <ul>
     </div>
     <div class="col-md-8 tab-content">
@@ -11133,6 +11137,86 @@
                 
                 <hr>
             
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-1-61" class="prettyprint">{&#34;password&#34;:&#34;MTIz&#34;,&#34;loginName&#34;:&#34;zw1&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"password\":\"MTIz\",\"loginName\":\"zw1\"}");
+                            document.getElementById('request-body-1-61').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-61">{&#34;code&#34;:200,&#34;msg&#34;:&#34;登录成功&#34;,&#34;data&#34;:{&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;id&#34;:&#34;9b5f9893-e751-4edc-8f28-994761b20dc5&#34;,&#34;loginName&#34;:&#34;zw1&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;roles&#34;:&#34;1002&#34;,&#34;token&#34;:&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSXhNREF5SW4wPSIsImV4cCI6MTUzMzAzODg1OH0.MpTjmTe8kfiCx5S8tQgoZVtmWucym4Lb8npIdjDhSYw&#34;}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"登录成功\",\"data\":{\"email\":\"1512763623@qq.com\",\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"loginName\":\"zw1\",\"name\":\"管理员\",\"phone\":\"13540416116\",\"roles\":\"1002\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSXhNREF5SW4wPSIsImV4cCI6MTUzMzAzODg1OH0.MpTjmTe8kfiCx5S8tQgoZVtmWucym4Lb8npIdjDhSYw\"}}");
+                            document.getElementById('response-body-1-61').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
         </div>
         
         <div id="2top"  role="tabpanel" class="tab-pane col-md-10">
@@ -20582,6 +20666,86 @@
                 
                 <hr>
             
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-11-17" class="prettyprint">{&#34;id&#34;:&#34;9b5f9893-e751-4edc-8f28-994761b20dc5&#34;,&#34;loginName&#34;:&#34;zw1&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1002&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"loginName\":\"zw1\",\"name\":\"管理员\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1002\"}");
+                            document.getElementById('request-body-11-17').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-11-17">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功保存用户信息&#34;}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功保存用户信息\"}");
+                            document.getElementById('response-body-11-17').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
         </div>
         
         <div id="12top"  role="tabpanel" class="tab-pane col-md-10">
@@ -29595,6 +29759,134 @@
                 
                 <hr>
             
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-37-2">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取用户信息&#34;,&#34;data&#34;:{&#34;id&#34;:&#34;9b5f9893-e751-4edc-8f28-994761b20dc5&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;loginName&#34;:&#34;zw1&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1001,1002&#34;}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户信息\",\"data\":{\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"name\":\"管理员\",\"loginName\":\"zw1\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1001,1002\"}}");
+                            document.getElementById('response-body-37-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-37-3">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取用户信息&#34;,&#34;data&#34;:{&#34;id&#34;:&#34;9b5f9893-e751-4edc-8f28-994761b20dc5&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;loginName&#34;:&#34;zw1&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1002&#34;}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户信息\",\"data\":{\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"name\":\"管理员\",\"loginName\":\"zw1\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1002\"}}");
+                            document.getElementById('response-body-37-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
         </div>
         
         <div id="38top"  role="tabpanel" class="tab-pane col-md-10">
@@ -29719,6 +30011,70 @@
                         try {
                             var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户信息\",\"data\":{\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"name\":\"zw\",\"loginName\":\"zw\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"[\\\"1001\\\"]\"}}");
                             document.getElementById('response-body-38-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-38-2">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取用户信息&#34;,&#34;data&#34;:{&#34;id&#34;:&#34;7960ea0a-3c8e-4bd1-9e01-0d18335905f0&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;zw&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1001&#34;}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户信息\",\"data\":{\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"name\":\"zw\",\"loginName\":\"zw\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1001\"}}");
+                            document.getElementById('response-body-38-2').innerHTML = syntaxHighlight(jsonStr);
                         } catch (e) {
                              
                         }
@@ -32139,6 +32495,326 @@
                 
                 <hr>
             
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-41-26" class="prettyprint">{&#34;loginName&#34;:null,&#34;name&#34;:null,&#34;phone&#34;:null,&#34;email&#34;:null}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"loginName\":null,\"name\":null,\"phone\":null,\"email\":null}");
+                            document.getElementById('request-body-41-26').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-41-26">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取用户列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:5,&#34;pageSize&#34;:10,&#34;pageNum&#34;:1,&#34;pageData&#34;:[{&#34;id&#34;:&#34;7960ea0a-3c8e-4bd1-9e01-0d18335905f0&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;zw&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1001&#34;},{&#34;id&#34;:&#34;90e0d8f4-9af6-4e9d-8f12-d4c270956617&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;rrerr&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;11111111@qq.com&#34;,&#34;roles&#34;:&#34;1001,1002,1003&#34;},{&#34;id&#34;:&#34;9b5f9893-e751-4edc-8f28-994761b20dc5&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;loginName&#34;:&#34;zw1&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1001,1002&#34;},{&#34;id&#34;:&#34;6975acf7-3e76-4d30-a92b-b8450dad2b75&#34;,&#34;name&#34;:&#34;dsfdsf&#34;,&#34;loginName&#34;:&#34;sdfdsfd&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;15955555555&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;&#34;},{&#34;id&#34;:&#34;4f1f5ec8-499f-4f92-9786-f75b62601771&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;loginName&#34;:&#34;cw&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;12222222222&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;&#34;}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户列表信息\",\"data\":{\"totalCount\":5,\"pageSize\":10,\"pageNum\":1,\"pageData\":[{\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"name\":\"zw\",\"loginName\":\"zw\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1001\"},{\"id\":\"90e0d8f4-9af6-4e9d-8f12-d4c270956617\",\"name\":\"zw\",\"loginName\":\"rrerr\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"11111111@qq.com\",\"roles\":\"1001,1002,1003\"},{\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"name\":\"管理员\",\"loginName\":\"zw1\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1001,1002\"},{\"id\":\"6975acf7-3e76-4d30-a92b-b8450dad2b75\",\"name\":\"dsfdsf\",\"loginName\":\"sdfdsfd\",\"password\":\"\",\"phone\":\"15955555555\",\"email\":\"1512763623@qq.com\",\"roles\":\"\"},{\"id\":\"4f1f5ec8-499f-4f92-9786-f75b62601771\",\"name\":\"管理员\",\"loginName\":\"cw\",\"password\":\"\",\"phone\":\"12222222222\",\"email\":\"1512763623@qq.com\",\"roles\":\"\"}]}}");
+                            document.getElementById('response-body-41-26').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-41-27" class="prettyprint">{&#34;loginName&#34;:null,&#34;name&#34;:null,&#34;phone&#34;:null,&#34;email&#34;:null}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"loginName\":null,\"name\":null,\"phone\":null,\"email\":null}");
+                            document.getElementById('request-body-41-27').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-41-27">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取用户列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:4,&#34;pageSize&#34;:10,&#34;pageNum&#34;:1,&#34;pageData&#34;:[{&#34;id&#34;:&#34;7960ea0a-3c8e-4bd1-9e01-0d18335905f0&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;zw&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1001&#34;},{&#34;id&#34;:&#34;90e0d8f4-9af6-4e9d-8f12-d4c270956617&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;rrerr&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;11111111@qq.com&#34;,&#34;roles&#34;:&#34;1001,1002,1003&#34;},{&#34;id&#34;:&#34;9b5f9893-e751-4edc-8f28-994761b20dc5&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;loginName&#34;:&#34;zw1&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1001,1002&#34;},{&#34;id&#34;:&#34;4f1f5ec8-499f-4f92-9786-f75b62601771&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;loginName&#34;:&#34;cw&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;12222222222&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;&#34;}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户列表信息\",\"data\":{\"totalCount\":4,\"pageSize\":10,\"pageNum\":1,\"pageData\":[{\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"name\":\"zw\",\"loginName\":\"zw\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1001\"},{\"id\":\"90e0d8f4-9af6-4e9d-8f12-d4c270956617\",\"name\":\"zw\",\"loginName\":\"rrerr\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"11111111@qq.com\",\"roles\":\"1001,1002,1003\"},{\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"name\":\"管理员\",\"loginName\":\"zw1\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1001,1002\"},{\"id\":\"4f1f5ec8-499f-4f92-9786-f75b62601771\",\"name\":\"管理员\",\"loginName\":\"cw\",\"password\":\"\",\"phone\":\"12222222222\",\"email\":\"1512763623@qq.com\",\"roles\":\"\"}]}}");
+                            document.getElementById('response-body-41-27').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-41-28" class="prettyprint">{&#34;loginName&#34;:null,&#34;name&#34;:null,&#34;phone&#34;:null,&#34;email&#34;:null}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"loginName\":null,\"name\":null,\"phone\":null,\"email\":null}");
+                            document.getElementById('request-body-41-28').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-41-28">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取用户列表信息&#34;,&#34;data&#34;:{&#34;totalCount&#34;:3,&#34;pageSize&#34;:10,&#34;pageNum&#34;:1,&#34;pageData&#34;:[{&#34;id&#34;:&#34;7960ea0a-3c8e-4bd1-9e01-0d18335905f0&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;zw&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1001&#34;},{&#34;id&#34;:&#34;90e0d8f4-9af6-4e9d-8f12-d4c270956617&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;rrerr&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;11111111@qq.com&#34;,&#34;roles&#34;:&#34;1001,1002,1003&#34;},{&#34;id&#34;:&#34;9b5f9893-e751-4edc-8f28-994761b20dc5&#34;,&#34;name&#34;:&#34;管理员&#34;,&#34;loginName&#34;:&#34;zw1&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;1512763623@qq.com&#34;,&#34;roles&#34;:&#34;1002&#34;}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户列表信息\",\"data\":{\"totalCount\":3,\"pageSize\":10,\"pageNum\":1,\"pageData\":[{\"id\":\"7960ea0a-3c8e-4bd1-9e01-0d18335905f0\",\"name\":\"zw\",\"loginName\":\"zw\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1001\"},{\"id\":\"90e0d8f4-9af6-4e9d-8f12-d4c270956617\",\"name\":\"zw\",\"loginName\":\"rrerr\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"11111111@qq.com\",\"roles\":\"1001,1002,1003\"},{\"id\":\"9b5f9893-e751-4edc-8f28-994761b20dc5\",\"name\":\"管理员\",\"loginName\":\"zw1\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"1512763623@qq.com\",\"roles\":\"1002\"}]}}");
+                            document.getElementById('response-body-41-28').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSXhNREF5SW4wPSIsImV4cCI6MTUzMzAzODg1OH0.MpTjmTe8kfiCx5S8tQgoZVtmWucym4Lb8npIdjDhSYw</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-41-29" class="prettyprint">{&#34;loginName&#34;:null,&#34;name&#34;:null,&#34;phone&#34;:null,&#34;email&#34;:null}</pre>
+                <script>
+                     
+                    var requestHeader ={"Authorization":" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpsaU5XWTVPRGt6TFdVM05URXROR1ZrWXkwNFpqSTRMVGs1TkRjMk1XSXlNR1JqTlNJc0ltNWhiV1VpT2lMbnJxSG5rSWJsa1pnaUxDSnNiMmRwYms1aGJXVWlPaUo2ZHpFaUxDSndZWE56ZDI5eVpDSTZJaUlzSW5Cb2IyNWxJam9pTVRNMU5EQTBNVFl4TVRZaUxDSmxiV0ZwYkNJNklqRTFNVEkzTmpNMk1qTkFjWEV1WTI5dElpd2ljbTlzWlhNaU9pSXhNREF5SW4wPSIsImV4cCI6MTUzMzAzODg1OH0.MpTjmTe8kfiCx5S8tQgoZVtmWucym4Lb8npIdjDhSYw\r","Content-Type":" application/json; charset=UTF-8\r","Referer":" http"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"loginName\":null,\"name\":null,\"phone\":null,\"email\":null}");
+                            document.getElementById('request-body-41-29').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-41-29">{&#34;code&#34;:402,&#34;msg&#34;:&#34;接口没有权限&#34;}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":402,\"msg\":\"接口没有权限\"}");
+                            document.getElementById('response-body-41-29').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
         </div>
         
         <div id="42top"  role="tabpanel" class="tab-pane col-md-10">
@@ -32786,6 +33462,70 @@
                 
                 <hr>
             
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-47-3">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功获取用户信息&#34;,&#34;data&#34;:{&#34;id&#34;:&#34;90e0d8f4-9af6-4e9d-8f12-d4c270956617&#34;,&#34;name&#34;:&#34;zw&#34;,&#34;loginName&#34;:&#34;rrerr&#34;,&#34;password&#34;:&#34;&#34;,&#34;phone&#34;:&#34;13540416116&#34;,&#34;email&#34;:&#34;11111111@qq.com&#34;,&#34;roles&#34;:&#34;1001,1002,1003&#34;}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功获取用户信息\",\"data\":{\"id\":\"90e0d8f4-9af6-4e9d-8f12-d4c270956617\",\"name\":\"zw\",\"loginName\":\"rrerr\",\"password\":\"\",\"phone\":\"13540416116\",\"email\":\"11111111@qq.com\",\"roles\":\"1001,1002,1003\"}}");
+                            document.getElementById('response-body-47-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
         </div>
         
         <div id="48top"  role="tabpanel" class="tab-pane col-md-10">
@@ -33254,6 +33994,142 @@
                         try {
                             var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功删除用户信息\"}");
                             document.getElementById('response-body-54-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="55top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-55-0">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功删除用户信息&#34;}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功删除用户信息\"}");
+                            document.getElementById('response-body-55-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="56top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Authorization</td>
+                        <td>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImV5SnBaQ0k2SWpjNU5qQmxZVEJoTFROak9HVXROR0prTVMwNVpUQXhMVEJrTVRnek16VTVNRFZtTUNJc0ltNWhiV1VpT2lKNmR5SXNJbXh2WjJsdVRtRnRaU0k2SW5wM0lpd2ljR0Z6YzNkdmNtUWlPaUlpTENKd2FHOXVaU0k2SWpFek5UUXdOREUyTVRFMklpd2laVzFoYVd3aU9pSXhOVEV5TnpZek5qSXpRSEZ4TG1OdmJTSXNJbkp2YkdWeklqb2lNVEF3TVNKOSIsImV4cCI6MTUzMzAzODQ1N30.asIUQndkL0UJQ1_h2DM9iRvhoxm3a3JKzyalB77fL8g</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Referer</td>
+                        <td>  http</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-56-0">{&#34;code&#34;:200,&#34;msg&#34;:&#34;成功删除用户信息&#34;}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"code\":200,\"msg\":\"成功删除用户信息\"}");
+                            document.getElementById('response-body-56-0').innerHTML = syntaxHighlight(jsonStr);
                         } catch (e) {
                              
                         }
