@@ -39,7 +39,7 @@ func HttpInterceptor(ctx iris.Context) {
 	} else {
 		result := Result{}
 		result.Code = 401
-		result.Msg = "没有权限"
+		result.Msg = "没有登录或者登录过期"
 		ctx.JSON(result)
 	}
 

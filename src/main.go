@@ -41,7 +41,7 @@ func main() {
 
 	//RedisInit()
 	RouterInit(app)
-
+	//http拦截器中间件
 	app.UseGlobal(HttpInterceptor)
 
 	app.Run(iris.Addr(":8888"),

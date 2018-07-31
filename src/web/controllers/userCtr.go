@@ -3,6 +3,7 @@ package controllers
 import (
 	. "../../config"
 	. "../../datamodels"
+	. "../../models"
 	. "../../services"
 	"crypto/md5"
 	"encoding/hex"
@@ -34,7 +35,7 @@ func UserCreate(ctx iris.Context) {
 		h := md5.New()
 		h.Write([]byte(user.Password))
 		user.Password = hex.EncodeToString(h.Sum(nil))
-		err := user.UserInsert()
+		err := UserInsert(user)
 
 		if err != nil {
 			result.Code = 0
@@ -47,7 +48,7 @@ func UserCreate(ctx iris.Context) {
 		ctx.JSON(result)
 	}
 }
-func UserUpdate(ctx iris.Context) {
+func UserUpdateCtr(ctx iris.Context) {
 	result := Result{}
 	var user User
 	ctx.ReadJSON(&user)
@@ -58,7 +59,7 @@ func UserUpdate(ctx iris.Context) {
 		result.Msg = "登录名重复"
 		ctx.JSON(result)
 	} else {
-		err := user.UserUpdate()
+		err := UserUpdate(user)
 		if err != nil {
 			result.Code = 0
 			result.Msg = err.Error()

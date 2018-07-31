@@ -2,37 +2,13 @@ package service
 
 import (
 	. "../config"
+	. "../models"
 	"fmt"
 	"github.com/satori/go.uuid"
 	"strconv"
 )
 
-type User struct {
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-	LoginName string `json:"loginName"`
-	Password  string `json:"password"`
-	Phone     string `json:"phone"`
-	Email     string `json:"email"`
-	Roles     string `json:"roles"`
-}
-type UserSearchVo struct {
-	Phone     string `column:"and,phone,like"`
-	Name      string `column:"and,name,like"`
-	Email     string `column:"and,email,like"`
-	LoginName string `column:"and,loginName,like"`
-	Roles     string `column:"and,roles,like"`
-}
-type LoginVo struct {
-	LoginName string `json:"loginName"`
-	Password  string `json:"password"`
-}
-type LoginUser struct {
-	User
-	Token string `json:"token"`
-}
-
-func (user *User) UserInsert() (err error) {
+func UserInsert(user User) (err error) {
 	sql := "insert into _user(id,loginName,name,password,email,phone,roles) values($1,$2,$3,$4,$5,$6,$7)"
 	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), user.LoginName, user.Name, user.Password, user.Email, user.Phone, user.Roles)
 	return
@@ -44,9 +20,9 @@ func UserDelete(id string) (err error) {
 	return
 }
 
-func (user *User) UserUpdate() (err error) {
+func UserUpdate(user User) (err error) {
 	sql := "update _user set name=$1,LoginName=$2,Phone=$3,Email=$4,Roles=$5 where id=$6"
-	_, err = Db.Exec(sql, user.Name, user.LoginName, user.Phone, user.Email, user.ID, user.Roles)
+	_, err = Db.Exec(sql, user.Name, user.LoginName, user.Phone, user.Email, user.Roles, user.ID)
 	return
 }
 
