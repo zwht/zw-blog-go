@@ -1,7 +1,8 @@
-package config
+package http
 
 import (
-	. "../datamodels"
+	. "../../datamodels"
+	. "../../tools"
 	"github.com/kataras/iris"
 	"strings"
 )
@@ -24,6 +25,11 @@ func HttpInterceptor(ctx iris.Context) {
 		}
 		if !isNext {
 			tokenString := ctx.Request().Header.Get("Authorization")
+			urlToken := ctx.Params().Get("token")
+			//如果url有token，优先使用url
+			if urlToken != "" {
+				tokenString = urlToken
+			}
 			if tokenString != "" {
 				isNext, _ = GetJwt(tokenString)
 			}

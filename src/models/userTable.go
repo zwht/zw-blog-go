@@ -10,6 +10,7 @@ type User struct {
 	Phone     string `json:"phone"`
 	Email     string `json:"email"`
 	Roles     string `json:"roles"`
+	State     bool   `json:"state"`
 }
 type UserSearchVo struct {
 	Phone     string `column:"and,phone,like"`

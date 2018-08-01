@@ -1,9 +1,10 @@
-package config
+package http
 
 // 接口权限处理
 import (
-	. "../datamodels"
-	. "../models"
+	. "../../datamodels"
+	. "../../models"
+	. "../../tools"
 	"encoding/json"
 	"github.com/kataras/iris"
 	"strings"
@@ -12,7 +13,7 @@ import (
 
 type Context struct {
 	iris.Context
-	user User
+	User User
 }
 
 var contextPool = sync.Pool{New: func() interface{} {
@@ -23,11 +24,16 @@ func acquire(original iris.Context) *Context {
 	ctx := contextPool.Get().(*Context)
 	ctx.Context = original
 	tokenString := ctx.Request().Header.Get("Authorization")
+	//如果url有token，优先使用url
+	urlToken := ctx.Params().Get("token")
+	if urlToken != "" {
+		tokenString = urlToken
+	}
 	if tokenString != "" {
 		_, user := GetJwt(tokenString)
 		var empList User
 		_ = json.Unmarshal(user, &empList)
-		ctx.user = empList
+		ctx.User = empList
 	}
 	return ctx
 }
@@ -36,17 +42,17 @@ func release(ctx *Context) {
 	contextPool.Put(ctx)
 }
 
-func Permission(h func(iris.Context), roles string) iris.Handler {
+func Permission(h func(*Context), roles string) iris.Handler {
 	return func(original iris.Context) {
 		//处理ctx，把操作user数据绑定在ctx
 		ctx := acquire(original)
 		passe := false
 
 		urlRoles := strings.Split(roles, ",")
-		if len(urlRoles) == 0 {
+		if roles == "" {
 			passe = true
 		} else {
-			userRoles := strings.Split(ctx.user.Roles, ",")
+			userRoles := strings.Split(ctx.User.Roles, ",")
 			for _, userR := range userRoles {
 				for _, urlR := range urlRoles {
 					if userR == urlR {

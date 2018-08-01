@@ -1,7 +1,7 @@
 package routers
 
 import (
-	. "../../config"
+	. "../../tools/http"
 	. "../controllers"
 	"github.com/kataras/iris"
 )
@@ -14,11 +14,12 @@ func UserRouter(app *iris.Application) {
 	})
 	{
 		routes.Post("/add", Permission(UserCreate, "1001"))
-		routes.Post("/update", UserUpdateCtr)
+		routes.Post("/update", Permission(UserUpdateCtr, ""))
+		routes.Get("/updateState", Permission(UserUpdateStateCtr, "1001"))
 		routes.Get("/del/{id:string}", Permission(UserDeleteById, "1001"))
-		routes.Get("/getById/{id:string}", UserGetById)
+		routes.Get("/getById/{id:string}", Permission(UserGetById, ""))
 		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(UserGetList, "1001"))
-		routes.Post("/login", Login)
+		routes.Post("/login", Permission(Login, ""))
 	}
 
 }

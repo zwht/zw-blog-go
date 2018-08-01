@@ -1,7 +1,7 @@
 package main
 
 import (
-	. "./config"
+	. "./tools/http"
 	. "./web/routers"
 	"github.com/betacraft/yaag/irisyaag"
 	"github.com/betacraft/yaag/yaag"

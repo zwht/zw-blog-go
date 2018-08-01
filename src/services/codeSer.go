@@ -1,7 +1,7 @@
 package service
 
 import (
-	. "../config"
+	. "../tools"
 	"github.com/satori/go.uuid"
 	"strconv"
 )

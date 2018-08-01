@@ -1,15 +1,14 @@
 package controllers
 
 import (
-	. "../../config"
 	. "../../datamodels"
 	. "../../models"
 	. "../../services"
+	. "../../tools"
+	. "../../tools/http"
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
-
-	"github.com/kataras/iris"
 	"strconv"
 )
 
@@ -21,7 +20,7 @@ func byteString(p []byte) string {
 	}
 	return string(p)
 }
-func UserCreate(ctx iris.Context) {
+func UserCreate(ctx *Context) {
 	result := Result{}
 	var user User
 	ctx.ReadJSON(&user)
@@ -48,7 +47,7 @@ func UserCreate(ctx iris.Context) {
 		ctx.JSON(result)
 	}
 }
-func UserUpdateCtr(ctx iris.Context) {
+func UserUpdateCtr(ctx *Context) {
 	result := Result{}
 	var user User
 	ctx.ReadJSON(&user)
@@ -70,8 +69,29 @@ func UserUpdateCtr(ctx iris.Context) {
 		ctx.JSON(result)
 	}
 }
+func UserUpdateStateCtr(ctx *Context) {
+	//id := ctx.Params().Get("id")
+	st := ctx.URLParam("state")
+	id := ctx.URLParam("id")
 
-func UserGetById(ctx iris.Context) {
+	state := false
+	if st == "true" {
+		state = true
+	}
+
+	err := UserUpdateState(id, state)
+	result := Result{}
+	if err != nil {
+		result.Code = 0
+		result.Msg = err.Error()
+	} else {
+		result.Code = 200
+		result.Msg = "修改状态成功"
+	}
+	ctx.JSON(result)
+}
+
+func UserGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	user, err := UserSelect(id)
 
@@ -89,7 +109,7 @@ func UserGetById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func UserGetList(ctx iris.Context) {
+func UserGetList(ctx *Context) {
 
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
@@ -102,6 +122,16 @@ func UserGetList(ctx iris.Context) {
 		result.Code = 0
 		result.Msg = err.Error()
 	} else {
+		//删除自己数据
+		var j = -1
+		for i, v := range users {
+			if v.ID == ctx.User.ID {
+				j = i
+			}
+		}
+		if j != -1 {
+			users = append(users[:j], users[j+1:]...)
+		}
 		resultPage := ResultPage{}
 		resultPage.TotalCount = count
 		resultPage.PageSize = pageSize
@@ -116,7 +146,7 @@ func UserGetList(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func UserDeleteById(ctx iris.Context) {
+func UserDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := UserDelete(id)
 
@@ -133,7 +163,7 @@ func UserDeleteById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func Login(ctx iris.Context) {
+func Login(ctx *Context) {
 
 	var loginVo LoginVo
 	ctx.ReadJSON(&loginVo)
@@ -157,25 +187,29 @@ func Login(ctx iris.Context) {
 			result.Code = 0
 			result.Msg = err1.Error()
 		} else {
-			result.Code = 200
-			result.Msg = "登录成功"
-			// 把token保存到redis
-			//s := Sess.Start(ctx)
-			//s.Set("token", tokenString)
-			//fmt.Printf(s.GetString("token"))
+			if user.State {
+				result.Code = 200
+				result.Msg = "登录成功"
+				// 把token保存到redis
+				//s := Sess.Start(ctx)
+				//s.Set("token", tokenString)
+				//fmt.Printf(s.GetString("token"))
 
-			var userVo map[string]string /*创建集合 */
-			userVo = make(map[string]string)
-			userVo["name"] = user.Name
-			userVo["id"] = user.ID
-			userVo["loginName"] = user.LoginName
-			userVo["phone"] = user.Phone
-			userVo["email"] = user.Email
-			userVo["roles"] = user.Roles
-			userVo["token"] = tokenString
-			result.Data = userVo
+				var userVo map[string]string /*创建集合 */
+				userVo = make(map[string]string)
+				userVo["name"] = user.Name
+				userVo["id"] = user.ID
+				userVo["loginName"] = user.LoginName
+				userVo["phone"] = user.Phone
+				userVo["email"] = user.Email
+				userVo["roles"] = user.Roles
+				userVo["token"] = tokenString
+				result.Data = userVo
+			} else {
+				result.Code = 403
+				result.Msg = "账号被禁用"
+			}
 		}
-
 	}
 	ctx.JSON(result)
 }
