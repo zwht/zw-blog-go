@@ -44,7 +44,7 @@ func main() {
 	//http拦截器中间件
 	app.UseGlobal(HttpInterceptor)
 
-	app.Run(iris.Addr(":9999"),
+	app.Run(iris.Addr(":9876"),
 		iris.WithCharset("UTF-8"),
 		iris.WithoutServerError(iris.ErrServerClosed))
 }
