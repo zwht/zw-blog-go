@@ -31,6 +31,7 @@ func HttpInterceptor(ctx iris.Context) {
 				tokenString = urlToken
 			}
 			if tokenString != "" {
+				// 获取jwt解析后的token数据
 				isNext, _ = GetJwt(tokenString)
 			}
 			// var empList User

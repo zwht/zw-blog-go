@@ -7,11 +7,11 @@ import (
 )
 
 const (
-	host     = "127.0.0.1"
+	host     = "120.79.171.251"
 	port     = 5432
 	user     = "zhaowei"
 	password = "123"
-	dbname   = "zhaowei"
+	dbname   = "gobase"
 )
 
 var Db *sql.DB
