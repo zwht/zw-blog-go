@@ -213,7 +213,7 @@ func Login(ctx *Context) {
 
 		if err1 != nil {
 			result.Code = 0
-			result.Msg = err1.Error()
+			result.Msg = "登录名或密码错误"
 		} else {
 			if user.State {
 				result.Code = 200
