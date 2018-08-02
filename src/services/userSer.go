@@ -31,7 +31,7 @@ func UserUpdateState(id string, state bool) (err error) {
 	return
 }
 func UserUpdatePassoword(id string, oldPassword string, passoword string) (err error) {
-	sql := "update _user set passoword=$1 where id=$2 and password=$3"
+	sql := "update _user set password=$1 where id=$2 and password=$3"
 	_, err = Db.Exec(sql, passoword, id, oldPassword)
 	return
 }
