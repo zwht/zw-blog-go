@@ -30,6 +30,11 @@ func UserUpdateState(id string, state bool) (err error) {
 	_, err = Db.Exec(sql, state, id)
 	return
 }
+func UserUpdatePassoword(id string, oldPassword string, passoword string) (err error) {
+	sql := "update _user set passoword=$1 where id=$2 and password=$3"
+	_, err = Db.Exec(sql, passoword, id, oldPassword)
+	return
+}
 
 func UserSelect(id string) (user User, err error) {
 	sql := "select id,name,loginName,phone,email,roles,state from _user where id=$1"

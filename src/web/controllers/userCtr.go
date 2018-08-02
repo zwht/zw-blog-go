@@ -91,6 +91,34 @@ func UserUpdateStateCtr(ctx *Context) {
 	ctx.JSON(result)
 }
 
+func UserUpdatePassowordCtr(ctx *Context) {
+	//id := ctx.Params().Get("id")
+	oldPassword := ctx.URLParam("oldPassword")
+	password := ctx.URLParam("password")
+	id := ctx.URLParam("id")
+	if id == "" {
+		id = ctx.User.ID
+	}
+	h := md5.New()
+	h.Write([]byte(password))
+	password = hex.EncodeToString(h.Sum(nil))
+
+	h2 := md5.New()
+	h2.Write([]byte(oldPassword))
+	oldPassword = hex.EncodeToString(h2.Sum(nil))
+
+	err := UserUpdatePassoword(id, oldPassword, password)
+	result := Result{}
+	if err != nil {
+		result.Code = 0
+		result.Msg = "密码错误"
+	} else {
+		result.Code = 200
+		result.Msg = "修改成功"
+	}
+	ctx.JSON(result)
+}
+
 func UserGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	user, err := UserSelect(id)

@@ -16,6 +16,7 @@ func UserRouter(app *iris.Application) {
 		routes.Post("/add", Permission(UserCreate, "1001"))
 		routes.Post("/update", Permission(UserUpdateCtr, ""))
 		routes.Get("/updateState", Permission(UserUpdateStateCtr, "1001"))
+		routes.Get("/updatePassword", Permission(UserUpdatePassowordCtr, ""))
 		routes.Get("/del/{id:string}", Permission(UserDeleteById, "1001"))
 		routes.Get("/getById/{id:string}", Permission(UserGetById, ""))
 		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(UserGetList, "1001"))
