@@ -22,39 +22,42 @@ type CodeSearchVo struct {
 }
 
 func (code *Code) CodeInsert() (err error) {
-	sql := "insert into _code(id,name,description,groups,code) values($1,$2,$3,$4,$5)"
+	sql := "insert into code(id,name,description,groups,code) values($1,$2,$3,$4,$5)"
 	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), code.Name, code.Description, code.Groups, code.Code)
 	return
 }
 
 func CodeDelete(id string) (err error) {
-	sql := "delete from _code where id=$1"
+	sql := "delete from code where id=$1"
 	_, err = Db.Exec(sql, id)
 	return
 }
 
 func (code *Code) CodeUpdate() (err error) {
-	sql := "update _code set name=$1,description=$2,groups=$3,code=$4 where id=$5"
+	sql := "update code set name=$1,description=$2,groups=$3,code=$4 where id=$5"
 	_, err = Db.Exec(sql, code.Name, code.Description, code.Groups, code.Code, code.ID)
 	return
 }
 
 func CodeSelect(id string) (code Code, err error) {
-	sql := "select id,name,description,groups,code from _code where id=$1"
+	sql := "select id,name,description,groups,code from code where id=$1"
 	code = Code{}
 	err = Db.QueryRow(sql, id).Scan(&code.ID, &code.Name, &code.Description, &code.Groups, &code.Code)
 	return
 }
 func CodeSelectCount(search CodeSearchVo) (count int, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from _code"+whereStr, 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from code"+whereStr, 0)
 	err = Db.QueryRow(sql, args...).Scan(&count)
 	return
 }
 func CodeSelectList(pageSize int, pageNum int, search CodeSearchVo) (codes []Code, err error) {
-	sql := "select id,name,description,groups,code from _code limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
+	whereStr, args := GenWhereByStruct(search)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,name,description,groups,code from code "+whereStr+" limit ? offset ?", 0)
 	codes = []Code{}
-	rows, err := Db.Query(sql)
+	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
+	rows, err := Db.Query(sql, args...)
+
 	if err != nil {
 		panic(err.Error)
 	}

@@ -11,50 +11,52 @@ type NewType struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	ParentId    string `json:"parentId"`
-	Index       string `json:"index"`
+	Index       int    `json:"index"`
 }
 type NewTypeSearchVo struct {
 	ID          string `column:"and,id,="`
 	Name        string `column:"and,name,like"`
 	Description string `column:"and,description,like"`
 	ParentId    string `column:"and,parentId,like"`
-	Index       string `column:"and,index,="`
+	Index       int    `column:"and,index,="`
 }
 
 func (newType *NewType) NewTypeInsert() (err error) {
-	sql := "insert into _newType(id,name,description,parentId,index) values($1,$2,$3,$4,$5)"
+	sql := "insert into new_type(id,name,description,parent_id,index) values($1,$2,$3,$4,$5)"
 	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), newType.Name, newType.Description, newType.ParentId, newType.Index)
 	return
 }
 
 func NewTypeDelete(id string) (err error) {
-	sql := "delete from _newType where id=$1"
+	sql := "delete from new_type where id=$1"
 	_, err = Db.Exec(sql, id)
 	return
 }
 
 func (newType *NewType) NewTypeUpdate() (err error) {
-	sql := "update _newType set name=$1,description=$2,parentId=$3,index=$4 where id=$5"
+	sql := "update new_type set name=$1,description=$2,parent_id=$3,index=$4 where id=$5"
 	_, err = Db.Exec(sql, newType.Name, newType.Description, newType.ParentId, newType.Index, newType.ID)
 	return
 }
 
 func NewTypeSelect(id string) (newType NewType, err error) {
-	sql := "select id,name,description,parentId,index from _newType where id=$1"
+	sql := "select id,name,description,parent_id,index from new_type where id=$1"
 	newType = NewType{}
 	err = Db.QueryRow(sql, id).Scan(&newType.ID, &newType.Name, &newType.Description, &newType.ParentId, &newType.Index)
 	return
 }
 func NewTypeSelectCount(search NewTypeSearchVo) (count int, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from _newType"+whereStr, 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from new_type"+whereStr, 0)
 	err = Db.QueryRow(sql, args...).Scan(&count)
 	return
 }
 func NewTypeSelectList(pageSize int, pageNum int, search NewTypeSearchVo) (newTypes []NewType, err error) {
-	sql := "select id,name,description,parentId,index from _newType limit " + strconv.Itoa(pageSize) + " offset " + strconv.Itoa(pageSize*(pageNum-1))
+	whereStr, args := GenWhereByStruct(search)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,name,description,parent_id,index from new_type "+whereStr+" limit ? offset ?", 0)
 	newTypes = []NewType{}
-	rows, err := Db.Query(sql)
+	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
+	rows, err := Db.Query(sql, args...)
 	if err != nil {
 		panic(err.Error)
 	}
