@@ -7,4 +7,5 @@ import (
 func RouterInit(app *iris.Application) {
 	UserRouter(app)
 	CodeRouter(app)
+	NewTypeRouter(app)
 }
