@@ -6,14 +6,14 @@ import (
 	"strconv"
 )
 
-type NewType struct {
+type NewsType struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	ParentId    string `json:"parentId"`
 	Index       int    `json:"index"`
 }
-type NewTypeSearchVo struct {
+type NewsTypeSearchVo struct {
 	ID          string `column:"and,id,="`
 	Name        string `column:"and,name,like"`
 	Description string `column:"and,description,like"`
@@ -21,40 +21,40 @@ type NewTypeSearchVo struct {
 	Index       int    `column:"and,index,="`
 }
 
-func (newType *NewType) NewTypeInsert() (err error) {
+func (newsType *NewsType) NewsTypeInsert() (err error) {
 	sql := "insert into new_type(id,name,description,parent_id,index) values($1,$2,$3,$4,$5)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), newType.Name, newType.Description, newType.ParentId, newType.Index)
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), newsType.Name, newsType.Description, newsType.ParentId, newsType.Index)
 	return
 }
 
-func NewTypeDelete(id string) (err error) {
+func NewsTypeDelete(id string) (err error) {
 	sql := "delete from new_type where id=$1"
 	_, err = Db.Exec(sql, id)
 	return
 }
 
-func (newType *NewType) NewTypeUpdate() (err error) {
+func (newsType *NewsType) NewsTypeUpdate() (err error) {
 	sql := "update new_type set name=$1,description=$2,parent_id=$3,index=$4 where id=$5"
-	_, err = Db.Exec(sql, newType.Name, newType.Description, newType.ParentId, newType.Index, newType.ID)
+	_, err = Db.Exec(sql, newsType.Name, newsType.Description, newsType.ParentId, newsType.Index, newsType.ID)
 	return
 }
 
-func NewTypeSelect(id string) (newType NewType, err error) {
+func NewsTypeSelect(id string) (newsType NewsType, err error) {
 	sql := "select id,name,description,parent_id,index from new_type where id=$1"
-	newType = NewType{}
-	err = Db.QueryRow(sql, id).Scan(&newType.ID, &newType.Name, &newType.Description, &newType.ParentId, &newType.Index)
+	newsType = NewsType{}
+	err = Db.QueryRow(sql, id).Scan(&newsType.ID, &newsType.Name, &newsType.Description, &newsType.ParentId, &newsType.Index)
 	return
 }
-func NewTypeSelectCount(search NewTypeSearchVo) (count int, err error) {
+func NewsTypeSelectCount(search NewsTypeSearchVo) (count int, err error) {
 	whereStr, args := GenWhereByStruct(search)
 	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from new_type"+whereStr, 0)
 	err = Db.QueryRow(sql, args...).Scan(&count)
 	return
 }
-func NewTypeSelectList(pageSize int, pageNum int, search NewTypeSearchVo) (newTypes []NewType, err error) {
+func NewsTypeSelectList(pageSize int, pageNum int, search NewsTypeSearchVo) (newsTypes []NewsType, err error) {
 	whereStr, args := GenWhereByStruct(search)
 	sql, _ := ReplaceQuestionToDollarInherit("select id,name,description,parent_id,index from new_type "+whereStr+" limit ? offset ?", 0)
-	newTypes = []NewType{}
+	newsTypes = []NewsType{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)
 	if err != nil {
@@ -63,12 +63,12 @@ func NewTypeSelectList(pageSize int, pageNum int, search NewTypeSearchVo) (newTy
 	defer rows.Close()
 	for rows.Next() {
 		rows.Columns()
-		var newType NewType
-		err = rows.Scan(&newType.ID, &newType.Name, &newType.Description, &newType.ParentId, &newType.Index)
+		var newsType NewsType
+		err = rows.Scan(&newsType.ID, &newsType.Name, &newsType.Description, &newsType.ParentId, &newsType.Index)
 		if err != nil {
 			panic(err.Error)
 		}
-		newTypes = append(newTypes, newType)
+		newsTypes = append(newsTypes, newsType)
 	}
 	return
 }

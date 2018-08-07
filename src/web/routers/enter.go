@@ -6,6 +6,9 @@ import (
 
 func RouterInit(app *iris.Application) {
 	UserRouter(app)
+	UserGroupRouter(app)
 	CodeRouter(app)
-	NewTypeRouter(app)
+	NewsTypeRouter(app)
+	NewsReviewRouter(app)
+	NewsRouter(app)
 }
