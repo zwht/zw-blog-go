@@ -11,6 +11,7 @@ type NewsType struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	ParentId    string `json:"parentId"`
+	UserGroupId string `json:"userGroupId"`
 	Index       int    `json:"index"`
 }
 type NewsTypeSearchVo struct {
@@ -18,12 +19,13 @@ type NewsTypeSearchVo struct {
 	Name        string `column:"and,name,like"`
 	Description string `column:"and,description,like"`
 	ParentId    string `column:"and,parentId,like"`
+	UserGroupId string `column:"and,userGroupId,like"`
 	Index       int    `column:"and,index,="`
 }
 
 func (newsType *NewsType) NewsTypeInsert() (err error) {
-	sql := "insert into new_type(id,name,description,parent_id,index) values($1,$2,$3,$4,$5)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), newsType.Name, newsType.Description, newsType.ParentId, newsType.Index)
+	sql := "insert into new_type(id,name,description,parent_id,index,user_group_id) values($1,$2,$3,$4,$5,$6)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), newsType.Name, newsType.Description, newsType.ParentId, newsType.Index, newsType.UserGroupId)
 	return
 }
 

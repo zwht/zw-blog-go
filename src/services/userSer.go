@@ -9,8 +9,8 @@ import (
 )
 
 func UserInsert(user User) (err error) {
-	sql := "insert into users(id,loginName,name,password,email,phone,roles,state) values($1,$2,$3,$4,$5,$6,$7,$8)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), user.LoginName, user.Name, user.Password, user.Email, user.Phone, user.Roles, true)
+	sql := "insert into users(id,loginName,name,password,email,phone,roles,state,parent_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), user.LoginName, user.Name, user.Password, user.Email, user.Phone, user.Roles, true, user.ParentId)
 	return
 }
 

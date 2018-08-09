@@ -11,6 +11,7 @@ type User struct {
 	Email     string `json:"email"`
 	Roles     string `json:"roles"`
 	State     bool   `json:"state"`
+	ParentId  string `json:"parentId"`
 }
 type UserSearchVo struct {
 	Phone     string `column:"and,phone,like"`
