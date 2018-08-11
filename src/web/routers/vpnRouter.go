@@ -7,7 +7,7 @@ import (
 
 //code model
 func VpnRouter(app *iris.Application) {
-	routes := app.Party("/v1/vps", func(ctx iris.Context) {
+	routes := app.Party("/v1/vpn", func(ctx iris.Context) {
 		ctx.Next()
 	})
 	{

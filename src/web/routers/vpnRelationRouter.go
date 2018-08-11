@@ -7,7 +7,7 @@ import (
 
 //code model
 func VpnRelationRouter(app *iris.Application) {
-	routes := app.Party("/v1/vps", func(ctx iris.Context) {
+	routes := app.Party("/v1/vpn/relation", func(ctx iris.Context) {
 		ctx.Next()
 	})
 	{
@@ -16,6 +16,7 @@ func VpnRelationRouter(app *iris.Application) {
 		routes.Get("/del/{id:string}", VpnRelationDeleteById)
 		routes.Get("/getById/{id:string}", VpnRelationGetById)
 		routes.Post("/list/{pageNum:int}/{pageSize:int}", VpnRelationGetList)
+		routes.Get("/list", VpnRelationGetListByUserId)
 	}
 
 }

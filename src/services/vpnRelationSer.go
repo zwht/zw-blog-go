@@ -1,6 +1,7 @@
 package service
 
 import (
+	. "../datamodels"
 	. "../tools"
 	"github.com/satori/go.uuid"
 	"strconv"
@@ -14,17 +15,24 @@ type VpnRelation struct {
 	CreateTime  int64  `json:"createTime"`
 	OverdueTime int64  `json:"overdueTime"`
 }
+type VpnRelationGet struct {
+	ID          string    `json:"id"`
+	VpnId       string    `json:"vpnId"`
+	UserId      string    `json:"userId"`
+	CreateTime  LocalTime `json:"createTime"`
+	OverdueTime LocalTime `json:"overdueTime"`
+}
 type VpnRelationSearchVo struct {
-	ID        string    `column:"and,id,="`
-	UserId    string    `column:"and,userId,like"`
-	VpnId     string    `column:"and,vpnId,like"`
-	StartTime time.Time `column:"and,overdueTime,between"`
-	EndTime   time.Time `column:"and,overdueTime,between"`
+	ID     string `column:"and,id,="`
+	UserId string `column:"and,userId,like"`
+	VpnId  string `column:"and,vpnId,like"`
+	// StartTime time.Time `column:"and,overdueTime,between"`
+	// EndTime   time.Time `column:"and,overdueTime,between"`
 }
 
 func (vpnRelation *VpnRelation) VpnRelationInsert() (err error) {
 	sql := "insert into vpn_relation(id,vpn_id,user_id,create_time,overdue_time) values($1,$2,$3,$4,$5)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), vpnRelation.VpnId, vpnRelation.UserId, vpnRelation.CreateTime, vpnRelation.OverdueTime)
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), vpnRelation.VpnId, vpnRelation.UserId, time.Now(), time.Unix(vpnRelation.OverdueTime/1000, 0))
 	return
 }
 
@@ -35,14 +43,14 @@ func VpnRelationDelete(id string) (err error) {
 }
 
 func (vpnRelation *VpnRelation) VpnRelationUpdate() (err error) {
-	sql := "update vpn_relation set vpn_id=$1,user_id=$2,create_time=$3,overdue_time=$4 where id=$5"
-	_, err = Db.Exec(sql, vpnRelation.VpnId, vpnRelation.UserId, vpnRelation.CreateTime, vpnRelation.OverdueTime, vpnRelation.ID)
+	sql := "update vpn_relation set vpn_id=$1,user_id=$2,overdue_time=$3 where id=$4"
+	_, err = Db.Exec(sql, vpnRelation.VpnId, vpnRelation.UserId, vpnRelation.OverdueTime, time.Unix(vpnRelation.OverdueTime/1000, 0), vpnRelation.ID)
 	return
 }
 
-func VpnRelationSelect(id string) (vpnRelation VpnRelation, err error) {
+func VpnRelationSelect(id string) (vpnRelation VpnRelationGet, err error) {
 	sql := "select id,vpn_id,user_id,create_time,overdue_time from vpn_relation where id=$1"
-	vpnRelation = VpnRelation{}
+	vpnRelation = VpnRelationGet{}
 	err = Db.QueryRow(sql, id).Scan(&vpnRelation.ID, &vpnRelation.VpnId, &vpnRelation.UserId, &vpnRelation.CreateTime, &vpnRelation.OverdueTime)
 	return
 }
@@ -52,22 +60,41 @@ func VpnRelationSelectCount(search VpnRelationSearchVo) (count int, err error) {
 	err = Db.QueryRow(sql, args...).Scan(&count)
 	return
 }
-func VpnRelationSelectList(pageSize int, pageNum int, search VpnRelationSearchVo) (vpnRelations []VpnRelation, err error) {
+func VpnRelationSelectList(pageSize int, pageNum int, search VpnRelationSearchVo) (vpnRelations []VpnRelationGet, err error) {
 	whereStr, args := GenWhereByStruct(search)
 	sql, _ := ReplaceQuestionToDollarInherit("select id,vpn_id,user_id,create_time,overdue_time from vpn_relation "+whereStr+" limit ? offset ?", 0)
-	vpnRelations = []VpnRelation{}
+	vpnRelations = []VpnRelationGet{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)
 	if err != nil {
-		panic(err.Error)
+		return
 	}
 	defer rows.Close()
 	for rows.Next() {
 		rows.Columns()
-		var vpnRelation VpnRelation
+		var vpnRelation VpnRelationGet
 		err = rows.Scan(&vpnRelation.ID, &vpnRelation.VpnId, &vpnRelation.UserId, &vpnRelation.CreateTime, &vpnRelation.OverdueTime)
 		if err != nil {
-			panic(err.Error)
+			return
+		}
+		vpnRelations = append(vpnRelations, vpnRelation)
+	}
+	return
+}
+
+func VpnRelationSelectListByUserId(id string) (vpnRelations []VpnRelationGet, err error) {
+	sql := "select id,vpn_id,user_id,create_time,overdue_time from vpn_relation where user_id=$1"
+	rows, err := Db.Query(sql, id)
+	if err != nil {
+		return
+	}
+	defer rows.Close()
+	for rows.Next() {
+		rows.Columns()
+		var vpnRelation VpnRelationGet
+		err = rows.Scan(&vpnRelation.ID, &vpnRelation.VpnId, &vpnRelation.UserId, &vpnRelation.CreateTime, &vpnRelation.OverdueTime)
+		if err != nil {
+			return
 		}
 		vpnRelations = append(vpnRelations, vpnRelation)
 	}

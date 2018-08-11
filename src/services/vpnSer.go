@@ -1,6 +1,7 @@
 package service
 
 import (
+	. "../datamodels"
 	. "../tools"
 	"github.com/satori/go.uuid"
 	"strconv"
@@ -17,18 +18,28 @@ type Vpn struct {
 	LockTime   int64  `json:"lockTime"`
 	State      bool   `json:"state"`
 }
+type VpnGet struct {
+	ID         string    `json:"id"`
+	Name       string    `json:"name"`
+	Password   string    `json:"password"`
+	Ip         string    `json:"ip"`
+	VpsId      string    `json:"vpsId"`
+	CreateTime LocalTime `json:"createTime"`
+	LockTime   LocalTime `json:"lockTime"`
+	State      bool      `json:"state"`
+}
 
 type VpnSearchVo struct {
-	ID        string    `column:"and,id,="`
-	Name      string    `column:"and,name,like"`
-	Ip        string    `column:"and,ip,like"`
-	StartTime time.Time `column:"and,lockTime,between"`
-	EndTime   time.Time `column:"and,lockTime,between"`
+	ID   string `column:"and,id,="`
+	Name string `column:"and,name,like"`
+	Ip   string `column:"and,ip,like"`
+	// StartTime time.Time `column:"and,lockTime,between"`
+	// EndTime   time.Time `column:"and,lockTime,between"`
 }
 
 func (vpn *Vpn) VpnInsert() (err error) {
-	sql := "insert into vpn(id,name,password,ip,vps_id,create_time,lock_time.state) values($1,$2,$3,$4,$5,$6,$7,$8)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), vpn.Name, vpn.Password, vpn.Ip, vpn.VpsId, vpn.CreateTime, vpn.LockTime, vpn.State)
+	sql := "insert into vpn(id,name,password,ip,vps_id,create_time,lock_time,state) values($1,$2,$3,$4,$5,$6,$7,$8)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), vpn.Name, vpn.Password, vpn.Ip, vpn.VpsId, time.Now(), time.Unix(vpn.LockTime/1000, 0), true)
 	return
 }
 
@@ -39,14 +50,14 @@ func VpnDelete(id string) (err error) {
 }
 
 func (vpn *Vpn) VpnUpdate() (err error) {
-	sql := "update vpn set name=$1,password=$2,ip=$3,vps_id=$4,create_time=$5,lock_time=$6,state=$7 where id=$8"
-	_, err = Db.Exec(sql, vpn.Name, vpn.Password, vpn.Ip, vpn.VpsId, vpn.CreateTime, vpn.LockTime, vpn.State, vpn.ID)
+	sql := "update vpn set name=$1,password=$2,ip=$3,vps_id=$4,lock_time=$5,state=$6 where id=$7"
+	_, err = Db.Exec(sql, vpn.Name, vpn.Password, vpn.Ip, vpn.VpsId, time.Unix(vpn.LockTime/1000, 0), vpn.State, vpn.ID)
 	return
 }
 
-func VpnSelect(id string) (vpn Vpn, err error) {
+func VpnSelect(id string) (vpn VpnGet, err error) {
 	sql := "select id,name,password,ip,vps_id,create_time,lock_time,state from vpn where id=$1"
-	vpn = Vpn{}
+	vpn = VpnGet{}
 	err = Db.QueryRow(sql, id).Scan(&vpn.ID, &vpn.Name, &vpn.Password, &vpn.Ip, &vpn.VpsId, &vpn.CreateTime, &vpn.LockTime, &vpn.State)
 	return
 }
@@ -58,22 +69,22 @@ func VpnSelectCount(search VpnSearchVo) (count int, err error) {
 	return
 }
 
-func VpnSelectList(pageSize int, pageNum int, search VpnSearchVo) (vpns []Vpn, err error) {
+func VpnSelectList(pageSize int, pageNum int, search VpnSearchVo) (vpns []VpnGet, err error) {
 	whereStr, args := GenWhereByStruct(search)
 	sql, _ := ReplaceQuestionToDollarInherit("select id,name,password,ip,vps_id,create_time,lock_time,state from vpn "+whereStr+" limit ? offset ?", 0)
-	vpns = []Vpn{}
+	vpns = []VpnGet{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)
 	if err != nil {
-		panic(err.Error)
+		return
 	}
 	defer rows.Close()
 	for rows.Next() {
 		rows.Columns()
-		var vpn Vpn
+		var vpn VpnGet
 		err = rows.Scan(&vpn.ID, &vpn.Name, &vpn.Password, &vpn.Ip, &vpn.VpsId, &vpn.CreateTime, &vpn.LockTime, &vpn.State)
 		if err != nil {
-			panic(err.Error)
+			return
 		}
 		vpns = append(vpns, vpn)
 	}

@@ -104,3 +104,19 @@ func VpnRelationDeleteById(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
+
+func VpnRelationGetListByUserId(ctx iris.Context) {
+	id := ctx.URLParam("id")
+	vpnRelations, err := VpnRelationSelectListByUserId(id)
+	result := Result{}
+	if err != nil {
+		result.Code = 0
+		result.Msg = err.Error()
+	} else {
+		result.Data = vpnRelations
+		result.Code = 200
+		result.Msg = "成功获取vpnRelation列表信息"
+	}
+
+	ctx.JSON(result)
+}
