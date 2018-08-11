@@ -27,25 +27,25 @@ type VpnSearchVo struct {
 }
 
 func (vpn *Vpn) VpnInsert() (err error) {
-	sql := "insert into users_group(id,name,password,ip,vps_id,create_time,lock_time.state) values($1,$2,$3,$4,$5,$6,$7,$8)"
+	sql := "insert into vpn(id,name,password,ip,vps_id,create_time,lock_time.state) values($1,$2,$3,$4,$5,$6,$7,$8)"
 	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), vpn.Name, vpn.Password, vpn.Ip, vpn.VpsId, vpn.CreateTime, vpn.LockTime, vpn.State)
 	return
 }
 
 func VpnDelete(id string) (err error) {
-	sql := "delete from users_group where id=$1"
+	sql := "delete from vpn where id=$1"
 	_, err = Db.Exec(sql, id)
 	return
 }
 
 func (vpn *Vpn) VpnUpdate() (err error) {
-	sql := "update users_group set name=$1,password=$2,ip=$3,vps_id=$4,create_time=$5,lock_time=$6,state=$7 where id=$8"
+	sql := "update vpn set name=$1,password=$2,ip=$3,vps_id=$4,create_time=$5,lock_time=$6,state=$7 where id=$8"
 	_, err = Db.Exec(sql, vpn.Name, vpn.Password, vpn.Ip, vpn.VpsId, vpn.CreateTime, vpn.LockTime, vpn.State, vpn.ID)
 	return
 }
 
 func VpnSelect(id string) (vpn Vpn, err error) {
-	sql := "select id,name,password,ip,vps_id,create_time,lock_time,state from users_group where id=$1"
+	sql := "select id,name,password,ip,vps_id,create_time,lock_time,state from vpn where id=$1"
 	vpn = Vpn{}
 	err = Db.QueryRow(sql, id).Scan(&vpn.ID, &vpn.Name, &vpn.Password, &vpn.Ip, &vpn.VpsId, &vpn.CreateTime, &vpn.LockTime, &vpn.State)
 	return
@@ -53,14 +53,14 @@ func VpnSelect(id string) (vpn Vpn, err error) {
 
 func VpnSelectCount(search VpnSearchVo) (count int, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from users_group"+whereStr, 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from vpn"+whereStr, 0)
 	err = Db.QueryRow(sql, args...).Scan(&count)
 	return
 }
 
 func VpnSelectList(pageSize int, pageNum int, search VpnSearchVo) (vpns []Vpn, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select id,name,password,ip,vps_id,create_time,lock_time,state from users_group "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,name,password,ip,vps_id,create_time,lock_time,state from vpn "+whereStr+" limit ? offset ?", 0)
 	vpns = []Vpn{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)

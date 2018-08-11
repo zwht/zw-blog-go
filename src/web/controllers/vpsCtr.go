@@ -10,7 +10,6 @@ import (
 func VpsCreate(ctx iris.Context) {
 	var vps Vps
 	ctx.ReadJSON(&vps)
-
 	err := vps.VpsInsert()
 
 	result := Result{}
@@ -79,7 +78,6 @@ func VpsGetList(ctx iris.Context) {
 		resultPage.PageSize = pageSize
 		resultPage.PageNum = pageNum
 		resultPage.PageData = vpss
-
 		result.Code = 200
 		result.Msg = "成功获取vps列表信息"
 		result.Data = resultPage

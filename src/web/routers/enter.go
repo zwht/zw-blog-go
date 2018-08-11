@@ -11,4 +11,7 @@ func RouterInit(app *iris.Application) {
 	NewsTypeRouter(app)
 	NewsReviewRouter(app)
 	NewsRouter(app)
+	VpsRouter(app)
+	VpnRouter(app)
+	VpnRelationRouter(app)
 }
