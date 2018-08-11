@@ -1,6 +1,7 @@
 package routers
 
 import (
+	. "../../tools/http"
 	. "../controllers"
 	"github.com/kataras/iris"
 )
@@ -11,11 +12,12 @@ func VpnRouter(app *iris.Application) {
 		ctx.Next()
 	})
 	{
-		routes.Post("/add", VpnCreate)
-		routes.Post("/update", VpnUpdate)
-		routes.Get("/del/{id:string}", VpnDeleteById)
-		routes.Get("/getById/{id:string}", VpnGetById)
-		routes.Post("/list/{pageNum:int}/{pageSize:int}", VpnGetList)
+		routes.Post("/add", Permission(VpnCreate, "1001"))
+		routes.Post("/update", Permission(VpnUpdate, "1001"))
+		//routes.Get("/updateState", VpnUpdateStateCtr)
+		routes.Get("/del/{id:string}", Permission(VpnDeleteById, "1001"))
+		routes.Get("/getById/{id:string}", Permission(VpnGetById, "1001"))
+		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(VpnGetList, "1001"))
 	}
 
 }

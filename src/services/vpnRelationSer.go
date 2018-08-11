@@ -19,9 +19,23 @@ type VpnRelationGet struct {
 	ID          string    `json:"id"`
 	VpnId       string    `json:"vpnId"`
 	UserId      string    `json:"userId"`
+	State       int       `json:"state"`
 	CreateTime  LocalTime `json:"createTime"`
 	OverdueTime LocalTime `json:"overdueTime"`
 }
+
+type VpnRelationUserList struct {
+	RelationId  string    `json:"relationId"`
+	VpnId       string    `json:"vpnId"`
+	UserId      string    `json:"userId"`
+	LoginName   string    `json:"loginName"`
+	Password    string    `json:"password"`
+	Ip          string    `json:"ip"`
+	State       int       `json:"state"`
+	OverdueTime LocalTime `json:"overdueTime"`
+	CreateTime  LocalTime `json:"createTime"`
+}
+
 type VpnRelationSearchVo struct {
 	ID     string `column:"and,id,="`
 	UserId string `column:"and,userId,like"`
@@ -31,8 +45,8 @@ type VpnRelationSearchVo struct {
 }
 
 func (vpnRelation *VpnRelation) VpnRelationInsert() (err error) {
-	sql := "insert into vpn_relation(id,vpn_id,user_id,create_time,overdue_time) values($1,$2,$3,$4,$5)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), vpnRelation.VpnId, vpnRelation.UserId, time.Now(), time.Unix(vpnRelation.OverdueTime/1000, 0))
+	sql := "insert into vpn_relation(id,vpn_id,user_id,create_time,overdue_time,state) values($1,$2,$3,$4,$5,$6)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), vpnRelation.VpnId, vpnRelation.UserId, time.Now(), time.Unix(vpnRelation.OverdueTime/1000, 0), 2101)
 	return
 }
 
@@ -45,6 +59,11 @@ func VpnRelationDelete(id string) (err error) {
 func (vpnRelation *VpnRelation) VpnRelationUpdate() (err error) {
 	sql := "update vpn_relation set vpn_id=$1,user_id=$2,overdue_time=$3 where id=$4"
 	_, err = Db.Exec(sql, vpnRelation.VpnId, vpnRelation.UserId, vpnRelation.OverdueTime, time.Unix(vpnRelation.OverdueTime/1000, 0), vpnRelation.ID)
+	return
+}
+func VpnRelationUpdateState(id1 string, state int) (err error) {
+	sql := "update vpn_relation set state=$1 where id=$2"
+	_, err = Db.Exec(sql, state, id1)
 	return
 }
 
@@ -82,8 +101,9 @@ func VpnRelationSelectList(pageSize int, pageNum int, search VpnRelationSearchVo
 	return
 }
 
-func VpnRelationSelectListByUserId(id string) (vpnRelations []VpnRelationGet, err error) {
-	sql := "select id,vpn_id,user_id,create_time,overdue_time from vpn_relation where user_id=$1"
+//根据用户id查询关联vpn账号
+func VpnRelationSelectListByUserId(id string) (vpnRelations []VpnRelationUserList, err error) {
+	sql := "select vpn.id,vpn_relation.id,vpn_relation.user_id,vpn.name,vpn.password,vpn.ip,vpn_relation.overdue_time,vpn_relation.create_time,vpn_relation.state from vpn join vpn_relation on vpn.id = vpn_relation.vpn_id where vpn_relation.user_id=$1"
 	rows, err := Db.Query(sql, id)
 	if err != nil {
 		return
@@ -91,8 +111,8 @@ func VpnRelationSelectListByUserId(id string) (vpnRelations []VpnRelationGet, er
 	defer rows.Close()
 	for rows.Next() {
 		rows.Columns()
-		var vpnRelation VpnRelationGet
-		err = rows.Scan(&vpnRelation.ID, &vpnRelation.VpnId, &vpnRelation.UserId, &vpnRelation.CreateTime, &vpnRelation.OverdueTime)
+		var vpnRelation VpnRelationUserList
+		err = rows.Scan(&vpnRelation.VpnId, &vpnRelation.RelationId, &vpnRelation.UserId, &vpnRelation.LoginName, &vpnRelation.Password, &vpnRelation.Ip, &vpnRelation.OverdueTime, &vpnRelation.CreateTime, &vpnRelation.State)
 		if err != nil {
 			return
 		}

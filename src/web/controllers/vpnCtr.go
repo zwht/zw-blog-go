@@ -3,11 +3,11 @@ package controllers
 import (
 	. "../../datamodels"
 	. "../../services"
-	"github.com/kataras/iris"
+	. "../../tools/http"
 	"strconv"
 )
 
-func VpnCreate(ctx iris.Context) {
+func VpnCreate(ctx *Context) {
 	var vpn Vpn
 	ctx.ReadJSON(&vpn)
 
@@ -25,7 +25,7 @@ func VpnCreate(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
-func VpnUpdate(ctx iris.Context) {
+func VpnUpdate(ctx *Context) {
 	var vpn Vpn
 	ctx.ReadJSON(&vpn)
 
@@ -43,8 +43,24 @@ func VpnUpdate(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
+func VpnUpdateStateCtr(ctx *Context) {
+	id := ctx.URLParam("id")
+	state, _ := strconv.Atoi(ctx.Params().Get("state"))
 
-func VpnGetById(ctx iris.Context) {
+	err := VpnUpdateState(id, state)
+	result := Result{}
+	if err != nil {
+		result.Code = 0
+		result.Msg = err.Error()
+	} else {
+		result.Code = 200
+		result.Msg = "修改状态成功"
+	}
+
+	ctx.JSON(result)
+}
+
+func VpnGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	vpn, err := VpnSelect(id)
 
@@ -62,7 +78,7 @@ func VpnGetById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func VpnGetList(ctx iris.Context) {
+func VpnGetList(ctx *Context) {
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var vpnSearchVo VpnSearchVo
@@ -88,7 +104,7 @@ func VpnGetList(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func VpnDeleteById(ctx iris.Context) {
+func VpnDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := VpnDelete(id)
 

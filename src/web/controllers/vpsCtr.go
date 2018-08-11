@@ -3,11 +3,11 @@ package controllers
 import (
 	. "../../datamodels"
 	. "../../services"
-	"github.com/kataras/iris"
+	. "../../tools/http"
 	"strconv"
 )
 
-func VpsCreate(ctx iris.Context) {
+func VpsCreate(ctx *Context) {
 	var vps Vps
 	ctx.ReadJSON(&vps)
 	err := vps.VpsInsert()
@@ -24,7 +24,7 @@ func VpsCreate(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
-func VpsUpdate(ctx iris.Context) {
+func VpsUpdate(ctx *Context) {
 	var vps Vps
 	ctx.ReadJSON(&vps)
 
@@ -43,7 +43,7 @@ func VpsUpdate(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func VpsGetById(ctx iris.Context) {
+func VpsGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	vps, err := VpsSelect(id)
 
@@ -61,7 +61,7 @@ func VpsGetById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func VpsGetList(ctx iris.Context) {
+func VpsGetList(ctx *Context) {
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var vpsSearchVo VpsSearchVo
@@ -86,7 +86,7 @@ func VpsGetList(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func VpsDeleteById(ctx iris.Context) {
+func VpsDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := VpsDelete(id)
 

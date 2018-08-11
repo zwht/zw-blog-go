@@ -1,6 +1,7 @@
 package routers
 
 import (
+	. "../../tools/http"
 	. "../controllers"
 	"github.com/kataras/iris"
 )
@@ -11,11 +12,11 @@ func UserGroupRouter(app *iris.Application) {
 		ctx.Next()
 	})
 	{
-		routes.Post("/add", UserGroupCreate)
-		routes.Post("/update", UserGroupUpdate)
-		routes.Get("/del/{id:string}", UserGroupDeleteById)
-		routes.Get("/getById/{id:string}", UserGroupGetById)
-		routes.Post("/list/{pageNum:int}/{pageSize:int}", UserGroupGetList)
+		routes.Post("/add", Permission(UserGroupCreate, "1001"))
+		routes.Post("/update", Permission(UserGroupUpdate, "1001"))
+		routes.Get("/del/{id:string}", Permission(UserGroupDeleteById, "1001"))
+		routes.Get("/getById/{id:string}", Permission(UserGroupGetById, "1001"))
+		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(UserGroupGetList, "1001"))
 	}
 
 }

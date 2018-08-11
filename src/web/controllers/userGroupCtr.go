@@ -3,11 +3,11 @@ package controllers
 import (
 	. "../../datamodels"
 	. "../../services"
-	"github.com/kataras/iris"
+	. "../../tools/http"
 	"strconv"
 )
 
-func UserGroupCreate(ctx iris.Context) {
+func UserGroupCreate(ctx *Context) {
 	var userGroup UserGroup
 	ctx.ReadJSON(&userGroup)
 
@@ -25,7 +25,7 @@ func UserGroupCreate(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
-func UserGroupUpdate(ctx iris.Context) {
+func UserGroupUpdate(ctx *Context) {
 	var userGroup UserGroup
 	ctx.ReadJSON(&userGroup)
 
@@ -44,7 +44,7 @@ func UserGroupUpdate(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func UserGroupGetById(ctx iris.Context) {
+func UserGroupGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	userGroup, err := UserGroupSelect(id)
 
@@ -62,7 +62,7 @@ func UserGroupGetById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func UserGroupGetList(ctx iris.Context) {
+func UserGroupGetList(ctx *Context) {
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var userGroupSearchVo UserGroupSearchVo
@@ -88,7 +88,7 @@ func UserGroupGetList(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func UserGroupDeleteById(ctx iris.Context) {
+func UserGroupDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := UserGroupDelete(id)
 

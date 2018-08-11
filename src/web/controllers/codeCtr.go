@@ -3,11 +3,11 @@ package controllers
 import (
 	. "../../datamodels"
 	. "../../services"
-	"github.com/kataras/iris"
+	. "../../tools/http"
 	"strconv"
 )
 
-func CodeCreate(ctx iris.Context) {
+func CodeCreate(ctx *Context) {
 	var code Code
 	ctx.ReadJSON(&code)
 
@@ -25,7 +25,7 @@ func CodeCreate(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
-func CodeUpdate(ctx iris.Context) {
+func CodeUpdate(ctx *Context) {
 	var code Code
 	ctx.ReadJSON(&code)
 
@@ -44,7 +44,7 @@ func CodeUpdate(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func CodeGetById(ctx iris.Context) {
+func CodeGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	code, err := CodeSelect(id)
 
@@ -62,7 +62,7 @@ func CodeGetById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func CodeGetList(ctx iris.Context) {
+func CodeGetList(ctx *Context) {
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var codeSearchVo CodeSearchVo
@@ -88,7 +88,7 @@ func CodeGetList(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func CodeDeleteById(ctx iris.Context) {
+func CodeDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := CodeDelete(id)
 

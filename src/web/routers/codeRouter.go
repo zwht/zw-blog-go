@@ -1,6 +1,7 @@
 package routers
 
 import (
+	. "../../tools/http"
 	. "../controllers"
 	"github.com/kataras/iris"
 )
@@ -11,11 +12,11 @@ func CodeRouter(app *iris.Application) {
 		ctx.Next()
 	})
 	{
-		routes.Post("/add", CodeCreate)
-		routes.Post("/update", CodeUpdate)
-		routes.Get("/del/{id:string}", CodeDeleteById)
-		routes.Get("/getById/{id:string}", CodeGetById)
-		routes.Post("/list/{pageNum:int}/{pageSize:int}", CodeGetList)
+		routes.Post("/add", Permission(CodeCreate, "1001"))
+		routes.Post("/update", Permission(CodeUpdate, "1001"))
+		routes.Get("/del/{id:string}", Permission(CodeDeleteById, "1001"))
+		routes.Get("/getById/{id:string}", Permission(CodeGetById, "1001"))
+		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(CodeGetList, ""))
 	}
 
 }

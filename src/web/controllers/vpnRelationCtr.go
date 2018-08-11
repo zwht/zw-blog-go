@@ -3,11 +3,11 @@ package controllers
 import (
 	. "../../datamodels"
 	. "../../services"
-	"github.com/kataras/iris"
+	. "../../tools/http"
 	"strconv"
 )
 
-func VpnRelationCreate(ctx iris.Context) {
+func VpnRelationCreate(ctx *Context) {
 	var vpnRelation VpnRelation
 	ctx.ReadJSON(&vpnRelation)
 
@@ -19,13 +19,19 @@ func VpnRelationCreate(ctx iris.Context) {
 		result.Code = 0
 		result.Msg = err.Error()
 	} else {
-		result.Code = 200
-		result.Msg = "成功保存vpnRelation信息"
+		err1 := VpnUpdateState(vpnRelation.VpnId, 2002)
+		if err1 != nil {
+			result.Code = 0
+			result.Msg = err.Error()
+		} else {
+			result.Code = 200
+			result.Msg = "成功保存vpnRelation信息"
+		}
 	}
 
 	ctx.JSON(result)
 }
-func VpnRelationUpdate(ctx iris.Context) {
+func VpnRelationUpdate(ctx *Context) {
 	var vpnRelation VpnRelation
 	ctx.ReadJSON(&vpnRelation)
 
@@ -43,8 +49,35 @@ func VpnRelationUpdate(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
+func VpnRelationUpdateStateCtr(ctx *Context) {
+	id := ctx.URLParam("id")
+	vpnId := ctx.URLParam("vpnId")
+	state, _ := strconv.Atoi(ctx.URLParam("state"))
+	err := VpnRelationUpdateState(id, state)
+	result := Result{}
+	if err != nil {
+		result.Code = 0
+		result.Msg = err.Error()
+	} else {
+		if state == 2102 {
+			err1 := VpnUpdateState(vpnId, 2001)
+			if err1 != nil {
+				result.Code = 0
+				result.Msg = err.Error()
+			} else {
+				result.Code = 200
+				result.Msg = "成功保存vpnRelation信息"
+			}
+		} else {
+			result.Code = 200
+			result.Msg = "成功保存vpnRelation信息"
+		}
+	}
 
-func VpnRelationGetById(ctx iris.Context) {
+	ctx.JSON(result)
+}
+
+func VpnRelationGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	vpnRelation, err := VpnRelationSelect(id)
 
@@ -62,7 +95,7 @@ func VpnRelationGetById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func VpnRelationGetList(ctx iris.Context) {
+func VpnRelationGetList(ctx *Context) {
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var vpnRelationSearchVo VpnRelationSearchVo
@@ -88,7 +121,7 @@ func VpnRelationGetList(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func VpnRelationDeleteById(ctx iris.Context) {
+func VpnRelationDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := VpnRelationDelete(id)
 
@@ -105,7 +138,7 @@ func VpnRelationDeleteById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func VpnRelationGetListByUserId(ctx iris.Context) {
+func VpnRelationGetListByUserId(ctx *Context) {
 	id := ctx.URLParam("id")
 	vpnRelations, err := VpnRelationSelectListByUserId(id)
 	result := Result{}
