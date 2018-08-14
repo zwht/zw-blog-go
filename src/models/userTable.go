@@ -20,6 +20,11 @@ type UserSearchVo struct {
 	LoginName string `column:"and,loginName,like"`
 	Roles     string `column:"and,roles,like"`
 }
+type SearchRepeatVo struct {
+	Phone     string `column:"or,phone,="`
+	Email     string `column:"or,email,="`
+	LoginName string `column:"or,loginName,="`
+}
 type LoginVo struct {
 	LoginName string `json:"loginName"`
 	Password  string `json:"password"`

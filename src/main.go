@@ -1,6 +1,7 @@
 package main
 
 import (
+	. "./tools"
 	. "./tools/http"
 	. "./web/routers"
 	// "github.com/betacraft/yaag/irisyaag"
@@ -39,7 +40,8 @@ func main() {
 	// 	ctx.View("api.html")
 	// })
 
-	//RedisInit()
+	//redis初始化
+	RedisInit()
 	RouterInit(app)
 	//http拦截器中间件
 	app.UseGlobal(HttpInterceptor)

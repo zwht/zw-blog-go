@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-var Sess *sessions.Sessions
+var db *redis.Database
 
 func RedisInit() {
-	db := redis.New(service.Config{
+	db = redis.New(service.Config{
 		Network:     "",
 		Addr:        "127.0.0.1:6379",
 		Password:    "",
@@ -28,7 +28,13 @@ func RedisInit() {
 	iris.RegisterOnInterrupt(func() {
 		db.Close()
 	})
-	Sess = sessions.New(sessions.Config{Cookie: "sessionscookieid", Expires: 1 * time.Minute})
-	Sess.UseDatabase(db)
+
 	// fmt.Printf("sess type:%T\n", sess)
+}
+
+func GetSess(key int) (Sess *sessions.Sessions) {
+	Sess = sessions.New(sessions.Config{Cookie: "sessionscookieid",
+		Expires: time.Duration(key) * time.Minute})
+	Sess.UseDatabase(db)
+	return Sess
 }

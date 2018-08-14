@@ -19,22 +19,26 @@ type News struct {
 	Index       string `json:"index"`
 	Img         string `json:"img"`
 	IsHot       int    `json:"isHot"`
+	State       int    `json:"state"`
+	Abstract    string `json:"abstract"`
+	Labels      string `json:"labels"`
 	ReviewSum   int    `json:"reviewSum"`
 }
 type NewsSearchVo struct {
-	ID          string    `column:"and,id,="`
-	Title       string    `column:"and,title,like"`
-	Author      string    `column:"and,author,like"`
-	TypeId      string    `column:"and,typeId,like"`
-	UserGroupId string    `column:"and,userGroupId,like"`
-	IsHot       int       `column:"and,isHot,="`
-	StartTime   time.Time `column:"and,createTime,between"`
-	EndTime     time.Time `column:"and,endTime,between"`
+	ID          string `column:"and,id,="`
+	Title       string `column:"and,title,like"`
+	Author      string `column:"and,author,like"`
+	TypeId      string `column:"and,typeId,like"`
+	UserGroupId string `column:"and,userGroupId,like"`
+	IsHot       int    `column:"and,isHot,="`
+	State       int    `column:"and,state,="`
+	// StartTime   time.Time `column:"and,createTime,between"`
+	// EndTime     time.Time `column:"and,endTime,between"`
 }
 
 func (news *News) NewsInsert() (err error) {
-	sql := "insert into news(id,title,content,create_time,author,type_id,img,user_group_id) values($1,$2,$3,$4,$5,$6,$7,$8)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.Title, news.Content, news.CreateTime, news.Author, news.TypeId, news.Img, news.UserGroupId)
+	sql := "insert into news(id,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels)
 	return
 }
 
@@ -45,15 +49,15 @@ func NewsDelete(id string) (err error) {
 }
 
 func (news *News) NewsUpdate() (err error) {
-	sql := "update news set title=$1,content=$2,type_id=$3,img=$4 where id=$5"
-	_, err = Db.Exec(sql, news.Title, news.Content, news.TypeId, news.Img, news.ID)
+	sql := "update news set title=$1,content=$2,type_id=$3,img=$4,state=$5,abstract=$6,labels=$7 where id=$8"
+	_, err = Db.Exec(sql, news.Title, news.Content, news.TypeId, news.Img, news.State, news.Abstract, news.Labels, news.ID)
 	return
 }
 
 func NewsSelect(id string) (news News, err error) {
-	sql := "select id,title,content,create_time,author,type_id,img from news where id=$1"
+	sql := "select id,title,content,create_time,author,type_id,img,state,abstract,labels from news where id=$1"
 	news = News{}
-	err = Db.QueryRow(sql, id).Scan(&news.ID, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img)
+	err = Db.QueryRow(sql, id).Scan(&news.ID, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels)
 	return
 }
 func NewsSelectCount(search NewsSearchVo) (count int, err error) {
@@ -64,7 +68,7 @@ func NewsSelectCount(search NewsSearchVo) (count int, err error) {
 }
 func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []News, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select id,title,content,create_time,author,type_id,img,user_group_id from news "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels from news "+whereStr+" limit ? offset ?", 0)
 	newss = []News{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)
@@ -75,7 +79,7 @@ func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []New
 	for rows.Next() {
 		rows.Columns()
 		var news News
-		err = rows.Scan(&news.ID, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.UserGroupId)
+		err = rows.Scan(&news.ID, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.UserGroupId, &news.State, &news.Abstract, &news.Labels)
 		if err != nil {
 			panic(err.Error)
 		}

@@ -43,9 +43,21 @@ func UserSelect(id string) (user User, err error) {
 	return
 }
 func UserSelectByName(loginName string) (user User, err error) {
-	sql := "select id,name,loginName,phone,email,roles,state from users where loginName=$1"
+	sql := "select id  from users where loginname=$1"
 	user = User{}
-	err = Db.QueryRow(sql, loginName).Scan(&user.ID, &user.Name, &user.LoginName, &user.Phone, &user.Email, &user.Roles, &user.State)
+	err = Db.QueryRow(sql, loginName).Scan(&user.ID)
+	return
+}
+func UserSelectByPhone(phone string) (user User, err error) {
+	sql := "select id from users where phone=$1"
+	user = User{}
+	err = Db.QueryRow(sql, phone).Scan(&user.ID)
+	return
+}
+func UserSelectByEmail(email string) (user User, err error) {
+	sql := "select id from users where email=$1"
+	user = User{}
+	err = Db.QueryRow(sql, email).Scan(&user.ID)
 	return
 }
 
@@ -80,7 +92,7 @@ func UserSelectList(pageSize int, pageNum int, search UserSearchVo) (users []Use
 }
 
 func Logins(loginVo LoginVo) (user User, err error) {
-	sql := "select id,name,loginName,phone,email,roles,state from users where loginName=$1 AND password=$2"
+	sql := "select id,name,loginName,phone,email,roles,state from users where (loginName=$1 AND password=$2) OR (email=$1 AND password=$2) OR (phone=$1 AND password=$2)"
 	user = User{}
 	err = Db.QueryRow(sql, loginVo.LoginName, loginVo.Password).Scan(&user.ID, &user.Name, &user.LoginName, &user.Phone, &user.Email, &user.Roles, &user.State)
 	return
