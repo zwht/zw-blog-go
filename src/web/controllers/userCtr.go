@@ -75,11 +75,11 @@ func UserRegister(ctx *Context) {
 			}
 		} else {
 			result.Code = 402
-			result.Msg = "验证码错误2"
+			result.Msg = "验证码错误"
 		}
 	} else {
 		result.Code = 402
-		result.Msg = "验证码错误1"
+		result.Msg = "验证码未发送"
 	}
 	ctx.JSON(result)
 }
