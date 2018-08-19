@@ -54,9 +54,10 @@ func FileUpload(ctx *Context) {
 }
 
 func FileGet(ctx *Context) {
-	f, err := ioutil.ReadFile("./web/views/img/典型页面1.png") // For read access.
+	fileName := ctx.Params().Get("name")
+	f, err := ioutil.ReadFile("./web/views/img/" + fileName) // For read access.
 	if err != nil {
+		ctx.WriteString("没有文件")
 	}
-
 	ctx.WriteString(string(f))
 }

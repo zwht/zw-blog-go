@@ -14,7 +14,7 @@ func FileRouter(app *iris.Application) {
 	})
 	{
 		routes.Post("/upload", iris.LimitRequestBodySize(maxSize+1<<20), Permission(FileUpload, ""))
-		routes.Get("/img", Permission(FileGet, ""))
+		routes.Get("/img/{name:string}", Permission(FileGet, ""))
 	}
 
 }
