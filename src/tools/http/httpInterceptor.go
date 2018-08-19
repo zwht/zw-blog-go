@@ -8,7 +8,7 @@ import (
 )
 
 var noTokenMap = [...]string{
-	"v1/election/getImg",
+	"/v1/file/img",
 	"/v1/user/login",
 	"/v1/user/captcha/email",
 	"/v1/user/register",

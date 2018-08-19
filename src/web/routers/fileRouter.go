@@ -9,12 +9,12 @@ import (
 //code model
 func FileRouter(app *iris.Application) {
 	const maxSize = 5 << 20 // 5MB
-	routes := app.Party("/v1/election", func(ctx iris.Context) {
+	routes := app.Party("/v1/file", func(ctx iris.Context) {
 		ctx.Next()
 	})
 	{
 		routes.Post("/upload", iris.LimitRequestBodySize(maxSize+1<<20), Permission(FileUpload, ""))
-		routes.Get("/getImg", Permission(FileGet, ""))
+		routes.Get("/img", Permission(FileGet, ""))
 	}
 
 }
