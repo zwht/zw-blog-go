@@ -1,1 +1,1 @@
-# 第一版，有svn 有news
+# 第二版，election选票系统
