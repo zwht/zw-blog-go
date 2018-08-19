@@ -29,6 +29,7 @@ func main() {
 
 	//静态文件配置
 	app.StaticWeb("/", "./web/views/dist")
+	app.StaticWeb("/img/", "./web/views/img")
 	//html模板配置
 	app.RegisterView(iris.HTML("./web/views", ".html"))
 	//项目入口

@@ -14,4 +14,5 @@ func RouterInit(app *iris.Application) {
 	VpsRouter(app)
 	VpnRouter(app)
 	VpnRelationRouter(app)
+	FileRouter(app)
 }
