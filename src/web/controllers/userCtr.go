@@ -11,6 +11,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/kataras/iris/sessions"
+	"github.com/satori/go.uuid"
 	"gopkg.in/gomail.v2"
 	"math/rand"
 	"strconv"
@@ -108,8 +109,8 @@ func UserCreate(ctx *Context) {
 		h := md5.New()
 		h.Write([]byte(user.Password))
 		user.Password = hex.EncodeToString(h.Sum(nil))
+		user.ID = uuid.Must(uuid.NewV4()).String()
 		err := UserInsert(user)
-
 		if err != nil {
 			result.Code = 0
 			msg := err.Error()
@@ -118,12 +119,25 @@ func UserCreate(ctx *Context) {
 			} else {
 				result.Msg = err.Error()
 			}
-
 		} else {
-			result.Code = 200
-			result.Msg = "成功保存用户信息"
+			if user.Img != "" {
+				result.Code = 200
+				result.Msg = "成功保存用户信息"
+			} else {
+				upFile := FileVo{}
+				upFile.ID = user.Img
+				upFile.Type = 1201
+				upFile.UserId = user.ID
+				err7 := upFile.FileUpdate()
+				if err7 != nil {
+					result.Code = 200
+					result.Msg = err7.Error()
+				} else {
+					result.Code = 200
+					result.Msg = "成功保存用户信息"
+				}
+			}
 		}
-
 		ctx.JSON(result)
 	}
 }
@@ -234,6 +248,7 @@ func UserGetById(ctx *Context) {
 }
 
 func UserGetList(ctx *Context) {
+	SendPhoneMessages()
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var userSearchVo UserSearchVo
@@ -327,6 +342,7 @@ func Login(ctx *Context) {
 				userVo["email"] = user.Email
 				userVo["roles"] = user.Roles
 				userVo["token"] = tokenString
+				userVo["img"] = user.Img
 				result.Data = userVo
 			} else {
 				result.Code = 403

@@ -12,6 +12,7 @@ type User struct {
 	Roles     string `json:"roles"`
 	State     bool   `json:"state"`
 	ParentId  string `json:"parentId"`
+	Img       string `json:"img"`
 }
 type UserSearchVo struct {
 	Phone     string `column:"and,phone,like"`
@@ -19,6 +20,7 @@ type UserSearchVo struct {
 	Email     string `column:"and,email,like"`
 	LoginName string `column:"and,loginName,like"`
 	Roles     string `column:"and,roles,like"`
+	Img       string `json:"img"`
 }
 type SearchRepeatVo struct {
 	Phone     string `column:"or,phone,="`
