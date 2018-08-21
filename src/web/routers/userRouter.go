@@ -13,7 +13,6 @@ func UserRouter(app *iris.Application) {
 		ctx.Next()
 	})
 	{
-		routes.Post("/register", Permission(UserRegister, ""))
 		routes.Post("/add", Permission(UserCreate, "1001"))
 		routes.Post("/update", Permission(UserUpdateCtr, ""))
 		routes.Get("/updateState", Permission(UserUpdateStateCtr, "1001"))
@@ -21,8 +20,11 @@ func UserRouter(app *iris.Application) {
 		routes.Get("/del/{id:string}", Permission(UserDeleteById, "1001"))
 		routes.Get("/getById/{id:string}", Permission(UserGetById, ""))
 		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(UserGetList, "1001"))
+
 		routes.Post("/login", Permission(Login, ""))
 		routes.Get("/captcha/email", Permission(UserCaptchaEmailCtr, ""))
+		routes.Post("/register/email", Permission(UserRegisterEmailCtr, ""))
+		routes.Get("/captcha/phone", Permission(UserCaptchaPhoneCtr, ""))
+		routes.Post("/register/phone", Permission(UserRegisterPhoneCtr, ""))
 	}
-
 }

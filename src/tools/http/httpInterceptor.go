@@ -13,6 +13,7 @@ var noTokenMap = [...]string{
 	"/v1/user/captcha/email",
 	"/v1/user/register",
 	"/v1/code/list",
+	"/v1/file/upload",
 }
 
 func HttpInterceptor(ctx iris.Context) {

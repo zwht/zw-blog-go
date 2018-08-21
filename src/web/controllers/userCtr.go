@@ -9,14 +9,8 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
-	"fmt"
-	"github.com/kataras/iris/sessions"
 	"github.com/satori/go.uuid"
-	"gopkg.in/gomail.v2"
-	"math/rand"
 	"strconv"
-	"strings"
-	"time"
 )
 
 func byteString(p []byte) string {
@@ -28,62 +22,6 @@ func byteString(p []byte) string {
 	return string(p)
 }
 
-func UserRegister(ctx *Context) {
-	captcha := ctx.URLParam("captcha")
-	result := Result{}
-	var user User
-	ctx.ReadJSON(&user)
-
-	s := GetSess(5).Start(ctx)
-	capcha := s.GetString(user.Email)
-	if capcha != "" {
-		a := strings.Split(capcha, "#%#")
-		if captcha == a[0] {
-			_, err1 := UserSelectByName(user.LoginName)
-			_, err2 := UserSelectByPhone(user.Phone)
-			_, err3 := UserSelectByEmail(user.Email)
-			user.Roles = "1004"
-			user.ParentId = "vpn"
-			user.Name = user.LoginName
-			if err1 == nil {
-				result.Code = 402
-				result.Msg = "昵称已被使用"
-			} else if err2 == nil {
-				result.Code = 402
-				result.Msg = "电话号码已经被使用"
-			} else if err3 == nil {
-				result.Code = 402
-				result.Msg = "邮箱已经被使用"
-			} else {
-				// md5加密密码
-				h := md5.New()
-				h.Write([]byte(user.Password))
-				user.Password = hex.EncodeToString(h.Sum(nil))
-				err := UserInsert(user)
-				if err != nil {
-					result.Code = 0
-					msg := err.Error()
-					if msg == "pq: value too long for type character varying(11)" {
-						result.Msg = "电话号码错误"
-					} else {
-						result.Msg = err.Error()
-					}
-
-				} else {
-					result.Code = 200
-					result.Msg = "成功保存用户信息"
-				}
-			}
-		} else {
-			result.Code = 402
-			result.Msg = "验证码错误"
-		}
-	} else {
-		result.Code = 402
-		result.Msg = "验证码未发送"
-	}
-	ctx.JSON(result)
-}
 func UserCreate(ctx *Context) {
 	result := Result{}
 	var user User
@@ -248,7 +186,7 @@ func UserGetById(ctx *Context) {
 }
 
 func UserGetList(ctx *Context) {
-	SendPhoneMessages()
+	// SendPhoneMessages()
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var userSearchVo UserSearchVo
@@ -351,76 +289,4 @@ func Login(ctx *Context) {
 		}
 	}
 	ctx.JSON(result)
-}
-
-//邮件发送验证码
-func UserCaptchaEmailCtr(ctx *Context) {
-	//"97212287@qq.com"
-	// 把token保存到redis
-	//s := Sess.Start(ctx)
-	//s.Set("token", tokenString)
-	//fmt.Printf(s.GetString("token"))
-	email := ctx.URLParam("email")
-	s := GetSess(5).Start(ctx)
-	result := Result{}
-
-	capcha := s.GetString(email)
-	if capcha != "" {
-		a := strings.Split(capcha, "#%#")
-		//a[0]=code a[1]=过期时间
-		overTime, _ := strconv.ParseInt(a[1], 10, 64)
-		if overTime < time.Now().UnixNano()/1e6 {
-			vcode, erra := sendCode(s, email, a[0])
-			if erra == nil {
-				result.Msg = "已经发送" + vcode
-				result.Code = 200
-			} else {
-				result.Msg = erra.Error()
-				result.Code = 430
-			}
-
-		} else {
-			result.Msg = "验证吗已经发送，在过" + strconv.FormatInt((overTime-time.Now().UnixNano()/1e6)/1000, 10) + "s在发送"
-			result.Code = 405
-		}
-	} else {
-
-		vcode, errb := sendCode(s, email, "")
-		if errb == nil {
-			result.Msg = "已经发送" + vcode
-			result.Code = 200
-		} else {
-			result.Msg = errb.Error()
-			result.Code = 430
-		}
-	}
-	ctx.JSON(result)
-}
-
-func sendCode(s *sessions.Session, email string, code string) (vcode string, err error) {
-	if code != "" {
-		vcode = code
-	} else {
-		//获取6位数字
-		rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
-		vcode = fmt.Sprintf("%06v", rnd.Int31n(1000000))
-	}
-	// 创建redis保存数据，需要过期时间
-	tim := time.Now().UnixNano()/1e6 + 1000*60
-	s.Set(email, vcode+"#%#"+strconv.FormatInt(tim, 10))
-	err = sendEmail(email, vcode)
-	return
-}
-func sendEmail(email string, code string) (err error) {
-	m := gomail.NewMessage()
-	m.SetHeader("From", "1512763623@qq.com")
-	m.SetHeader("To", email)
-	m.SetHeader("Subject", "vpn用户注册验证码")
-	m.SetBody("text/html", "<div style='width: 600px; margin: 50px auto'><p>您好：</p><h3 style=' line-height: 50px;'>您的vpn注册验证码已经成功发送</h3><p>如果您未做过此申请并认为有人未经授权使用了您的邮件，您不必要把验证码透露给任何人。如果若希望注册vpn账号，然后前往<a style='color: #08c;' href='http://120.79.171.251:9876/'>vpn翻墙神器</a> </p><p style=' line-height: 40px'>您的验证码：<b style='color: #099'>"+code+"</b></p><p style='line-height: 50px;'>此致</p><p>神器vpn 支持</p></div>")
-	d := gomail.NewDialer("smtp.qq.com", 465, "1512763623@qq.com", "btdvleiwkbjthjdg")
-	// Send the email to Bob, Cora and Dan.
-	if err := d.DialAndSend(m); err != nil {
-
-	}
-	return
 }
