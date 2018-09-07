@@ -123,7 +123,7 @@ func UserRegisterPhoneCtr(ctx *Context) {
 	ctx.ReadJSON(&user)
 
 	s := GetSess(5).Start(ctx)
-	capcha := s.GetString(user.Email)
+	capcha := s.GetString(user.Phone)
 	if capcha != "" {
 		a := strings.Split(capcha, "#%#")
 		if captcha == a[0] {
@@ -172,6 +172,42 @@ func UserRegisterPhoneCtr(ctx *Context) {
 
 //手机号发送验证码
 func UserCaptchaPhoneCtr(ctx *Context) {
+	phone := ctx.URLParam("phone")
+	s := GetSess(5).Start(ctx)
 	result := Result{}
+
+	capcha := s.GetString(phone)
+	if capcha != "" {
+		a := strings.Split(capcha, "#%#")
+		//a[0]=code a[1]=过期时间
+		overTime, _ := strconv.ParseInt(a[1], 10, 64)
+		if overTime < time.Now().UnixNano()/1e6 {
+			vcode, erra := SendCode(phone, "phone", a[0])
+			if erra == nil {
+				result.Msg = "已经发送" + vcode
+				result.Code = 200
+			} else {
+				result.Msg = erra.Error()
+				result.Code = 430
+			}
+
+		} else {
+			result.Msg = "验证吗已经发送，在过" + strconv.FormatInt((overTime-time.Now().UnixNano()/1e6)/1000, 10) + "s在发送"
+			result.Code = 405
+		}
+	} else {
+		vcode, errb := SendCode(phone, "phone", "")
+		// 创建redis保存数据，需要过期时间
+		tim := time.Now().UnixNano()/1e6 + 1000*60
+		s.Set(phone, vcode+"#%#"+strconv.FormatInt(tim, 10))
+
+		if errb == nil {
+			result.Msg = "已经发送" + vcode
+			result.Code = 200
+		} else {
+			result.Msg = errb.Error()
+			result.Code = 430
+		}
+	}
 	ctx.JSON(result)
 }

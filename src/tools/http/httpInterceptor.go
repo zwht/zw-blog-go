@@ -10,7 +10,7 @@ import (
 var noTokenMap = [...]string{
 	"/v1/file/img",
 	"/v1/user/login",
-	"/v1/user/captcha/email",
+	"/v1/user/captcha",
 	"/v1/user/register",
 	"/v1/code/list",
 	"/v1/file/upload",
