@@ -3,7 +3,8 @@ package main
 import (
 	. "./tools"
 	. "./tools/http"
-	. "./web/routers"
+	. "./web/routersBlog"
+	. "./web/routersRestFull"
 	// "github.com/betacraft/yaag/irisyaag"
 	// "github.com/betacraft/yaag/yaag"
 	"github.com/kataras/iris"
@@ -28,12 +29,17 @@ func main() {
 	app.Use(logger.New())
 
 	//静态文件配置
-	app.StaticWeb("/", "./web/views/dist")
 	app.StaticWeb("/img/", "./web/views/img")
+	app.StaticWeb("/blog/", "./web/views/blog/assets")
+	app.StaticWeb("/", "./web/views/dist")
 	//html模板配置
+	// app.RegisterView(iris.HTML("./web/views/blog", ".html").
+	// 	Layout("layout.html").
+	// 	Reload(true))
 	app.RegisterView(iris.HTML("./web/views", ".html"))
-	//项目入口
-	app.Get("/", func(ctx iris.Context) {
+
+	// 管理平台入口
+	app.Get("/admin", func(ctx iris.Context) {
 		ctx.View("dist/index.html")
 	})
 	//qpi入口
@@ -41,9 +47,12 @@ func main() {
 	// 	ctx.View("api.html")
 	// })
 
-	//redis初始化
+	// redis初始化
 	RedisInit()
-	RouterInit(app)
+	// restFull接口路由
+	RoutersRestFullInit(app)
+	// blog接口路由,项目入口
+	RoutersBlogInit(app)
 	//http拦截器中间件
 	app.UseGlobal(HttpInterceptor)
 

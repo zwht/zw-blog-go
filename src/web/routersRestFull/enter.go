@@ -4,7 +4,7 @@ import (
 	"github.com/kataras/iris"
 )
 
-func RouterInit(app *iris.Application) {
+func RoutersRestFullInit(app *iris.Application) {
 	UserRouter(app)
 	UserGroupRouter(app)
 	CodeRouter(app)
