@@ -12,11 +12,11 @@
 
 <body>
   <ul>
-    {{range $key, $value :=.list}}
+    {{range $key, $value :=.List}}
     <li>
-      <a href="">
+      <a href="/detail?id={{$value.ID}}" target="_blank">
         <h3>{{$value.Title}}</h3>
-        <div class='fuck'>文章内容，标签却显示了{{$value.Content}}</div>
+        <div class='fuck'>{{$value.Abstract}}</div>
       </a>
     </li>
     {{end}}

@@ -5,9 +5,9 @@ import (
 	"github.com/kataras/iris/mvc"
 )
 
-type BlogListController struct{}
+type BlogIndexController struct{}
 
-func (c *BlogListController) GetBy(name string, pageSize int64, pageNum int64) mvc.Result {
+func (c *BlogIndexController) Get() mvc.Result {
 	var newsSearchVo NewsSearchVo
 	count, _ := NewsSelectCount(newsSearchVo)
 	newss, _ := NewsSelectList(10, 1, newsSearchVo)
@@ -15,8 +15,8 @@ func (c *BlogListController) GetBy(name string, pageSize int64, pageNum int64) m
 		"Title":    "列表",
 		"List":     newss,
 		"Count":    count,
-		"PageSize": pageSize,
-		"PageNum":  pageNum,
+		"PageSize": 10,
+		"PageNum":  1,
 	}
 	var helloView = mvc.View{
 		Name: "blog/pages/index.html",
@@ -24,6 +24,3 @@ func (c *BlogListController) GetBy(name string, pageSize int64, pageNum int64) m
 	}
 	return helloView
 }
-
-// var errBadName = errors.New("bad name")
-// var badName = mvc.Response{Err: errBadName, Code: 400}

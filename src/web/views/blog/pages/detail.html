@@ -11,16 +11,10 @@
   <script src="vb/js/common.js"></script>
 
 <body>
-  <ul>
-    {{range $key, $value :=.list}}
-    <li>
-      <a href="">
-        <h3>{{$value.Title}}</h3>
-        <div class='fuck'>文章内容，标签却显示了{{$value.Content}}</div>
-      </a>
-    </li>
-    {{end}}
-  </ul>
+  <h1>{{.Title}}</h1>
+  <article>
+    混合双打
+  </article>
   <script>
     window.onload = function () {
       baseNode('.fuck')

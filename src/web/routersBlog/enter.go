@@ -6,6 +6,7 @@ import (
 )
 
 func RoutersBlogInit(app *iris.Application) {
-	mvc.New(app.Party("/")).Handle(new(BlogListController))
+	mvc.New(app.Party("/")).Handle(new(BlogIndexController))
+	mvc.New(app.Party("/list/")).Handle(new(BlogListController))
 	mvc.New(app.Party("/detail/")).Handle(new(BlogDetailController))
 }
