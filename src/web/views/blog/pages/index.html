@@ -3,18 +3,21 @@
 
 <head>
   <meta charset="utf-8">
-  <title>{{.Title}} - My App</title>
+  <title>魏翼超然</title>
+  <meta name="keywords" content="魏翼超然|技术分享"> 
+  <meta name="description" content="魏翼超然博客，记录学习，分享知识，技术分享">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="vb/css/common.css">
-  <link rel="stylesheet" href="vb/css/index.css">
-  <script src="vb/js/common.js"></script>
+  <link rel="stylesheet" href="/vb/css/common.css">
+  <link rel="stylesheet" href="/vb/css/index.css">
+  <script src="/vb/js/common.js"></script>
 
 <body>
+  <h1>魏翼超然，技术分享</h1>
   <ul>
     {{range $key, $value :=.List}}
     <li>
-      <a href="/detail?id={{$value.ID}}" target="_blank">
+      <a href="/detail/{{$value.ID}}" title="{{$value.Title}}" target="_blank">
         <h3>{{$value.Title}}</h3>
         <div class='fuck'>{{$value.Abstract}}</div>
       </a>

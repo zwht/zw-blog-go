@@ -2,19 +2,20 @@ package routersBlog
 
 import (
 	. "../../services"
+	"errors"
 	"github.com/kataras/iris/mvc"
 )
 
 type BlogDetailController struct{}
 
-func (c *BlogDetailController) Get() mvc.Result {
-	var newsSearchVo NewsSearchVo
-	// count, _ := NewsSelectCount(newsSearchVo)
-	newss, _ := NewsSelectList(10, 1, newsSearchVo)
+func (c *BlogDetailController) GetBy(id string) mvc.Result {
+
+	detail, err := NewsSelect(id)
+	if err != nil {
+		return mvc.Response{Err: errors.New("错误"), Code: 400}
+	}
 	data := map[string]interface{}{
-		"Title":     "Hello Page",
-		"list":      newss,
-		"MyMessage": "<div>999</div>",
+		"Detail": detail,
 	}
 	var helloView = mvc.View{
 		Name: "blog/pages/detail.html",
