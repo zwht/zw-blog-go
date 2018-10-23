@@ -9,6 +9,7 @@ import (
 
 type News struct {
 	ID          string `json:"id"`
+	UrlEn       string `json:"id"`
 	Title       string `json:"title"`
 	Content     string `json:"content"`
 	CreateTime  string `json:"createTime"`
@@ -37,8 +38,8 @@ type NewsSearchVo struct {
 }
 
 func (news *News) NewsInsert() (err error) {
-	sql := "insert into news(id,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels)
+	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels)
 	return
 }
 
@@ -49,15 +50,21 @@ func NewsDelete(id string) (err error) {
 }
 
 func (news *News) NewsUpdate() (err error) {
-	sql := "update news set title=$1,content=$2,type_id=$3,img=$4,state=$5,abstract=$6,labels=$7 where id=$8"
-	_, err = Db.Exec(sql, news.Title, news.Content, news.TypeId, news.Img, news.State, news.Abstract, news.Labels, news.ID)
+	sql := "update news set title=$1,content=$2,type_id=$3,img=$4,state=$5,abstract=$6,labels=$7,url_en=$8 where id=$9"
+	_, err = Db.Exec(sql, news.Title, news.Content, news.TypeId, news.Img, news.State, news.Abstract, news.Labels, news.UrlEn, news.ID)
 	return
 }
 
 func NewsSelect(id string) (news News, err error) {
-	sql := "select id,title,content,create_time,author,type_id,img,state,abstract,labels from news where id=$1"
+	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels from news where id=$1"
 	news = News{}
-	err = Db.QueryRow(sql, id).Scan(&news.ID, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels)
+	err = Db.QueryRow(sql, id).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels)
+	return
+}
+func NewsSelectByUrl(urlEn string, time1 string, time2 string) (news News, err error) {
+	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels from news where url_en=$1 and create_time >= $2 and create_time < $3"
+	news = News{}
+	err = Db.QueryRow(sql, urlEn, time1, time2).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels)
 	return
 }
 func NewsSelectCount(search NewsSearchVo) (count int, err error) {
@@ -68,7 +75,7 @@ func NewsSelectCount(search NewsSearchVo) (count int, err error) {
 }
 func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []News, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select id,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels from news "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels from news "+whereStr+" limit ? offset ?", 0)
 	newss = []News{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)
@@ -79,7 +86,7 @@ func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []New
 	for rows.Next() {
 		rows.Columns()
 		var news News
-		err = rows.Scan(&news.ID, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.UserGroupId, &news.State, &news.Abstract, &news.Labels)
+		err = rows.Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.UserGroupId, &news.State, &news.Abstract, &news.Labels)
 		if err != nil {
 			panic(err.Error)
 		}

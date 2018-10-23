@@ -4,13 +4,22 @@ import (
 	. "../../services"
 	"errors"
 	"github.com/kataras/iris/mvc"
+	"strconv"
 )
 
 type BlogDetailController struct{}
 
-func (c *BlogDetailController) GetBy(id string) mvc.Result {
-
-	detail, err := NewsSelect(id)
+// 根据月份和urlen去查询新闻详情
+func (c *BlogDetailController) GetBy(year string, month string, urlEn string) mvc.Result {
+	month1, _ := strconv.Atoi(month)
+	year1, _ := strconv.Atoi(year)
+	if month1 == 12 {
+		month1 = 1
+		year1 = year1 + 1
+	} else {
+		month1 = month1 + 1
+	}
+	detail, err := NewsSelectByUrl(urlEn, year+"-"+month+"-01", strconv.Itoa(year1)+"-"+strconv.Itoa(month1)+"-01")
 	if err != nil {
 		return mvc.Response{Err: errors.New("错误"), Code: 400}
 	}
