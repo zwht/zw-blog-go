@@ -9,7 +9,7 @@ import (
 
 type News struct {
 	ID          string `json:"id"`
-	UrlEn       string `json:"id"`
+	UrlEn       string `json:"urlEn"`
 	Title       string `json:"title"`
 	Content     string `json:"content"`
 	CreateTime  string `json:"createTime"`
