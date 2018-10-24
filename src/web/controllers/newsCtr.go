@@ -2,17 +2,24 @@ package controllers
 
 import (
 	. "../../datamodels"
+	. "../../models"
 	. "../../services"
+	. "../../tools"
+	"encoding/json"
 	"github.com/kataras/iris"
 	"strconv"
 )
 
 func NewsCreate(ctx iris.Context) {
+	tokenString := ctx.Request().Header.Get("Authorization")
+	_, userBty := GetJwt(tokenString)
+	var user User
+	_ = json.Unmarshal(userBty, &user)
+
 	var news News
 	ctx.ReadJSON(&news)
-
+	news.Author = user.Name
 	err := news.NewsInsert()
-
 	result := Result{}
 
 	if err != nil {
