@@ -4,23 +4,33 @@
 <head>
   <meta charset="utf-8">
   <title>{{.Detail.Title}}</title>
-  <meta name="keywords" content="{{.Detail.Labels}}"> 
+  <meta name="keywords" content="{{.Detail.Labels}}">
   <meta name="description" content="{{.Detail.Abstract}}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="/vb/css/common.css">
   <link rel="stylesheet" href="/vb/css/detail.css">
   <script src="/vb/js/common.js"></script>
+
 <body>
-  <h1>{{.Detail.Title}}</h1>
-  <p>{{.Detail.CreateTime}}</p>
-  <article>
-      {{.Detail.Content}}
-  </article>
+  <div class="content clear">
+    <div class="left">
+      <h1>{{.Detail.Title}}</h1>
+      <p class="time">{{.Detail.CreateTime}}</p>
+      <article>
+        {{.Detail.Content}}
+      </article>
+    </div>
+    <div class="right">
+      dff
+    </div>
+  </div>
   <script>
-    window.onload = function () {
+    addLoadEvent(function () {
       baseNode('article')
-    }
+      document.querySelector('body').className = "body"
+    })
   </script>
 </body>
+
 </html>

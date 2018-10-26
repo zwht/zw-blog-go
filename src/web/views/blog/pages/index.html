@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>魏翼超然</title>
-  <meta name="keywords" content="魏翼超然|技术分享"> 
+  <meta name="keywords" content="魏翼超然|技术分享">
   <meta name="description" content="魏翼超然博客，记录学习，分享知识，技术分享">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -13,16 +13,23 @@
   <script src="/vb/js/common.js"></script>
 
 <body>
-  <h1>魏翼超然，技术分享</h1>
-  <ul>
-    {{range $key, $value :=.List}}
-    <li>
-      <a href="/detail/{{$value.Year}}/{{$value.Month}}/{{$value.UrlEn}}" title="{{$value.Title}}" target="_blank">
-        <h3>{{$value.Title}}</h3>
-        <div>{{$value.Abstract}}</div>
-      </a>
-    </li>
-    {{end}}
-  </ul>
+  <div class="content clear">
+    <div class="left">
+      <h1>魏翼超然，技术分享</h1>
+      <ul>
+        {{range $key, $value :=.List}}
+        <li>
+          <a href="/detail/{{$value.Year}}/{{$value.Month}}/{{$value.UrlEn}}" title="{{$value.Title}}" target="_blank">
+            <h3>{{$value.Title}}</h3>
+            <div>{{$value.Abstract}}</div>
+          </a>
+        </li>
+        {{end}}
+      </ul>
+    </div>
+    <div class="right">
+      dff
+    </div>
+  </div>
 </body>
 </html>
