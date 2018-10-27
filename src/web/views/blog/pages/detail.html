@@ -10,27 +10,27 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="/vb/css/common.css">
   <link rel="stylesheet" href="/vb/css/detail.css">
-  <script src="/vb/js/common.js"></script>
-
+  <link rel="stylesheet" href="/vb/css/prism.css">
+  
 <body>
   <div class="content clear">
     <div class="left">
       <h1>{{.Detail.Title}}</h1>
       <p class="time">{{.Detail.CreateTime}}</p>
       <article>
-        {{.Detail.Content}}
+        {{.Detail.Content | RenderHtml}}
       </article>
     </div>
     <div class="right">
       dff
     </div>
   </div>
+  <script src="/vb/js/common.js"></script>
   <script>
     addLoadEvent(function () {
-      baseNode('article')
-      document.querySelector('body').className = "body"
+      
     })
   </script>
+  <script src="/vb/js/prism.js"></script>
 </body>
-
 </html>

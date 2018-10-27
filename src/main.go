@@ -30,10 +30,12 @@ func main() {
 	//静态文件配置
 	app.StaticWeb("/admin/", "./web/views/admin") //管理平台入口
 	app.StaticWeb("/api/", "./web/views/api")     //api入口
-	// app.StaticWeb("/img/", "./web/views/img")
+	app.StaticWeb("/img/", "./web/views/img")
 	app.StaticWeb("/vb/", "./web/views/blog/assets")
 	//html模板配置
-	app.RegisterView(iris.HTML("./web/views", ".html"))
+	htmEng := iris.HTML("./web/views", ".html").Reload(true)
+	htmEng.AddFunc("RenderHtml", RenderHtml)
+	app.RegisterView(htmEng)
 
 	// redis初始化
 	RedisInit()
