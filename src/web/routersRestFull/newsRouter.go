@@ -1,6 +1,7 @@
 package routers
 
 import (
+	. "../../tools/http"
 	. "../controllers"
 	"github.com/kataras/iris"
 )
@@ -11,11 +12,11 @@ func NewsRouter(app *iris.Application) {
 		ctx.Next()
 	})
 	{
-		routes.Post("/add", NewsCreate)
-		routes.Post("/update", NewsUpdate)
-		routes.Get("/del/{id:string}", NewsDeleteById)
-		routes.Get("/getById/{id:string}", NewsGetById)
-		routes.Post("/list/{pageNum:int}/{pageSize:int}", NewsGetList)
+		routes.Post("/add", Permission(NewsCreate, ""))
+		routes.Post("/update", Permission(NewsUpdate, ""))
+		routes.Get("/del/{id:string}", Permission(NewsDeleteById, ""))
+		routes.Get("/getById/{id:string}", Permission(NewsGetById, ""))
+		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(NewsGetList, ""))
 	}
 
 }

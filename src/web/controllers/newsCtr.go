@@ -2,23 +2,17 @@ package controllers
 
 import (
 	. "../../datamodels"
-	. "../../models"
 	. "../../services"
-	. "../../tools"
-	"encoding/json"
-	"github.com/kataras/iris"
+	. "../../tools/http"
 	"strconv"
+	"strings"
 )
 
-func NewsCreate(ctx iris.Context) {
-	tokenString := ctx.Request().Header.Get("Authorization")
-	_, userBty := GetJwt(tokenString)
-	var user User
-	_ = json.Unmarshal(userBty, &user)
-
+func NewsCreate(ctx *Context) {
 	var news News
 	ctx.ReadJSON(&news)
-	news.Author = user.Name
+	news.Author = ctx.User.Name
+	news.AuthorId = ctx.User.ID
 	err := news.NewsInsert()
 	result := Result{}
 
@@ -32,7 +26,7 @@ func NewsCreate(ctx iris.Context) {
 
 	ctx.JSON(result)
 }
-func NewsUpdate(ctx iris.Context) {
+func NewsUpdate(ctx *Context) {
 	var news News
 	ctx.ReadJSON(&news)
 
@@ -51,7 +45,7 @@ func NewsUpdate(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func NewsGetById(ctx iris.Context) {
+func NewsGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	news, err := NewsSelect(id)
 
@@ -69,11 +63,15 @@ func NewsGetById(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func NewsGetList(ctx iris.Context) {
+func NewsGetList(ctx *Context) {
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
 	var newsSearchVo NewsSearchVo
 	ctx.ReadJSON(&newsSearchVo)
+	if !strings.Contains(ctx.User.Roles, "1001") {
+		newsSearchVo.AuthorId = ctx.User.ID
+	}
+
 	count, _ := NewsSelectCount(newsSearchVo)
 	newss, err := NewsSelectList(pageSize, pageNum, newsSearchVo)
 	result := Result{}
@@ -95,7 +93,7 @@ func NewsGetList(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func NewsDeleteById(ctx iris.Context) {
+func NewsDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := NewsDelete(id)
 
