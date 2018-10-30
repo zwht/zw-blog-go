@@ -17,7 +17,7 @@ type News struct {
 	AuthorId    string `json:"authorId"`
 	TypeId      string `json:"typeId"`
 	UserGroupId string `json:"userGroupId"`
-	SeeSum      string `json:"seeSum"`
+	SeeSum      int    `json:"seeSum"`
 	Index       string `json:"index"`
 	Img         string `json:"img"`
 	IsHot       int    `json:"isHot"`
@@ -36,7 +36,7 @@ type NewsList struct {
 	AuthorId    string `json:"authorId"`
 	TypeId      string `json:"typeId"`
 	UserGroupId string `json:"userGroupId"`
-	SeeSum      string `json:"seeSum"`
+	SeeSum      int    `json:"seeSum"`
 	Index       string `json:"index"`
 	Img         string `json:"img"`
 	IsHot       int    `json:"isHot"`
@@ -60,8 +60,8 @@ type NewsSearchVo struct {
 }
 
 func (news *News) NewsInsert() (err error) {
-	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId)
+	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id,see_sum) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId, news.SeeSum)
 	return
 }
 
@@ -76,17 +76,22 @@ func (news *News) NewsUpdate() (err error) {
 	_, err = Db.Exec(sql, news.Title, news.Content, news.TypeId, news.Img, news.State, news.Abstract, news.Labels, news.UrlEn, news.ID)
 	return
 }
+func (news *News) NewsUpdateSum() (err error) {
+	sql := "update news set see_sum=$1 where id=$2"
+	_, err = Db.Exec(sql, news.SeeSum, news.ID)
+	return
+}
 
 func NewsSelect(id string) (news News, err error) {
-	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id from news where id=$1"
+	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id,see_sum from news where id=$1"
 	news = News{}
-	err = Db.QueryRow(sql, id).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.AuthorId)
+	err = Db.QueryRow(sql, id).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.AuthorId, &news.SeeSum)
 	return
 }
 func NewsSelectByUrl(urlEn string, time1 string, time2 string) (news News, err error) {
-	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels from news where url_en=$1 and create_time >= $2 and create_time < $3"
+	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id,see_sum from news where url_en=$1 and create_time >= $2 and create_time < $3"
 	news = News{}
-	err = Db.QueryRow(sql, urlEn, time1, time2).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels)
+	err = Db.QueryRow(sql, urlEn, time1, time2).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.AuthorId, &news.SeeSum)
 	return
 }
 func NewsSelectCount(search NewsSearchVo) (count int, err error) {

@@ -14,6 +14,7 @@ func NewsRouter(app *iris.Application) {
 	{
 		routes.Post("/add", Permission(NewsCreate, ""))
 		routes.Post("/update", Permission(NewsUpdate, ""))
+		routes.Get("/updateSum", NewsUpdateSum)
 		routes.Get("/del/{id:string}", Permission(NewsDeleteById, ""))
 		routes.Get("/getById/{id:string}", Permission(NewsGetById, ""))
 		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(NewsGetList, ""))

@@ -11,12 +11,12 @@
   <link rel="stylesheet" href="/vb/css/common.css">
   <link rel="stylesheet" href="/vb/css/detail.css">
   <link rel="stylesheet" href="/vb/css/prism.css">
-  
+
 <body>
   <div class="content clear">
     <div class="left">
       <h1>{{.Detail.Title}}</h1>
-      <p class="time">{{.Detail.CreateTime}}</p>
+      <p class="time">{{.Detail.CreateTime | DateFk}}&nbsp;&nbsp;{{.Detail.SeeSum}}</p>
       <article>
         {{.Detail.Content | RenderHtml}}
       </article>
@@ -25,12 +25,18 @@
       dff
     </div>
   </div>
+  <div style="display:none" id="newsId">{{.Detail.ID}}</div>
+  <script src="/vb/js/zepto.js"></script>
   <script src="/vb/js/common.js"></script>
+  <script src="/vb/js/prism.js"></script>
   <script>
-    addLoadEvent(function () {
-      
+    $(function () {
+      setTimeout(function () {
+        $.get('/v1/news/updateSum?id='+$('#newsId').text(), function (response) {
+        })
+      }, 5000)
     })
   </script>
-  <script src="/vb/js/prism.js"></script>
 </body>
+
 </html>
