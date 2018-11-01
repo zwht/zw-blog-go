@@ -18,6 +18,7 @@ func NewsRouter(app *iris.Application) {
 		routes.Get("/del/{id:string}", Permission(NewsDeleteById, ""))
 		routes.Get("/getById/{id:string}", Permission(NewsGetById, ""))
 		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(NewsGetList, ""))
+		routes.Get("/listHot", Permission(NewsGetHotList, ""))
 	}
 
 }

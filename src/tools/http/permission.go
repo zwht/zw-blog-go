@@ -61,7 +61,6 @@ func Permission(h func(*Context), roles string) iris.Handler {
 				}
 			}
 		}
-
 		if passe {
 			h(ctx)
 			release(ctx)

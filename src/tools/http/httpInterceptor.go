@@ -15,6 +15,7 @@ var noTokenMap = [...]string{
 	"/v1/code/list",
 	"/v1/file/upload",
 	"/v1/news/updateSum",
+	"/v1/news/listHot",
 }
 
 func HttpInterceptor(ctx iris.Context) {
@@ -31,19 +32,18 @@ func HttpInterceptor(ctx iris.Context) {
 		if !isNext {
 			tokenString := ctx.Request().Header.Get("Authorization")
 			urlToken := ctx.Params().Get("token")
+			urlToken1 := ctx.FormValue("token")
 			//如果url有token，优先使用url
 			if urlToken != "" {
 				tokenString = urlToken
+			}
+			if urlToken1 != "" {
+				tokenString = urlToken1
 			}
 			if tokenString != "" {
 				// 获取jwt解析后的token数据
 				isNext, _ = GetJwt(tokenString)
 			}
-			// var empList User
-			// err3 := json.Unmarshal(tokenStr33, &empList)
-			// if err3 != nil {
-			// 	fmt.Printf(err3.Error())
-			// }
 		}
 	}
 	if isNext {

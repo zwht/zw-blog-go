@@ -140,6 +140,21 @@ func NewsGetList(ctx *Context) {
 	ctx.JSON(result)
 }
 
+func NewsGetHotList(ctx *Context) {
+	typeId := ctx.FormValue("typeId")
+	newss, err := NewsSelectHotList(typeId)
+	result := Result{}
+	if err != nil {
+		result.Code = 0
+		result.Msg = err.Error()
+	} else {
+		result.Code = 200
+		result.Msg = "成功"
+		result.Data = newss
+	}
+	ctx.JSON(result)
+}
+
 func NewsDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := NewsDelete(id)

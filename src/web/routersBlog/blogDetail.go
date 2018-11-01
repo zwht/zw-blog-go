@@ -12,7 +12,6 @@ type BlogDetailController struct{}
 
 // 根据月份和urlen去查询新闻详情
 func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string, urlEn string) mvc.Result {
-	ip := ctx.RemoteAddr()
 	month1, _ := strconv.Atoi(month)
 	year1, _ := strconv.Atoi(year)
 	if month1 == 12 {
@@ -23,7 +22,7 @@ func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string
 	}
 	detail, err := NewsSelectByUrl(urlEn, year+"-"+month+"-01", strconv.Itoa(year1)+"-"+strconv.Itoa(month1)+"-01")
 	if err != nil {
-		return mvc.Response{Err: errors.New("错误" + ip), Code: 400}
+		return mvc.Response{Err: errors.New("错误"), Code: 400}
 	}
 	data := map[string]interface{}{
 		"Detail": detail,

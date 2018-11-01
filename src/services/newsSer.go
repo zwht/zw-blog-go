@@ -122,3 +122,21 @@ func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []New
 	}
 	return
 }
+func NewsSelectHotList(typeId string) (newss []NewsList, err error) {
+	newss = []NewsList{}
+	rows, err := Db.Query("select news.id,news.url_en,news.title,news.content,news.create_time,news.author,news.type_id,news.img,news.user_group_id,news.state,news.abstract,news.labels,new_type.name from news join new_type on news.type_id = new_type.id where news.type_id = $1 limit 10 offset 0", typeId)
+	if err != nil {
+		panic(err.Error)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		rows.Columns()
+		var news NewsList
+		err = rows.Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.UserGroupId, &news.State, &news.Abstract, &news.Labels, &news.TypeName)
+		if err != nil {
+			panic(err.Error)
+		}
+		newss = append(newss, news)
+	}
+	return
+}
