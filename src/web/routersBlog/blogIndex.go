@@ -31,6 +31,7 @@ type BlogIndexController struct{}
 
 func (c *BlogIndexController) Get() mvc.Result {
 	var newsSearchVo NewsSearchVo
+	newsSearchVo.State = 1105
 	count, _ := NewsSelectCount(newsSearchVo)
 	newss, _ := NewsSelectList(10, 1, newsSearchVo)
 	var out []interface{}

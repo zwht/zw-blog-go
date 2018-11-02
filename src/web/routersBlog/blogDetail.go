@@ -22,7 +22,10 @@ func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string
 	}
 	detail, err := NewsSelectByUrl(urlEn, year+"-"+month+"-01", strconv.Itoa(year1)+"-"+strconv.Itoa(month1)+"-01")
 	if err != nil {
-		return mvc.Response{Err: errors.New("错误"), Code: 400}
+		return mvc.Response{Err: errors.New("未找到数据"), Code: 400}
+	}
+	if detail.State != 1105 {
+		return mvc.Response{Err: errors.New("未找到数据!"), Code: 400}
 	}
 	data := map[string]interface{}{
 		"Detail": detail,
