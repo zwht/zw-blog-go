@@ -11,7 +11,7 @@ const (
 	port     = 5432
 	user     = "zhaowei"
 	password = "123"
-	dbname   = "election"
+	dbname   = "blog"
 )
 
 var Db *sql.DB
