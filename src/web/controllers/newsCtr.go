@@ -92,6 +92,25 @@ func NewsUpdateSum(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
+// 修改文章状态
+func NewsUpdateStateCtr(ctx *Context) {
+	result := Result{}
+	id := ctx.FormValue("id")
+	state, _ := strconv.Atoi(ctx.FormValue("state"))
+	var news News
+	news.ID = id
+	news.State = state
+	err1 := news.NewsUpdateState()
+	if err1 != nil {
+		result.Code = 0
+		result.Msg = err1.Error()
+	} else {
+		result.Code = 200
+		result.Msg = "修改状态成功"
+	}
+	ctx.JSON(result)
+}
+
 func NewsGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	news, err := NewsSelect(id)

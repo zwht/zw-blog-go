@@ -84,6 +84,11 @@ func (news *News) NewsUpdateSum() (err error) {
 	_, err = Db.Exec(sql, news.SeeSum, news.ID)
 	return
 }
+func (news *News) NewsUpdateState() (err error) {
+	sql := "update news set state=$1 where id=$2"
+	_, err = Db.Exec(sql, news.State, news.ID)
+	return
+}
 
 func NewsSelect(id string) (news News, err error) {
 	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id,see_sum,source from news where id=$1"
