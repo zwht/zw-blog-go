@@ -29,7 +29,8 @@ func main() {
 
 	//静态文件配置
 	app.StaticWeb("/admin/", "./web/views/admin") //管理平台入口
-	app.StaticWeb("/api/", "./web/views/api")     //api入口
+	app.StaticWeb("/assets/", "./web/views/admin/assets")
+	app.StaticWeb("/api/", "./web/views/api") //api入口
 	app.StaticWeb("/img/", "./web/views/img")
 	app.StaticWeb("/vb/", "./web/views/blog/assets")
 	//html模板配置

@@ -1,20 +1,23 @@
 package routers
 
 import (
+	. "../../tools/http"
 	. "../controllers"
 	"github.com/kataras/iris"
 )
 
-//code model
+//news_review model
 func NewsReviewRouter(app *iris.Application) {
-	routes := app.Party("/v1/new/review", func(ctx iris.Context) {
+	routes := app.Party("/v1/news_review", func(ctx iris.Context) {
 		ctx.Next()
 	})
 	{
-		routes.Post("/add", NewsReviewCreate)
-		routes.Get("/del/{id:string}", NewsReviewDeleteById)
-		routes.Get("/getById/{id:string}", NewsReviewGetById)
-		routes.Post("/list/{pageNum:int}/{pageSize:int}", NewsReviewGetList)
+		routes.Post("/add", Permission(NewsReviewCreate, "1001"))
+		routes.Post("/update", Permission(NewsReviewUpdate, "1001"))
+		routes.Post("/updateState", Permission(NewsReviewUpdateState, "1001"))
+		routes.Get("/del/{id:string}", Permission(NewsReviewDeleteById, "1001"))
+		routes.Get("/getById/{id:string}", Permission(NewsReviewGetById, "1001"))
+		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(NewsReviewGetList, ""))
 	}
 
 }

@@ -13,18 +13,14 @@
   <link rel="stylesheet" href="/vb/css/prism.css">
 
 <body>
-  <div class="content clear">
-    <div class="left">
-      <h1>{{.Detail.Title}}</h1>
-      <p class="time">{{.Detail.CreateTime | DateFk}}&nbsp;&nbsp;{{.Detail.SeeSum}}</p>
-      <article>
-        {{.Detail.Content | RenderHtml}}
-      </article>
-    </div>
-    <div class="right">
-      dff
-    </div>
-  </div>
+  <section class="art">
+    <h1>{{.Detail.Title}}</h1>
+    <p class="time">{{.Detail.CreateTime | DateFk}}&nbsp;&nbsp;{{.Detail.SeeSum}}</p>
+    <article>
+      {{.Detail.Content | RenderHtml}}
+    </article>
+  </section>
+
   <div style="display:none" id="newsId">{{.Detail.ID}}</div>
   <script src="/vb/js/zepto.js"></script>
   <script src="/vb/js/common.js"></script>
@@ -32,7 +28,7 @@
   <script>
     $(function () {
       setTimeout(function () {
-        $.get('/v1/news/updateSum?id='+$('#newsId').text(), function (response) {
+        $.get('/v1/news/updateSum?id=' + $('#newsId').text(), function (response) {
         })
       }, 5000)
     })

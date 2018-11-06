@@ -110,7 +110,7 @@ func NewsSelectCount(search NewsSearchVo) (count int, err error) {
 }
 func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []NewsList, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select news.id,news.url_en,news.title,news.create_time,news.author,news.img,news.state,news.abstract,news.labels,new_type.name,news.source from news join new_type on news.type_id = new_type.id "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select news.id,news.url_en,news.title,news.create_time,news.author,news.img,news.state,news.abstract,news.labels,news_type.name,news.source from news join news_type on news.type_id = news_type.id "+whereStr+" limit ? offset ?", 0)
 	println(sql)
 	newss = []NewsList{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
@@ -132,7 +132,7 @@ func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []New
 }
 func NewsSelectHotList(typeId string) (newss []NewsList, err error) {
 	newss = []NewsList{}
-	rows, err := Db.Query("select news.url_en,news.title,news.create_time,news.author,news.type_id,news.state,news.source from news join new_type on news.type_id = new_type.id where news.type_id = $1 limit 10 offset 0", typeId)
+	rows, err := Db.Query("select news.url_en,news.title,news.create_time,news.author,news.type_id,news.state,news.source from news join news_type on news.type_id = news_type.id where news.type_id = $1 limit 10 offset 0", typeId)
 	if err != nil {
 		panic(err.Error)
 	}

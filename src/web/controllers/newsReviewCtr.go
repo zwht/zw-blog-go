@@ -3,32 +3,68 @@ package controllers
 import (
 	. "../../datamodels"
 	. "../../services"
-	"github.com/kataras/iris"
+	. "../../tools/http"
 	"strconv"
 )
 
-func NewsReviewCreate(ctx iris.Context) {
+func NewsReviewCreate(ctx *Context) {
+	var news_review NewsReview
+	ctx.ReadJSON(&news_review)
+
+	err := news_review.NewsReviewInsert()
+
+	result := Result{}
+
+	if err != nil {
+		result.Code = 0
+		result.Msg = err.Error()
+	} else {
+		result.Code = 200
+		result.Msg = "成功保存news_review信息"
+	}
+
+	ctx.JSON(result)
+}
+func NewsReviewUpdate(ctx *Context) {
+	var news_review NewsReview
+	ctx.ReadJSON(&news_review)
+
+	err := news_review.NewsReviewUpdate()
+
+	result := Result{}
+
+	if err != nil {
+		result.Code = 0
+		result.Msg = err.Error()
+	} else {
+		result.Code = 200
+		result.Msg = "成功保存news_review信息"
+	}
+
+	ctx.JSON(result)
+}
+
+func NewsReviewUpdateState(ctx *Context) {
+	result := Result{}
+	id := ctx.FormValue("id")
+	state, _ := strconv.Atoi(ctx.FormValue("state"))
 	var newsReview NewsReview
-	ctx.ReadJSON(&newsReview)
-
-	err := newsReview.NewsReviewInsert()
-
-	result := Result{}
-
-	if err != nil {
+	newsReview.ID = id
+	newsReview.State = state
+	err1 := newsReview.NewsReviewUpdateState()
+	if err1 != nil {
 		result.Code = 0
-		result.Msg = err.Error()
+		result.Msg = err1.Error()
 	} else {
 		result.Code = 200
-		result.Msg = "成功保存newsReview信息"
+		result.Msg = "修改状态成功"
 	}
-
 	ctx.JSON(result)
 }
 
-func NewsReviewGetById(ctx iris.Context) {
+func NewsReviewGetById(ctx *Context) {
 	id := ctx.Params().Get("id")
-	newsReview, err := NewsReviewSelect(id)
+	news_review, err := NewsReviewSelect(id)
 
 	result := Result{}
 
@@ -37,20 +73,20 @@ func NewsReviewGetById(ctx iris.Context) {
 		result.Msg = err.Error()
 	} else {
 		result.Code = 200
-		result.Msg = "成功获取newsReview信息"
-		result.Data = newsReview
+		result.Msg = "成功获取news_review信息"
+		result.Data = news_review
 	}
 
 	ctx.JSON(result)
 }
 
-func NewsReviewGetList(ctx iris.Context) {
+func NewsReviewGetList(ctx *Context) {
 	pageSize, _ := strconv.Atoi(ctx.Params().Get("pageSize"))
 	pageNum, _ := strconv.Atoi(ctx.Params().Get("pageNum"))
-	var newsReviewSearchVo NewsReviewSearchVo
-	ctx.ReadJSON(&newsReviewSearchVo)
-	count, _ := NewsReviewSelectCount(newsReviewSearchVo)
-	newsReviews, err := NewsReviewSelectList(pageSize, pageNum, newsReviewSearchVo)
+	var news_reviewSearchVo NewsReviewSearchVo
+	ctx.ReadJSON(&news_reviewSearchVo)
+	count, _ := NewsReviewSelectCount(news_reviewSearchVo)
+	news_reviews, err := NewsReviewSelectList(pageSize, pageNum, news_reviewSearchVo)
 	result := Result{}
 	if err != nil {
 		result.Code = 0
@@ -60,17 +96,17 @@ func NewsReviewGetList(ctx iris.Context) {
 		resultPage.TotalCount = count
 		resultPage.PageSize = pageSize
 		resultPage.PageNum = pageNum
-		resultPage.PageData = newsReviews
+		resultPage.PageData = news_reviews
 
 		result.Code = 200
-		result.Msg = "成功获取newsReview列表信息"
+		result.Msg = "成功获取news_review列表信息"
 		result.Data = resultPage
 	}
 
 	ctx.JSON(result)
 }
 
-func NewsReviewDeleteById(ctx iris.Context) {
+func NewsReviewDeleteById(ctx *Context) {
 	id := ctx.Params().Get("id")
 	err := NewsReviewDelete(id)
 
@@ -81,7 +117,7 @@ func NewsReviewDeleteById(ctx iris.Context) {
 		result.Msg = err.Error()
 	} else {
 		result.Code = 200
-		result.Msg = "成功删除newsReview信息"
+		result.Msg = "成功删除news_review信息"
 	}
 
 	ctx.JSON(result)

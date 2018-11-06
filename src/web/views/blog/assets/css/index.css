@@ -1,18 +1,13 @@
-body{ margin: 0 auto; max-width: 1200px;}
-.content{ margin: 20px 10px;}
+.content{ margin: 20px  auto; max-width: 800px;}
 
-.left{ float: left; width: 850px; background: #fff;}
-.left h1{ padding: 0 20px; color: #000;}
+.left{ width: 100%;}
+.left h1{ padding: 0 20px; color: #000; text-align: center}
 .left ul{}
 .left li{ border-bottom: 1px solid #ededed;
   padding: 15px 20px;}
 .left li h2{ font-size: 16px; line-height: 40px; color: #222; }
 .left li div{ color: #999;}
 
-.right{float: left; width: 235px; margin-left: 15px; padding: 10px;
-  min-height: 600px; 
-  background: #fff;
-}
 
 
 

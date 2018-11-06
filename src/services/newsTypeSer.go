@@ -24,38 +24,38 @@ type NewsTypeSearchVo struct {
 }
 
 func (newsType *NewsType) NewsTypeInsert() (err error) {
-	sql := "insert into new_type(id,name,description,parent_id,index,user_group_id) values($1,$2,$3,$4,$5,$6)"
+	sql := "insert into news_type(id,name,description,parent_id,index,user_group_id) values($1,$2,$3,$4,$5,$6)"
 	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), newsType.Name, newsType.Description, newsType.ParentId, newsType.Index, newsType.UserGroupId)
 	return
 }
 
 func NewsTypeDelete(id string) (err error) {
-	sql := "delete from new_type where id=$1"
+	sql := "delete from news_type where id=$1"
 	_, err = Db.Exec(sql, id)
 	return
 }
 
 func (newsType *NewsType) NewsTypeUpdate() (err error) {
-	sql := "update new_type set name=$1,description=$2,parent_id=$3,index=$4 where id=$5"
+	sql := "update news_type set name=$1,description=$2,parent_id=$3,index=$4 where id=$5"
 	_, err = Db.Exec(sql, newsType.Name, newsType.Description, newsType.ParentId, newsType.Index, newsType.ID)
 	return
 }
 
 func NewsTypeSelect(id string) (newsType NewsType, err error) {
-	sql := "select id,name,description,parent_id,index from new_type where id=$1"
+	sql := "select id,name,description,parent_id,index from news_type where id=$1"
 	newsType = NewsType{}
 	err = Db.QueryRow(sql, id).Scan(&newsType.ID, &newsType.Name, &newsType.Description, &newsType.ParentId, &newsType.Index)
 	return
 }
 func NewsTypeSelectCount(search NewsTypeSearchVo) (count int, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from new_type"+whereStr, 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select count(*) from news_type"+whereStr, 0)
 	err = Db.QueryRow(sql, args...).Scan(&count)
 	return
 }
 func NewsTypeSelectList(pageSize int, pageNum int, search NewsTypeSearchVo) (newsTypes []NewsType, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select id,name,description,parent_id,index from new_type "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,name,description,parent_id,index from news_type "+whereStr+" limit ? offset ?", 0)
 	newsTypes = []NewsType{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)
