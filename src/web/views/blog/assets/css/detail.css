@@ -3,4 +3,51 @@
 .art .time{padding-bottom:15px; color: #999; text-indent: 20px;
   border-bottom: 1px solid #ededed; margin-bottom: 20px;}
 .art article img{ max-width: 100%;}
+.review_box{ background: #f1f1f1; padding: 20px 0;}
+.review_box h3{ text-align: center; font-size: 24px;}
+.add_review{margin: 20px auto; max-width: 800px; }
+.add_review .text>img{ width: 100px; height: 100px; position: absolute; top:0; left: 0;}
+.add_review .text{ position: relative; padding-left: 100px; height: 100px; 
+  box-shadow: 0 2px 6px rgba(0,0,0,.2);
+  background: #fff;}
+.add_review .send{ position: absolute; bottom: -25px; height: 50px; width: 50px;
+  text-align: center; background: #099; right: 20px;border-radius: 100px;
+  color: #fff; line-height: 50px; cursor: pointer; opacity: 0.8; 
+  box-shadow: 0 2px 6px rgba(0,0,0,.3); 
+}
+.add_review .send:hover{ opacity: 1;}
+.add_review textarea{ width: 100%; min-height: 90px; border: none; padding: 10px;}
+.user_detail{ box-shadow: 0 2px 6px rgba(0,0,0,.2); margin-left: 100px;
+  margin-top: 15px; border-radius: 2px; width: 600px;}
+.user_detail .item{ width: 200px; float: left; position: relative; }
+.user_detail .item1{ border-right: 1px solid #ededed; border-left: 1px solid #ededed;}
+.user_detail input{ width: 100%; border:none; height: 38px; padding: 0 15px 0 10px;}
+.user_detail .required{ position: absolute; right: 3px; top:10px;
+  font-size: 18px; color: #c00;}
 
+.ul{ max-width: 800px; margin: 40px auto;}
+
+.reviews{ position: relative; padding: 0 10px 0 65px;}
+.reviews_item{ border-top: 1px solid #e1e1e1; padding: 25px 0;
+}
+.reviews_item>h4{ padding-bottom: 5px;}
+.reviews_item>h4 a{ color: #777;}
+.reviews_item>h4 span{ float: right; cursor: pointer; color: #aaa; display: none;}
+.reviews_item>h4 span:hover{ color: #099;}
+.reviews_item>h4 i{ margin-left: 10px; color: #999;}
+.reviews_item>img{ width: 50px; height: 50px; position: absolute; left: 0; top:27px;
+  border-radius: 25px;
+}
+.reviews_item p{ color: #000; }
+.reviews_item:hover>h4 span{ display: block;}
+.reviews .add_review{ padding-left: 50px; position: relative;}
+.reviews .add_review .text{ padding-left: 0; height: 80px; }
+.reviews .add_review textarea{ min-height: 70px;}
+.reviews .add_review >img{ width: 50px; height: 50px; position: absolute; top:0;
+left: 0; border-radius: 2px 0 0 2px;}
+.reviews .user_detail{ margin-left: 0; margin-top: 10px; width: 510px;}
+.reviews .user_detail .item{ width: 170px;}
+.reviews .reset{ position: absolute; right: 0; top: -25px; color: #099;
+  cursor: pointer;
+}
+.reviews .reset:hover{ color: darkcyan;}

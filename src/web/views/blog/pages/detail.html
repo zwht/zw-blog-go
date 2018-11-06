@@ -20,7 +20,136 @@
       {{.Detail.Content | RenderHtml}}
     </article>
   </section>
-
+  <div class="review_box">
+    <h3>3 条评论</h3>
+    <div class="add_review">
+      <div class="text">
+        <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+        <textarea name="" id="" cols="45" rows="3"></textarea>
+        <span class="send">提交</span>
+      </div>
+      <div class="user_detail clear">
+        <span>
+          <div class="item">
+            <label for="author"></label>
+            <span class="required">*</span>
+            <input id="author" type="text" placeholder="昵称">
+          </div>
+          <div class="item item1">
+            <label for="email"></label>
+            <span class="required">*</span>
+            <input id="email" type="text" placeholder="邮箱">
+          </div>
+          <div class="item">
+            <label for="url"></label>
+            <input id="url" type="text" placeholder="网站">
+          </div>
+        </span>
+      </div>
+    </div>
+    <ul class="ul">
+      <li>
+        <section class="reviews">
+          <div class="reviews_item">
+            <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+            <h4>
+              <a href="">博客大全</a>
+              <i>2018/8/23</i>
+              <span>回复</span>
+            </h4>
+            <p>好软件，值得收藏！好软件，值得收藏！好软件，值得收藏！</p>
+          </div>
+          <section class="reviews">
+              <div class="reviews_item">
+                <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+                <h4>
+                  <a href="">博客大全</a>
+                  <i>2018/8/23</i>
+                  <span>回复</span>
+                </h4>
+                <p>kjsjdsj，可节省的肯定时代精神</p>
+              </div>
+            </section>
+            <section class="reviews">
+              <div class="reviews_item">
+                <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+                <h4>
+                  <a href="">博客大全</a>
+                  <i>2018/8/23</i>
+                  <span>回复</span>
+                </h4>
+                <p>sdd可节省大家的时间，世界顶级！</p>
+              </div>
+              <div class="add_review">
+                <span class="reset">取消评论</span>
+                <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+                <div class="text">
+                  <textarea name="" id="" cols="45" rows="3"></textarea>
+                  <span class="send">提交</span>
+                </div>
+                <div class="user_detail clear">
+                  <span>
+                    <div class="item">
+                      <label for="author"></label>
+                      <span class="required">*</span>
+                      <input id="author" type="text" placeholder="昵称">
+                    </div>
+                    <div class="item item1">
+                      <label for="email"></label>
+                      <span class="required">*</span>
+                      <input id="email" type="text" placeholder="邮箱">
+                    </div>
+                    <div class="item">
+                      <label for="url"></label>
+                      <input id="url" type="text" placeholder="网站">
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </section>
+        </section>
+      </li>
+      <li>
+        <section class="reviews">
+          <div class="reviews_item">
+            <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+            <h4>
+              <a href="">博客大全</a>
+              <i>2018/8/23</i>
+              <span>回复</span>
+            </h4>
+            <p>好软件，值得收藏！好软件，值得收藏！好软件，值得收藏！</p>
+          </div>
+          <div class="add_review">
+            <span class="reset">取消评论</span>
+            <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+            <div class="text">
+              <textarea name="" id="" cols="45" rows="3"></textarea>
+              <span class="send">提交</span>
+            </div>
+            <div class="user_detail clear">
+              <span>
+                <div class="item">
+                  <label for="author"></label>
+                  <span class="required">*</span>
+                  <input id="author" type="text" placeholder="昵称">
+                </div>
+                <div class="item item1">
+                  <label for="email"></label>
+                  <span class="required">*</span>
+                  <input id="email" type="text" placeholder="邮箱">
+                </div>
+                <div class="item">
+                  <label for="url"></label>
+                  <input id="url" type="text" placeholder="网站">
+                </div>
+              </span>
+            </div>
+          </div>
+        </section>
+      </li>
+    </ul>
+  </div>
   <div style="display:none" id="newsId">{{.Detail.ID}}</div>
   <script src="/vb/js/zepto.js"></script>
   <script src="/vb/js/common.js"></script>

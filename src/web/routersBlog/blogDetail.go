@@ -27,8 +27,16 @@ func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string
 	if detail.State != 1105 {
 		return mvc.Response{Err: errors.New("未找到数据!"), Code: 400}
 	}
+	var news_reviewSearchVo NewsReviewSearchVo
+	news_reviewSearchVo.NewId = detail.ID
+	reviewList, reviewErr := NewsReviewSelectList(10000, 1, news_reviewSearchVo)
+	if reviewErr != nil {
+
+	}
+
 	data := map[string]interface{}{
-		"Detail": detail,
+		"Detail":  detail,
+		"reviews": reviewList,
 	}
 	var helloView = mvc.View{
 		Name: "blog/pages/detail.html",
@@ -36,24 +44,3 @@ func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string
 	}
 	return helloView
 }
-
-// var errBadName = errors.New("bad name")
-// var badName = mvc.Response{Err: errBadName, Code: 400}
-
-// func (c *BlogListController) GetBy(name string) mvc.Result {
-// 	if name != "iris" {
-// 		return badName
-// 		// or
-// 		// GetBy(name string) (mvc.Result, error) {
-// 		//	return nil, errBadName
-// 		// }
-// 	}
-// 	// return mvc.Response{Text: "Hello " + name} OR:
-// 	return mvc.View{
-// 		Name: "blog/pages/index.html",
-// 		Data: map[string]interface{}{
-// 			"Title":     "Hello Page",
-// 			"MyMessage": "Welcome to my awesome website",
-// 		},
-// 	}
-// }
