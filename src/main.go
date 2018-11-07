@@ -37,6 +37,7 @@ func main() {
 	htmEng := iris.HTML("./web/views", ".html").Reload(true)
 	htmEng.AddFunc("RenderHtml", RenderHtml)
 	htmEng.AddFunc("DateFk", DateFk)
+	htmEng.AddFunc("DateFk1", DateFk1)
 	app.RegisterView(htmEng)
 
 	// redis初始化

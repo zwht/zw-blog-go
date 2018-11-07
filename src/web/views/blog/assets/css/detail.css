@@ -39,6 +39,7 @@
   border-radius: 25px;
 }
 .reviews_item p{ color: #000; }
+.reviews_item p a{ color: #099; margin-right: 6px;}
 .reviews_item:hover>h4 span{ display: block;}
 .reviews .add_review{ padding-left: 50px; position: relative;}
 .reviews .add_review .text{ padding-left: 0; height: 80px; }

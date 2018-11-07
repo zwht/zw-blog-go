@@ -22,11 +22,11 @@
   </section>
   <div class="review_box">
     <h3>3 条评论</h3>
-    <div class="add_review">
+    <div id='add_review' class="add_review">
       <div class="text">
         <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
-        <textarea name="" id="" cols="45" rows="3"></textarea>
-        <span class="send">提交</span>
+        <textarea name="" id="review_content" cols="45" rows="3"></textarea>
+        <span id="send_pl" class="send">提交</span>
       </div>
       <div class="user_detail clear">
         <span>
@@ -47,86 +47,60 @@
         </span>
       </div>
     </div>
-    <ul class="ul">
-      {{range .Reviews}}
-      <li>
+    <div class="ul">
+      {{range $i, $v := .Reviews}}
+      <section class="reviews">
+        <div class="reviews_item">
+          <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+          <h4>
+            <a href="">{{.UserName}}</a>
+            <i>{{.CreateTime | DateFk1}}</i>
+            <span data={{.ID}} class="reply">回复</span>
+          </h4>
+          <p>{{.Content | RenderHtml}}</p>
+        </div>
+        {{range .Children}}
         <section class="reviews">
           <div class="reviews_item">
             <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
             <h4>
               <a href="">{{.UserName}}</a>
-              <i>{{.CreateTime | DateFk}}</i>
-              <span>回复</span>
+              <i>{{.CreateTime | DateFk1}}</i>
+              <span data={{$v.ID}} user-name={{.UserName}} class="reply">回复</span>
             </h4>
-            <p>{{.Content}}</p>
+            <p>{{.Content | RenderHtml}}</p>
           </div>
-
         </section>
-      </li>
+        {{end}}
+      </section>
       {{end}}
-      <li>
-        <section class="reviews">
-          <div class="reviews_item">
-            <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
-            <h4>
-              <a href="">博客大全</a>
-              <i>2018/8/23</i>
-              <span>回复</span>
-            </h4>
-            <p>好软件，值得收藏！好软件，值得收藏！好软件，值得收藏！</p>
+    </div>
+    <div id="reply_add_review" class="add_review">
+      <span id='reset' class="reset">取消评论</span>
+      <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+      <div class="text">
+        <textarea name="" id="reply_content" cols="45" rows="3"></textarea>
+        <span id="send_reply" class="send">提交</span>
+      </div>
+      <div class="user_detail clear">
+        <span>
+          <div class="item">
+            <label for="reply_author"></label>
+            <span class="required">*</span>
+            <input id="reply_author" type="text" placeholder="昵称">
           </div>
-          <section class="reviews">
-            <div class="reviews_item">
-              <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
-              <h4>
-                <a href="">博客大全</a>
-                <i>2018/8/23</i>
-                <span>回复</span>
-              </h4>
-              <p>kjsjdsj，可节省的肯定时代精神</p>
-            </div>
-          </section>
-          <section class="reviews">
-            <div class="reviews_item">
-              <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
-              <h4>
-                <a href="">博客大全</a>
-                <i>2018/8/23</i>
-                <span>回复</span>
-              </h4>
-              <p>sdd可节省大家的时间，世界顶级！</p>
-            </div>
-            <div class="add_review">
-              <span class="reset">取消评论</span>
-              <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
-              <div class="text">
-                <textarea name="" id="" cols="45" rows="3"></textarea>
-                <span class="send">提交</span>
-              </div>
-              <div class="user_detail clear">
-                <span>
-                  <div class="item">
-                    <label for="author"></label>
-                    <span class="required">*</span>
-                    <input id="author" type="text" placeholder="昵称">
-                  </div>
-                  <div class="item item1">
-                    <label for="email"></label>
-                    <span class="required">*</span>
-                    <input id="email" type="text" placeholder="邮箱">
-                  </div>
-                  <div class="item">
-                    <label for="url"></label>
-                    <input id="url" type="text" placeholder="网站">
-                  </div>
-                </span>
-              </div>
-            </div>
-          </section>
-        </section>
-      </li>
-
-    </ul>
+          <div class="item item1">
+            <label for="reply_email"></label>
+            <span class="required">*</span>
+            <input id="reply_email" type="text" placeholder="邮箱">
+          </div>
+          <div class="item">
+            <label for="reply_url"></label>
+            <input id="reply_url" type="text" placeholder="网站">
+          </div>
+        </span>
+      </div>
+    </div>
   </div>
   <div style="display:none" id="newsId">{{.Detail.ID}}</div>
   <script src="/vb/js/zepto.js"></script>
@@ -138,20 +112,54 @@
         $.get('/v1/news/updateSum?id=' + $('#newsId').text(), function (response) {
         })
       }, 1000)
-      $('.send').click(function () {
+      //发送评论
+      $('#send_pl').click(function () {
         $.post('/v1/news_review/add', JSON.stringify({
           newId: $('#newsId').text(),
-          content: "88sjdjkksd",
-          email: '333@qq.com',
-          userName: 'hdssdj',
+          content: $("#author").val(),
+          email: $("#email").val(),
+          userName: $("#review_content").val(),
           parentId: '',
-          url: '8s8d.dhdh'
+          url: $("#url").val()
         }), function (data) {
-          debugger
+          window.location.reload()
         })
-
       })
 
+      // 回复
+      var reply_add_review = $('#reply_add_review'),
+        add_review = $('#add_review'),
+        replyUser = '',
+        replyId = '';
+
+      reply_add_review.hide();
+      $('.reply').click(function (ev) {
+        add_review.hide();
+        var target = $(ev.target);
+        target.parents('.reviews_item').after(reply_add_review);
+        reply_add_review.show();
+        replyUser = target.attr('user-name') || '';
+        replyId = target.attr('data') || ''
+      })
+      // 隐藏回复评论
+      $('#reset').click(function () {
+        add_review.show();
+        reply_add_review.hide();
+      })
+
+      //发送回复
+      $('#send_reply').click(function () {
+        $.post('/v1/news_review/add', JSON.stringify({
+          newId: $('#newsId').text(),
+          content: replyUser ? "<a>@" + replyUser + "</a>" + $("#reply_author").val() : $("#reply_author").val(),
+          email: $("#reply_email").val(),
+          userName: $("#reply_content").val(),
+          parentId: replyId,
+          url: $("#reply_url").val()
+        }), function (data) {
+          window.location.reload()
+        })
+      })
     })
   </script>
 </body>

@@ -4,13 +4,18 @@ import (
 	. "../../datamodels"
 	. "../../services"
 	. "../../tools/http"
+	"github.com/satori/go.uuid"
 	"strconv"
+	"time"
 )
 
 func NewsReviewCreate(ctx *Context) {
 	var news_review NewsReview
 	ctx.ReadJSON(&news_review)
 	news_review.State = 1201
+	id := uuid.Must(uuid.NewV4()).String()
+	news_review.ID = id
+	news_review.CreateTime = time.Now()
 
 	ip := ctx.RemoteAddr()
 	if ip == "::1" {
@@ -28,6 +33,7 @@ func NewsReviewCreate(ctx *Context) {
 	} else {
 		result.Code = 200
 		result.Msg = "成功保存news_review信息"
+		result.Data = news_review
 	}
 
 	ctx.JSON(result)

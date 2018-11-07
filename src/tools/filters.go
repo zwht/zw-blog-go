@@ -2,6 +2,7 @@ package tools
 
 import (
 	"html/template"
+	"time"
 )
 
 //截取字符串 start 起点下标 length 需要截取的长度
@@ -37,4 +38,8 @@ func RenderHtml(content string) template.HTML {
 func DateFk(str string) string {
 	// str = "2018-10-30T23:18:11.673298Z"
 	return Substr(str, 0, 10) + " " + Substr(str, 11, 8)
+}
+func DateFk1(str time.Time) string {
+	// str = "2018-10-30T23:18:11.673298Z"
+	return Substr(str.String(), 0, 10) + " " + Substr(str.String(), 11, 8)
 }
