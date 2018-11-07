@@ -15,10 +15,11 @@
   color: #fff; line-height: 50px; cursor: pointer; opacity: 0.8; 
   box-shadow: 0 2px 6px rgba(0,0,0,.3); 
 }
+.add_review .text .disabled{ background: #bbb; cursor: not-allowed;}
 .add_review .send:hover{ opacity: 1;}
 .add_review textarea{ width: 100%; min-height: 90px; border: none; padding: 10px;}
 .user_detail{ box-shadow: 0 2px 6px rgba(0,0,0,.2); margin-left: 100px;
-  margin-top: 15px; border-radius: 2px; width: 600px;}
+  margin-top: 15px; border-radius: 2px; width: 600px; position: relative;}
 .user_detail .item{ width: 200px; float: left; position: relative; }
 .user_detail .item1{ border-right: 1px solid #ededed; border-left: 1px solid #ededed;}
 .user_detail input{ width: 100%; border:none; height: 38px; padding: 0 15px 0 10px;}
@@ -51,4 +52,5 @@ left: 0; border-radius: 2px 0 0 2px;}
 .reviews .reset{ position: absolute; right: 0; top: -25px; color: #099;
   cursor: pointer;
 }
+.errMsg{ color: red; position: absolute; top:40px; left: 0; display: none;}
 .reviews .reset:hover{ color: darkcyan;}

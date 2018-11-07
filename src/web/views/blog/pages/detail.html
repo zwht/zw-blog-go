@@ -29,6 +29,7 @@
         <span id="send_pl" class="send">提交</span>
       </div>
       <div class="user_detail clear">
+        <div id="errMsg" class="errMsg">请输入内容</div>
         <span>
           <div class="item">
             <label for="author"></label>
@@ -83,6 +84,7 @@
         <span id="send_reply" class="send">提交</span>
       </div>
       <div class="user_detail clear">
+        <div id="errMsg1" class="errMsg">请输入内容</div>
         <span>
           <div class="item">
             <label for="reply_author"></label>
@@ -107,22 +109,62 @@
   <script src="/vb/js/common.js"></script>
   <script src="/vb/js/prism.js"></script>
   <script>
+    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
     $(function () {
       setTimeout(function () {
         $.get('/v1/news/updateSum?id=' + $('#newsId').text(), function (response) {
         })
       }, 1000)
+      $(document).click(function () {
+        $(".errMsg").hide()
+      })
+      $('textarea').keyup(function (ev) {
+        var curLength = $(ev.target).val().trim().length;
+        if (curLength > 140) {
+          var num = $(ev.target).val().trim().substr(0, 240);
+          $(ev.target).val(num);
+        }
+      })
       //发送评论
-      $('#send_pl').click(function () {
+      $('#send_pl').click(function (ev) {
+        ev.stopPropagation();
+        var errMsg = $('#errMsg')
+        if (!$("#author").val()) {
+          errMsg.show();
+          errMsg.text('请输入昵称！')
+          return
+        }
+
+        if (!$("#email").val() || !reg.test($("#email").val())) {
+          errMsg.show();
+          errMsg.text('请输入正确邮箱！')
+          return
+        }
+        if (!$("#review_content").val()) {
+          errMsg.show();
+          errMsg.text('请输入内容！')
+          return
+        }
+        $('#send_pl').addClass("disabled")
         $.post('/v1/news_review/add', JSON.stringify({
           newId: $('#newsId').text(),
-          content: $("#author").val(),
+          content: $("#review_content").val(),
           email: $("#email").val(),
-          userName: $("#review_content").val(),
+          userName: $("#author").val(),
           parentId: '',
           url: $("#url").val()
         }), function (data) {
-          window.location.reload()
+          setCookie('userName', $("#author").val(), 5)
+          setCookie('email', $("#email").val(), 5)
+          setTimeout(function () {
+            $("#review_content").val('')
+            $("#email").val('')
+            $("#author").val('')
+            $("#url").val('')
+            $('#send_pl').removeClass("disabled")
+            // window.location.reload()
+          }, 2000)
+
         })
       })
 
@@ -148,19 +190,66 @@
       })
 
       //发送回复
-      $('#send_reply').click(function () {
+      $('#send_reply').click(function (ev) {
+        ev.stopPropagation();
+        var errMsg = $('#errMsg1')
+        if (!$("#reply_author").val()) {
+          errMsg.show();
+          errMsg.text('请输入昵称！')
+          return
+        }
+        if (!$("#reply_email").val() || !reg.test($("#reply_email").val())) {
+          errMsg.show();
+          errMsg.text('请输入正确邮箱！')
+          return
+        }
+        if (!$("#reply_content").val()) {
+          errMsg.show();
+          errMsg.text('请输入内容！')
+          return
+        }
+        $('#send_reply').addClass("disabled")
         $.post('/v1/news_review/add', JSON.stringify({
           newId: $('#newsId').text(),
-          content: replyUser ? "<a>@" + replyUser + "</a>" + $("#reply_author").val() : $("#reply_author").val(),
+          content: replyUser ? "<a>@" + replyUser + "</a>" + $("#reply_content").val() : $("#reply_content").val(),
           email: $("#reply_email").val(),
-          userName: $("#reply_content").val(),
+          userName: $("#reply_author").val(),
           parentId: replyId,
           url: $("#reply_url").val()
         }), function (data) {
-          window.location.reload()
+          setCookie('userName', $("#reply_author").val(), 5)
+          setCookie('email', $("#reply_email").val(), 5)
+          setTimeout(function () {
+            $("#reply_content").val('')
+            $("#reply_email").val('')
+            $("#reply_author").val('')
+            $("#reply_url").val('')
+            $('#send_reply').removeClass("disabled")
+            add_review.show();
+            reply_add_review.hide();
+            // window.location.reload()
+          }, 2000)
         })
       })
     })
+    function setCookie(c_name, value, expiredays) {
+      var exdate = new Date()
+      exdate.setDate(exdate.getDate() + expiredays)
+      document.cookie = c_name + "=" + escape(value) +
+        ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
+    }
+    function getCookie(c_name) {
+      if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=")
+        if (c_start != -1) {
+          c_start = c_start + c_name.length + 1
+          c_end = document.cookie.indexOf(";", c_start)
+          if (c_end == -1) c_end = document.cookie.length
+          return unescape(document.cookie.substring(c_start, c_end))
+        }
+      }
+      return ""
+    }
   </script>
 </body>
 

@@ -34,6 +34,7 @@ func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string
 	}
 	var news_reviewSearchVo NewsReviewSearchVo
 	news_reviewSearchVo.NewId = detail.ID
+	news_reviewSearchVo.State = 1203
 	reviewList, reviewErr := NewsReviewSelectList(10000, 1, news_reviewSearchVo)
 	if reviewErr != nil {
 	}

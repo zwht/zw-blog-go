@@ -25,7 +25,7 @@ type NewsReviewSearchVo struct {
 	ID      string `column:"and,id,="`
 	NewId   string `column:"and,new_id,="`
 	Content string `column:"and,content,like"`
-	State   string `column:"and,state,="`
+	State   int    `column:"and,state,="`
 	Ip      string `column:"and,ip,="`
 	Email   string `column:"and,email,="`
 	// StartTime   time.Time `column:"and,createTime,between"`
