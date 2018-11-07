@@ -10,6 +10,13 @@ import (
 func NewsReviewCreate(ctx *Context) {
 	var news_review NewsReview
 	ctx.ReadJSON(&news_review)
+	news_review.State = 1201
+
+	ip := ctx.RemoteAddr()
+	if ip == "::1" {
+		ip = ""
+	}
+	news_review.Ip = ip
 
 	err := news_review.NewsReviewInsert()
 

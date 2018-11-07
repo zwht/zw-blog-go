@@ -12,12 +12,11 @@ func NewsReviewRouter(app *iris.Application) {
 		ctx.Next()
 	})
 	{
-		routes.Post("/add", Permission(NewsReviewCreate, "1001"))
+		routes.Post("/add", Permission(NewsReviewCreate, ""))
 		routes.Post("/update", Permission(NewsReviewUpdate, "1001"))
 		routes.Post("/updateState", Permission(NewsReviewUpdateState, "1001"))
 		routes.Get("/del/{id:string}", Permission(NewsReviewDeleteById, "1001"))
-		routes.Get("/getById/{id:string}", Permission(NewsReviewGetById, "1001"))
+		routes.Get("/getById/{id:string}", Permission(NewsReviewGetById, ""))
 		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(NewsReviewGetList, ""))
 	}
-
 }

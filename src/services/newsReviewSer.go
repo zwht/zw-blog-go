@@ -5,18 +5,19 @@ import (
 	"fmt"
 	"github.com/satori/go.uuid"
 	"strconv"
+	"time"
 )
 
 type NewsReview struct {
 	ID         string `json:"id"`
-	NewId      string `json:"new_id"`
+	NewId      string `json:"newId"`
 	Content    string `json:"content"`
 	Ip         string `json:"ip"`
-	CreateTime string `json:"create_time"`
-	ParentId   string `json:"parent_id"`
+	CreateTime string `json:"createTime"`
+	ParentId   string `json:"parentId"`
 	Email      string `json:"email"`
-	UserId     string `json:"user_id"`
-	UserName   string `json:"user_name"`
+	UserId     string `json:"userId"`
+	UserName   string `json:"userName"`
 	Url        string `json:"url"`
 	Img        string `json:"img"`
 	State      int    `json:"state"`
@@ -34,7 +35,7 @@ type NewsReviewSearchVo struct {
 
 func (news_review *NewsReview) NewsReviewInsert() (err error) {
 	sql := "insert into news_review(id,new_id,content,create_time,ip,user_id,parent_id,email,user_name,url,img,state) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news_review.NewId, news_review.Content, news_review.CreateTime, news_review.Ip,
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news_review.NewId, news_review.Content, time.Now(), news_review.Ip,
 		news_review.UserId, news_review.ParentId, news_review.Email, news_review.UserName, news_review.Url, news_review.Img, news_review.State)
 	return
 }

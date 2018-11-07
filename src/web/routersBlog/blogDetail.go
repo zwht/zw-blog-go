@@ -31,12 +31,11 @@ func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string
 	news_reviewSearchVo.NewId = detail.ID
 	reviewList, reviewErr := NewsReviewSelectList(10000, 1, news_reviewSearchVo)
 	if reviewErr != nil {
-
 	}
 
 	data := map[string]interface{}{
 		"Detail":  detail,
-		"reviews": reviewList,
+		"Reviews": reviewList,
 	}
 	var helloView = mvc.View{
 		Name: "blog/pages/detail.html",
