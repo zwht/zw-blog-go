@@ -60,6 +60,7 @@ func NewsReviewUpdate(ctx *Context) {
 func NewsReviewUpdateState(ctx *Context) {
 	result := Result{}
 	id := ctx.FormValue("id")
+	newsId := ctx.FormValue("newsId")
 	state, _ := strconv.Atoi(ctx.FormValue("state"))
 	var newsReview NewsReview
 	newsReview.ID = id
@@ -69,6 +70,12 @@ func NewsReviewUpdateState(ctx *Context) {
 		result.Code = 0
 		result.Msg = err1.Error()
 	} else {
+		if state != 1203 {
+			var news News
+			news.ID = newsId
+			news.ReviewSum = 1
+			news.NewsUpdateReviewSum()
+		}
 		result.Code = 200
 		result.Msg = "修改状态成功"
 	}

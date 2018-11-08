@@ -63,8 +63,8 @@ type NewsSearchVo struct {
 }
 
 func (news *News) NewsInsert() (err error) {
-	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id,see_sum,source) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId, news.SeeSum, news.Source)
+	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id,see_sum,source) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)"
+	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId, news.SeeSum, news.Source, 0)
 	return
 }
 
@@ -89,6 +89,11 @@ func (news *News) NewsUpdateState() (err error) {
 	_, err = Db.Exec(sql, news.State, news.ID)
 	return
 }
+func (news *News) NewsUpdateReviewSum() (err error) {
+	sql := "update news set review_sum=review_sum+$1 where id=$2"
+	_, err = Db.Exec(sql, news.ReviewSum, news.ID)
+	return
+}
 
 func NewsSelect(id string) (news News, err error) {
 	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id,see_sum,source from news where id=$1"
@@ -97,9 +102,9 @@ func NewsSelect(id string) (news News, err error) {
 	return
 }
 func NewsSelectByUrl(urlEn string, time1 string, time2 string) (news News, err error) {
-	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id,see_sum, source from news where url_en=$1 and create_time >= $2 and create_time < $3"
+	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id,see_sum,source,review_sum from news where url_en=$1 and create_time >= $2 and create_time < $3"
 	news = News{}
-	err = Db.QueryRow(sql, urlEn, time1, time2).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.AuthorId, &news.SeeSum, &news.Source)
+	err = Db.QueryRow(sql, urlEn, time1, time2).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.AuthorId, &news.SeeSum, &news.Source, &news.ReviewSum)
 	return
 }
 func NewsSelectCount(search NewsSearchVo) (count int, err error) {
@@ -110,7 +115,7 @@ func NewsSelectCount(search NewsSearchVo) (count int, err error) {
 }
 func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []NewsList, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select news.id,news.url_en,news.title,news.create_time,news.author,news.img,news.state,news.abstract,news.labels,news_type.name,news.source from news join news_type on news.type_id = news_type.id "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select news.id,news.url_en,news.title,news.create_time,news.author,news.img,news.state,news.abstract,news.labels,news_type.name,news.source,news.review_sum from news join news_type on news.type_id = news_type.id "+whereStr+" limit ? offset ?", 0)
 	println(sql)
 	newss = []NewsList{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
@@ -122,7 +127,7 @@ func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []New
 	for rows.Next() {
 		rows.Columns()
 		var news NewsList
-		err = rows.Scan(&news.ID, &news.UrlEn, &news.Title, &news.CreateTime, &news.Author, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.TypeName, &news.Source)
+		err = rows.Scan(&news.ID, &news.UrlEn, &news.Title, &news.CreateTime, &news.Author, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.TypeName, &news.Source, &news.ReviewSum)
 		if err != nil {
 			panic(err.Error)
 		}
@@ -132,7 +137,7 @@ func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []New
 }
 func NewsSelectHotList(typeId string) (newss []NewsList, err error) {
 	newss = []NewsList{}
-	rows, err := Db.Query("select news.url_en,news.title,news.create_time,news.author,news.type_id,news.state,news.source from news join news_type on news.type_id = news_type.id where news.type_id = $1 limit 10 offset 0", typeId)
+	rows, err := Db.Query("select news.url_en,news.title,news.create_time,news.author,news.type_id,news.state,news.source,news.review_sum from news join news_type on news.type_id = news_type.id where news.type_id = $1 limit 10 offset 0", typeId)
 	if err != nil {
 		panic(err.Error)
 	}
@@ -140,7 +145,7 @@ func NewsSelectHotList(typeId string) (newss []NewsList, err error) {
 	for rows.Next() {
 		rows.Columns()
 		var news NewsList
-		err = rows.Scan(&news.UrlEn, &news.Title, &news.CreateTime, &news.Author, &news.TypeId, &news.State, &news.Source)
+		err = rows.Scan(&news.UrlEn, &news.Title, &news.CreateTime, &news.Author, &news.TypeId, &news.State, &news.Source, &news.ReviewSum)
 		if err != nil {
 			panic(err.Error)
 		}
