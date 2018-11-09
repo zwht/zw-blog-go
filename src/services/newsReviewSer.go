@@ -22,12 +22,13 @@ type NewsReview struct {
 	State      int       `json:"state"`
 }
 type NewsReviewSearchVo struct {
-	ID      string `column:"and,id,="`
-	NewId   string `column:"and,new_id,="`
-	Content string `column:"and,content,like"`
-	State   int    `column:"and,state,="`
-	Ip      string `column:"and,ip,="`
-	Email   string `column:"and,email,="`
+	ID       string `column:"and,id,="`
+	NewId    string `column:"and,new_id,="`
+	Content  string `column:"and,content,like"`
+	State    int    `column:"and,state,="`
+	Ip       string `column:"and,ip,="`
+	Email    string `column:"and,email,="`
+	UserName string `column:"and,user_name,="`
 	// StartTime   time.Time `column:"and,createTime,between"`
 	// EndTime     time.Time `column:"and,endTime,between"`
 }

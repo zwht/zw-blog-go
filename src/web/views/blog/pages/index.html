@@ -10,7 +10,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="/vb/css/common.css">
   <link rel="stylesheet" href="/vb/css/index.css">
-  <script src="/vb/js/common.js"></script>
+  <link rel="stylesheet" href="/vb/css/pagination.min.css">
 
 <body>
   <div class="content clear">
@@ -30,6 +30,36 @@
     <!-- <div class="right">
       dff
     </div> -->
+    <div id="pagination">
+
+    </div>
   </div>
+  <script src="/vb/js/common.js"></script>
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="/vb/js/pagination.min.js"></script>
+  <script>
+    $(function () {
+      var count = {{.Count}}
+      var pageSize={{.PageSize}}
+      var arr = [];
+      for (var i = 0; i < count; i++) {
+        arr.push(i)
+      }
+      var key=false;
+      $('#pagination').pagination({
+        dataSource: arr,
+        pageSize: pageSize,
+        showGoInput: true,
+        showGoButton: true,
+        pageNumber: {{.PageNum}},
+        callback: function (data, pagination) {
+          if (key) {
+            location.href = '/?pageSzie='+pageSize+'&pageNumber=' + (parseInt(data) + 1)
+          }
+          key = true;
+        }
+      })
+    })
+  </script>
 </body>
 </html>

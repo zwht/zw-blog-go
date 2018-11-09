@@ -2,7 +2,9 @@ package routersBlog
 
 import (
 	. "../../services"
+	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
+	"strconv"
 	"strings"
 )
 
@@ -29,11 +31,26 @@ type ListNews struct {
 
 type BlogIndexController struct{}
 
-func (c *BlogIndexController) Get() mvc.Result {
+func (c *BlogIndexController) Get(ctx iris.Context) mvc.Result {
+	pageSzie, _ := strconv.Atoi(ctx.FormValue("pageSzie"))
+	pageNumber, _ := strconv.Atoi(ctx.FormValue("pageNumber"))
+	state, _ := strconv.Atoi(ctx.FormValue("state"))
+	typeId := ctx.FormValue("typeId")
+	if pageSzie == 0 {
+		pageSzie = 10
+	}
+	if pageNumber == 0 {
+		pageNumber = 1
+	}
+	if state == 0 {
+		state = 1105
+	}
 	var newsSearchVo NewsSearchVo
-	newsSearchVo.State = 1105
+	newsSearchVo.State = state
+	newsSearchVo.TypeId = typeId
 	count, _ := NewsSelectCount(newsSearchVo)
-	newss, _ := NewsSelectList(10, 1, newsSearchVo)
+	newss, _ := NewsSelectList(pageSzie, pageNumber, newsSearchVo)
+
 	var out []interface{}
 	for i := 0; i < len(newss); i++ {
 		var listNews ListNews
@@ -51,8 +68,8 @@ func (c *BlogIndexController) Get() mvc.Result {
 		"Title":    "列表",
 		"List":     out,
 		"Count":    count,
-		"PageSize": 10,
-		"PageNum":  1,
+		"PageSize": pageSzie,
+		"PageNum":  pageNumber,
 	}
 	var helloView = mvc.View{
 		Name: "blog/pages/index.html",

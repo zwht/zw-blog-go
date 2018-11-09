@@ -19,6 +19,8 @@ type TreeStruct struct {
 func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string, urlEn string) mvc.Result {
 	month1, _ := strconv.Atoi(month)
 	year1, _ := strconv.Atoi(year)
+	email := ctx.GetCookie("email")
+	userName := ctx.GetCookie("userName")
 	if month1 == 12 {
 		month1 = 1
 		year1 = year1 + 1
@@ -29,18 +31,32 @@ func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string
 	if err != nil {
 		return mvc.Response{Err: errors.New("未找到数据"), Code: 400}
 	}
-	if detail.State != 1105 {
-		return mvc.Response{Err: errors.New("未找到数据!"), Code: 400}
-	}
+	// if detail.State != 1105 {
+	// 	return mvc.Response{Err: errors.New("未找到数据!"), Code: 400}
+	// }
 	var news_reviewSearchVo NewsReviewSearchVo
 	news_reviewSearchVo.NewId = detail.ID
 	news_reviewSearchVo.State = 1203
 	reviewList, reviewErr := NewsReviewSelectList(10000, 1, news_reviewSearchVo)
 	if reviewErr != nil {
 	}
+	var newNew = []NewsReview{}
+	if email != "" && userName != "" {
+		var news_reviewSearchVo1 NewsReviewSearchVo
+		news_reviewSearchVo1.NewId = detail.ID
+		news_reviewSearchVo1.State = 1201
+		news_reviewSearchVo1.Email = email
+		news_reviewSearchVo1.UserName = userName
+		reviewList1, reviewErr1 := NewsReviewSelectList(10, 1, news_reviewSearchVo1)
+		if reviewErr1 != nil {
+		}
+		newNew = append(reviewList1, reviewList...)
+	} else {
+		newNew = reviewList
+	}
 
 	newReviewList := []TreeStruct{}
-	for _, v := range reviewList {
+	for _, v := range newNew {
 		var item TreeStruct
 		item.ID = v.ID
 		item.NewId = v.NewId

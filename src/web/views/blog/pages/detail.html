@@ -24,7 +24,7 @@
     <h3>{{.Detail.ReviewSum}} 条评论</h3>
     <div id='add_review' class="add_review">
       <div class="text">
-        <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+        <img src="/vb/img/none.png" alt="">
         <textarea name="" id="review_content" cols="45" rows="3"></textarea>
         <span id="send_pl" class="send">提交</span>
       </div>
@@ -34,16 +34,16 @@
           <div class="item">
             <label for="author"></label>
             <span class="required">*</span>
-            <input id="author" type="text" placeholder="昵称">
+            <input class="author" id="author" type="text" placeholder="昵称">
           </div>
           <div class="item item1">
             <label for="email"></label>
             <span class="required">*</span>
-            <input id="email" type="text" placeholder="邮箱">
+            <input class="email" id="email" type="text" placeholder="邮箱">
           </div>
           <div class="item">
             <label for="url"></label>
-            <input id="url" type="text" placeholder="网站">
+            <input class="url" id="url" type="text" placeholder="网站">
           </div>
         </span>
       </div>
@@ -52,22 +52,30 @@
       {{range $i, $v := .Reviews}}
       <section class="reviews">
         <div class="reviews_item">
-          <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+          <img src="/vb/img/none.png" alt="">
           <h4>
             <a href="">{{.UserName}}</a>
             <i>{{.CreateTime | DateFk1}}</i>
+            {{if eq .State 1201}}
+            <span class="sh">你的评论审核中...</span>
+            {{else}}
             <span data={{.ID}} class="reply">回复</span>
+            {{end}}
           </h4>
           <p>{{.Content | RenderHtml}}</p>
         </div>
         {{range .Children}}
         <section class="reviews">
           <div class="reviews_item">
-            <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+            <img src="/vb/img/none.png" alt="">
             <h4>
               <a href="">{{.UserName}}</a>
               <i>{{.CreateTime | DateFk1}}</i>
+              {{if eq .State 1201}}
+              <span class="sh">你的评论审核中...</span>
+              {{else}}
               <span data={{$v.ID}} user-name={{.UserName}} class="reply">回复</span>
+              {{end}}
             </h4>
             <p>{{.Content | RenderHtml}}</p>
           </div>
@@ -78,7 +86,7 @@
     </div>
     <div id="reply_add_review" class="add_review">
       <span id='reset' class="reset">取消评论</span>
-      <img src="https://gravatar.com/avatar/?d=mm&s=100" alt="">
+      <img src="/vb/img/none.png" alt="">
       <div class="text">
         <textarea name="" id="reply_content" cols="45" rows="3"></textarea>
         <span id="send_reply" class="send">提交</span>
@@ -89,16 +97,16 @@
           <div class="item">
             <label for="reply_author"></label>
             <span class="required">*</span>
-            <input id="reply_author" type="text" placeholder="昵称">
+            <input class="author" id="reply_author" type="text" placeholder="昵称">
           </div>
           <div class="item item1">
             <label for="reply_email"></label>
             <span class="required">*</span>
-            <input id="reply_email" type="text" placeholder="邮箱">
+            <input class="email" id="reply_email" type="text" placeholder="邮箱">
           </div>
           <div class="item">
             <label for="reply_url"></label>
-            <input id="reply_url" type="text" placeholder="网站">
+            <input class="url" id="reply_url" type="text" placeholder="网站">
           </div>
         </span>
       </div>
@@ -118,13 +126,9 @@
       $(document).click(function () {
         $(".errMsg").hide()
       })
-      $('textarea').keyup(function (ev) {
-        var curLength = $(ev.target).val().trim().length;
-        if (curLength > 140) {
-          var num = $(ev.target).val().trim().substr(0, 240);
-          $(ev.target).val(num);
-        }
-      })
+      init();
+      inputMaxSet();
+
       //发送评论
       $('#send_pl').click(function (ev) {
         ev.stopPropagation();
@@ -156,13 +160,11 @@
         }), function (data) {
           setCookie('userName', $("#author").val(), 5)
           setCookie('email', $("#email").val(), 5)
+          setCookie('url', $("#url").val(), 5)
           setTimeout(function () {
             $("#review_content").val('')
-            $("#email").val('')
-            $("#author").val('')
-            $("#url").val('')
             $('#send_pl').removeClass("disabled")
-            // window.location.reload()
+            window.location.reload()
           }, 2000)
 
         })
@@ -177,7 +179,7 @@
       reply_add_review.hide();
       $('.reply').click(function (ev) {
         add_review.hide();
-        var target = $(ev.target);
+        var target = $(ev.target).parents('.reply');
         target.parents('.reviews_item').after(reply_add_review);
         reply_add_review.show();
         replyUser = target.attr('user-name') || '';
@@ -219,15 +221,14 @@
         }), function (data) {
           setCookie('userName', $("#reply_author").val(), 5)
           setCookie('email', $("#reply_email").val(), 5)
+          setCookie('url', $("#reply_url").val(), 5)
           setTimeout(function () {
             $("#reply_content").val('')
-            $("#reply_email").val('')
-            $("#reply_author").val('')
-            $("#reply_url").val('')
+
             $('#send_reply').removeClass("disabled")
             add_review.show();
             reply_add_review.hide();
-            // window.location.reload()
+            window.location.reload()
           }, 2000)
         })
       })
@@ -249,6 +250,44 @@
         }
       }
       return ""
+    }
+    function init() {
+      $("#reply_email").val(getCookie('email'))
+      $("#reply_author").val(getCookie('userName'))
+      $("#reply_url").val(getCookie('url'))
+      $("#email").val(getCookie('email'))
+      $("#author").val(getCookie('userName'))
+      $("#url").val(getCookie('url'))
+    }
+    function inputMaxSet() {
+      $('textarea').keyup(function (ev) {
+        var curLength = $(ev.target).val().trim().length;
+        if (curLength > 240) {
+          var num = $(ev.target).val().trim().substr(0, 240);
+          $(ev.target).val(num);
+        }
+      })
+      $('.author').keyup(function (ev) {
+        var curLength = $(ev.target).val().trim().length;
+        if (curLength > 10) {
+          var num = $(ev.target).val().trim().substr(0, 10);
+          $(ev.target).val(num);
+        }
+      })
+      $('.email').keyup(function (ev) {
+        var curLength = $(ev.target).val().trim().length;
+        if (curLength > 30) {
+          var num = $(ev.target).val().trim().substr(0, 30);
+          $(ev.target).val(num);
+        }
+      })
+      $('.url').keyup(function (ev) {
+        var curLength = $(ev.target).val().trim().length;
+        if (curLength > 60) {
+          var num = $(ev.target).val().trim().substr(0, 60);
+          $(ev.target).val(num);
+        }
+      })
     }
   </script>
 </body>
