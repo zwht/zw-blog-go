@@ -34,7 +34,7 @@ func main() {
 	app.StaticWeb("/img/", "./web/views/img")
 	app.StaticWeb("/vb/", "./web/views/blog/assets")
 	//html模板配置
-	htmEng := iris.HTML("./web/views", ".html").Reload(true)
+	htmEng := iris.HTML("./web/views/", ".html").Reload(true)
 	htmEng.AddFunc("RenderHtml", RenderHtml)
 	htmEng.AddFunc("DateFk", DateFk)
 	htmEng.AddFunc("DateFk1", DateFk1)
