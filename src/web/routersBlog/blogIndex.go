@@ -16,8 +16,9 @@ type ListNews struct {
 	CreateTime  string `json:"createTime"`
 	Author      string `json:"author"`
 	TypeId      string `json:"typeId"`
+	TypeName    string `json:"typeName"`
 	UserGroupId string `json:"userGroupId"`
-	SeeSum      string `json:"seeSum"`
+	SeeSum      int    `json:"seeSum"`
 	Index       string `json:"index"`
 	Img         string `json:"img"`
 	IsHot       int    `json:"isHot"`
@@ -37,7 +38,7 @@ func (c *BlogIndexController) Get(ctx iris.Context) mvc.Result {
 	state, _ := strconv.Atoi(ctx.FormValue("state"))
 	typeId := ctx.FormValue("typeId")
 	if pageSzie == 0 {
-		pageSzie = 10
+		pageSzie = 20
 	}
 	if pageNumber == 0 {
 		pageNumber = 1
@@ -59,7 +60,10 @@ func (c *BlogIndexController) Get(ctx iris.Context) mvc.Result {
 		listNews.CreateTime = newss[i].CreateTime
 		listNews.UrlEn = newss[i].UrlEn
 		listNews.TypeId = newss[i].TypeId
+		listNews.TypeName = newss[i].TypeName
 		listNews.Abstract = newss[i].Abstract
+		listNews.ReviewSum = newss[i].ReviewSum
+		listNews.SeeSum = newss[i].SeeSum
 		listNews.Year = strings.Split(newss[i].CreateTime, "-")[0]
 		listNews.Month = strings.Split(newss[i].CreateTime, "-")[1]
 		out = append(out, listNews)

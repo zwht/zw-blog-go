@@ -115,7 +115,7 @@ func NewsSelectCount(search NewsSearchVo) (count int, err error) {
 }
 func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []NewsList, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select news.id,news.url_en,news.title,news.create_time,news.author,news.img,news.state,news.abstract,news.labels,news_type.name,news.source,news.review_sum from news join news_type on news.type_id = news_type.id "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select news.id,news.url_en,news.title,news.create_time,news.author,news.img,news.state,news.abstract,news.labels,news_type.name,news.source,news.review_sum,news.see_sum from news join news_type on news.type_id = news_type.id "+whereStr+" limit ? offset ?", 0)
 	println(sql)
 	newss = []NewsList{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
@@ -127,7 +127,7 @@ func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []New
 	for rows.Next() {
 		rows.Columns()
 		var news NewsList
-		err = rows.Scan(&news.ID, &news.UrlEn, &news.Title, &news.CreateTime, &news.Author, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.TypeName, &news.Source, &news.ReviewSum)
+		err = rows.Scan(&news.ID, &news.UrlEn, &news.Title, &news.CreateTime, &news.Author, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.TypeName, &news.Source, &news.ReviewSum, &news.SeeSum)
 		if err != nil {
 			panic(err.Error)
 		}

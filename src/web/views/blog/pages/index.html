@@ -19,10 +19,18 @@
       <ul>
         {{range $key, $value :=.List}}
         <li>
-          <a href="/detail/{{$value.Year}}/{{$value.Month}}/{{$value.UrlEn}}" title="{{$value.Title}}" target="_blank">
-            <h3>{{$value.Title}}</h3>
-            <div>{{$value.Abstract}}</div>
-          </a>
+          <h3>
+            <a href="/detail/{{$value.Year}}/{{$value.Month}}/{{$value.UrlEn}}" title="{{$value.Title}}" target="_blank">
+              {{$value.Title}}
+            </a>
+          </h3>
+          <p>
+            <i>{{$value.TypeName}}／</i>
+            <i>{{$value.CreateTime  | DateFk}}／</i>
+            <i>{{$value.SeeSum}}人预览／</i>
+            <i>{{$value.ReviewSum}}条评论</i>
+          </p>
+          <div>{{$value.Abstract}}</div>
         </li>
         {{end}}
       </ul>
@@ -31,7 +39,6 @@
       dff
     </div> -->
     <div id="pagination">
-
     </div>
   </div>
   <script src="/vb/js/common.js"></script>
@@ -39,9 +46,13 @@
   <script src="/vb/js/pagination.min.js"></script>
   <script>
     $(function () {
+      paginationInt();
+    })
+    function paginationInt(){
       var count = {{.Count}}
       var pageSize={{.PageSize}}
-      var arr = [];
+      if(count>pageSize){
+        var arr = [];
       for (var i = 0; i < count; i++) {
         arr.push(i)
       }
@@ -59,7 +70,8 @@
           key = true;
         }
       })
-    })
+      }
+    }
   </script>
 </body>
 </html>
