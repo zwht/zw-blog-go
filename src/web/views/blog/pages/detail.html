@@ -11,11 +11,13 @@
   <link rel="stylesheet" href="/vb/css/common.css">
   <link rel="stylesheet" href="/vb/css/detail.css">
   <link rel="stylesheet" href="/vb/css/prism.css">
+  <!-- <link rel="stylesheet" href="/vb/css/shCoreDefault.css"> -->
+
 <body>
   <section class="art">
     <h1>{{.Detail.Title}}</h1>
     <p class="time">{{.Detail.CreateTime | DateFk}}&nbsp;&nbsp;{{.Detail.SeeSum}}</p>
-    <article>
+    <article id='article'>
       {{.Detail.Content | RenderHtml}}
     </article>
   </section>
@@ -115,6 +117,7 @@
   <script src="/vb/js/zepto.js"></script>
   <script src="/vb/js/common.js"></script>
   <script src="/vb/js/prism.js"></script>
+  <!-- <script src="/vb/js/shCore.js"></script> -->
   <script>
     var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
     $(function () {
@@ -257,6 +260,25 @@
       $("#email").val(getCookie('email'))
       $("#author").val(getCookie('userName'))
       $("#url").val(getCookie('url'))
+      insertCodeElement();
+    }
+    // 插入 code 标签函数,代码高亮方法
+    function insertCodeElement() {
+      // 创建一个 div 来放置获取到的内容，这样就可以把 content 字符串内容转换成 dom
+      // 方便我们对这个 dom 进行操作（只是创建 div，并没有插入到文档，他只存在于内存中）
+      var doc_pre = $("#article pre");
+      doc_pre.each(function (index, el) {
+        var class_val = $(this).attr('class');
+        var class_arr = new Array();
+        class_arr = class_val.split(';');
+        class_arr = class_arr['0'].split(':');
+        var lan_class = 'language-'+class_arr['1'];
+        var pre_content = '<code class="'+lan_class+'">'+$(this).html()+'</code>';
+        $(this).html(pre_content);
+        $(this).attr("class",'line-numbers '+lan_class);
+      });
+      // 最后，调用 Prism 的方法来高亮代码
+      Prism.highlightAll();
     }
     function inputMaxSet() {
       $('textarea').keyup(function (ev) {
