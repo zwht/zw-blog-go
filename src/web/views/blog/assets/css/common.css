@@ -1,19 +1,19 @@
-*, :after, :before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; margin: 0}
+*, :after, :before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
 html {height: 100%;width: 100%;}
-body {font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;height: 100%;width: 100%;
+body {font-family: -apple-system,BlinkMacSystemFont,"Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;height: 100%;width: 100%;
   overflow-y: auto;overflow-x: hidden;margin: 0;line-height: 1.42857143;
-  color: #555; font-size: 14px;}
-ul { list-style-type: none; margin: 0; padding: 0 }
-h1, h2, h3, h4, h5, h6, li, p { margin: 0; padding: 0; font-style: normal; font-weight: normal }
-a,b,i,img{font-weight: normal; font-style: normal;display: inline-block}
-i{ font-style: normal}
-textarea{resize: none;}
-input,button,select,textarea{outline:none; font-size: 14px;cursor: pointer}
-input,textarea,button,select,input[type=radio]{outline:none}
-a, a:link, a:visited { color: #555; text-decoration: none }
-ul,li{ list-style-type: none; margin: 0; padding: 0 }
+  color: #444; font-size: 16px;}
 hr{border: 1px solid #ededed; border-bottom: none;}
-
+.h1,h1 {font-size: 32px}
+.h2,h2 {font-size: 28px}
+.h3,h3 {font-size: 24px}
+.h4,h4 {font-size: 20px}
+.h5,h5 {font-size: 18px}
+.h6,h6 {font-size: 16px}
+h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{ font-weight: bold; color: #000;
+margin-bottom: 0.4em; margin-top: 1.5em;}
+h6,.h6{ margin-bottom: 0.4em; margin-top: 1em; color: #c00;}
+p{ margin: 0 0 1em;}
 .pull-right { float: right !important }
 .pull-left { float: left !important }
 .hide { display: none }
@@ -22,7 +22,6 @@ hr{border: 1px solid #ededed; border-bottom: none;}
 .clear2{clear: both}
 .clear:after,.clear2:after { content: " "; height: 0; width: 0; visibility: hidden;
   display: block; clear: both }
-
 .overflow { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
 .text-center{ text-align: center}
 .text-left{ text-align: left}

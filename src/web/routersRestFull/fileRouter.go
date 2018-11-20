@@ -15,6 +15,8 @@ func FileRouter(app *iris.Application) {
 	{
 		routes.Post("/upload", iris.LimitRequestBodySize(maxSize+1<<20), Permission(FileUpload, ""))
 		routes.Get("/img/{name:string}", Permission(FileGet, ""))
+		routes.Get("/del/{id:string}", Permission(FileDeleteById, ""))
+		routes.Post("/list/{pageNum:int}/{pageSize:int}", Permission(FileGetList, ""))
 	}
 
 }
