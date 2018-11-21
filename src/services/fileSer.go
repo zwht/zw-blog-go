@@ -3,17 +3,20 @@ package service
 import (
 	. "../tools"
 	"strconv"
+	"time"
 )
 
 type FileVo struct {
-	ID     string `json:"id"`
-	Type   int    `json:"type"`
-	UserId string `json:"userId"`
+	ID         string `json:"id"`
+	Type       int    `json:"type"`
+	UserId     string `json:"userId"`
+	CreateTime string `json:"createTime"`
 }
 type FileGetVo struct {
-	ID     string `json:"id"`
-	Type   int    `json:"type"`
-	UserId string `json:"userId"`
+	ID         string `json:"id"`
+	Type       int    `json:"type"`
+	UserId     string `json:"userId"`
+	CreateTime string `json:"createTime"`
 }
 
 type FileSearchVo struct {
@@ -25,8 +28,8 @@ type FileSearchVo struct {
 }
 
 func (file *FileVo) FileInsert() (err error) {
-	sql := "insert into files(id,type,user_id) values($1,$2,$3)"
-	_, err = Db.Exec(sql, file.ID, file.Type, file.UserId)
+	sql := "insert into files(id,type,user_id,create_time) values($1,$2,$3,$4)"
+	_, err = Db.Exec(sql, file.ID, file.Type, file.UserId, time.Now())
 	return
 }
 
@@ -56,7 +59,7 @@ func FileSelectCount(search FileSearchVo) (count int, err error) {
 }
 func FileSelectList(pageSize int, pageNum int, search FileSearchVo) (files []FileGetVo, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select id,type,user_id from files "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,type,user_id,create_time from files "+whereStr+" order by create_time desc limit ? offset ?", 0)
 	files = []FileGetVo{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
 	rows, err := Db.Query(sql, args...)
@@ -67,7 +70,7 @@ func FileSelectList(pageSize int, pageNum int, search FileSearchVo) (files []Fil
 	for rows.Next() {
 		rows.Columns()
 		var file FileGetVo
-		err = rows.Scan(&file.ID, &file.Type, &file.UserId)
+		err = rows.Scan(&file.ID, &file.Type, &file.UserId, &file.CreateTime)
 		if err != nil {
 			return
 		}

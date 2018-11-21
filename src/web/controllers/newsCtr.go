@@ -6,6 +6,7 @@ import (
 	. "../../tools"
 	. "../../tools/http"
 	"github.com/kataras/iris"
+	"github.com/satori/go.uuid"
 	"strconv"
 	"strings"
 )
@@ -16,6 +17,7 @@ func NewsCreate(ctx *Context) {
 	news.Author = ctx.User.Name
 	news.AuthorId = ctx.User.ID
 	news.SeeSum = 0
+	news.ID = uuid.Must(uuid.NewV4()).String()
 	err := news.NewsInsert()
 	result := Result{}
 
@@ -25,6 +27,7 @@ func NewsCreate(ctx *Context) {
 	} else {
 		result.Code = 200
 		result.Msg = "成功保存news信息"
+		result.Data = news.ID
 	}
 
 	ctx.JSON(result)

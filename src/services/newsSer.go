@@ -2,7 +2,6 @@ package service
 
 import (
 	. "../tools"
-	"github.com/satori/go.uuid"
 	"strconv"
 	"time"
 )
@@ -64,7 +63,7 @@ type NewsSearchVo struct {
 
 func (news *News) NewsInsert() (err error) {
 	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id,see_sum,source,review_sum) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)"
-	_, err = Db.Exec(sql, uuid.Must(uuid.NewV4()), news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId, news.SeeSum, news.Source, 0)
+	_, err = Db.Exec(sql, news.ID, news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId, news.SeeSum, news.Source, 0)
 	return
 }
 
