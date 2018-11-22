@@ -7,45 +7,47 @@ import (
 )
 
 type News struct {
-	ID          string `json:"id"`
-	UrlEn       string `json:"urlEn"`
-	Title       string `json:"title"`
-	Content     string `json:"content"`
-	CreateTime  string `json:"createTime"`
-	Author      string `json:"author"`
-	AuthorId    string `json:"authorId"`
-	TypeId      string `json:"typeId"`
-	UserGroupId string `json:"userGroupId"`
-	SeeSum      int    `json:"seeSum"`
-	Index       string `json:"index"`
-	Img         string `json:"img"`
-	IsHot       int    `json:"isHot"`
-	State       int    `json:"state"`
-	Abstract    string `json:"abstract"`
-	Labels      string `json:"labels"`
-	ReviewSum   int    `json:"reviewSum"`
-	Source      string `json:"source"`
+	ID              string `json:"id"`
+	UrlEn           string `json:"urlEn"`
+	Title           string `json:"title"`
+	Content         string `json:"content"`
+	CreateTime      string `json:"createTime"`
+	Author          string `json:"author"`
+	AuthorId        string `json:"authorId"`
+	TypeId          string `json:"typeId"`
+	UserGroupId     string `json:"userGroupId"`
+	SeeSum          int    `json:"seeSum"`
+	Index           string `json:"index"`
+	Img             string `json:"img"`
+	IsHot           int    `json:"isHot"`
+	State           int    `json:"state"`
+	Abstract        string `json:"abstract"`
+	Labels          string `json:"labels"`
+	ReviewSum       int    `json:"reviewSum"`
+	Source          string `json:"source"`
+	ContentMarkdown string `json:"contentMarkdown"`
 }
 type NewsList struct {
-	ID          string `json:"id"`
-	UrlEn       string `json:"urlEn"`
-	Title       string `json:"title"`
-	Content     string `json:"content"`
-	CreateTime  string `json:"createTime"`
-	Author      string `json:"author"`
-	AuthorId    string `json:"authorId"`
-	TypeId      string `json:"typeId"`
-	UserGroupId string `json:"userGroupId"`
-	SeeSum      int    `json:"seeSum"`
-	Index       string `json:"index"`
-	Img         string `json:"img"`
-	IsHot       int    `json:"isHot"`
-	State       int    `json:"state"`
-	Abstract    string `json:"abstract"`
-	Labels      string `json:"labels"`
-	ReviewSum   int    `json:"reviewSum"`
-	TypeName    string `json:"typeName"`
-	Source      string `json:"source"`
+	ID              string `json:"id"`
+	UrlEn           string `json:"urlEn"`
+	Title           string `json:"title"`
+	Content         string `json:"content"`
+	CreateTime      string `json:"createTime"`
+	Author          string `json:"author"`
+	AuthorId        string `json:"authorId"`
+	TypeId          string `json:"typeId"`
+	UserGroupId     string `json:"userGroupId"`
+	SeeSum          int    `json:"seeSum"`
+	Index           string `json:"index"`
+	Img             string `json:"img"`
+	IsHot           int    `json:"isHot"`
+	State           int    `json:"state"`
+	Abstract        string `json:"abstract"`
+	Labels          string `json:"labels"`
+	ReviewSum       int    `json:"reviewSum"`
+	TypeName        string `json:"typeName"`
+	Source          string `json:"source"`
+	ContentMarkdown string `json:"contentMarkdown"`
 }
 type NewsSearchVo struct {
 	ID          string `column:"and,news.id,="`
@@ -62,8 +64,8 @@ type NewsSearchVo struct {
 }
 
 func (news *News) NewsInsert() (err error) {
-	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id,see_sum,source,review_sum) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)"
-	_, err = Db.Exec(sql, news.ID, news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId, news.SeeSum, news.Source, 0)
+	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id,see_sum,source,content_markdown,markdown,review_sum) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)"
+	_, err = Db.Exec(sql, news.ID, news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId, news.SeeSum, news.Source, news.ContentMarkdown, 0)
 	return
 }
 
@@ -74,8 +76,8 @@ func NewsDelete(id string) (err error) {
 }
 
 func (news *News) NewsUpdate() (err error) {
-	sql := "update news set title=$1,content=$2,type_id=$3,img=$4,state=$5,abstract=$6,labels=$7,url_en=$8, source=$9 where id=$10"
-	_, err = Db.Exec(sql, news.Title, news.Content, news.TypeId, news.Img, news.State, news.Abstract, news.Labels, news.UrlEn, news.Source, news.ID)
+	sql := "update news set title=$1,content=$2,type_id=$3,img=$4,state=$5,abstract=$6,labels=$7,url_en=$8, source=$9,content_markdown=$10 where id=$11"
+	_, err = Db.Exec(sql, news.Title, news.Content, news.TypeId, news.Img, news.State, news.Abstract, news.Labels, news.UrlEn, news.Source, news.ContentMarkdown, news.ID)
 	return
 }
 func (news *News) NewsUpdateSum() (err error) {
@@ -95,9 +97,9 @@ func (news *News) NewsUpdateReviewSum() (err error) {
 }
 
 func NewsSelect(id string) (news News, err error) {
-	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id,see_sum,source from news where id=$1"
+	sql := "select id,url_en,title,content,create_time,author,type_id,img,state,abstract,labels,author_id,see_sum,source,content_markdown from news where id=$1"
 	news = News{}
-	err = Db.QueryRow(sql, id).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.AuthorId, &news.SeeSum, &news.Source)
+	err = Db.QueryRow(sql, id).Scan(&news.ID, &news.UrlEn, &news.Title, &news.Content, &news.CreateTime, &news.Author, &news.TypeId, &news.Img, &news.State, &news.Abstract, &news.Labels, &news.AuthorId, &news.SeeSum, &news.Source, &news.ContentMarkdown)
 	return
 }
 func NewsSelectByUrl(urlEn string, time1 string, time2 string) (news News, err error) {
@@ -114,7 +116,7 @@ func NewsSelectCount(search NewsSearchVo) (count int, err error) {
 }
 func NewsSelectList(pageSize int, pageNum int, search NewsSearchVo) (newss []NewsList, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select news.id,news.url_en,news.title,news.create_time,news.author,news.img,news.state,news.abstract,news.labels,news_type.name,news.source,news.review_sum,news.see_sum from news join news_type on news.type_id = news_type.id "+whereStr+" limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select news.id,news.url_en,news.title,news.create_time,news.author,news.img,news.state,news.abstract,news.labels,news_type.name,news.source,news.review_sum,news.see_sum from news join news_type on news.type_id = news_type.id "+whereStr+" order by create_time desc limit ? offset ?", 0)
 	println(sql)
 	newss = []NewsList{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))

@@ -54,7 +54,7 @@ func CodeSelectCount(search CodeSearchVo) (count int, err error) {
 }
 func CodeSelectList(pageSize int, pageNum int, search CodeSearchVo) (codes []Code, err error) {
 	whereStr, args := GenWhereByStruct(search)
-	sql, _ := ReplaceQuestionToDollarInherit("select id,name,description,groups,code from code"+whereStr+" order by code limit ? offset ?", 0)
+	sql, _ := ReplaceQuestionToDollarInherit("select id,name,description,groups,code from code"+whereStr+" order by code desc limit ? offset ?", 0)
 	fmt.Println(sql)
 	codes = []Code{}
 	args = append(args, strconv.Itoa(pageSize), strconv.Itoa(pageSize*(pageNum-1)))
