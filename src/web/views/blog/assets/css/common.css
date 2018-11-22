@@ -14,6 +14,9 @@ h1,h2,h3,h4,h5,.h1,.h2,.h3,.h4,.h5{ font-weight: bold; color: #000;
 margin-bottom: 0.4em; margin-top: 1.5em;}
 h6,.h6{ margin-bottom: 0.4em; margin-top: 1em; color: #c00;}
 p{ margin: 0 0 1em;}
+code{background-color: #fee9cc;color: rgba(0, 0, 0, 0.75);padding: 1px 3px;
+  font-size: 12px;border-radius: 3px;border-radius: 3px;}
+  
 .pull-right { float: right !important }
 .pull-left { float: left !important }
 .hide { display: none }
