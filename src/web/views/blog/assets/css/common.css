@@ -31,7 +31,7 @@ a{ color: #1890ff;background-color: transparent;text-decoration: none;outline: n
 a:hover{text-decoration:underline}
 table{border: 1px solid #ededed;width: 100%; border-left: 0; border-bottom: 0;border-collapse: collapse;}
 th, td{padding: 6px;height: 40px; border-left: 1px solid #ededed;}
-th{height: 50px;font-weight: bold; background: rgb(233, 235, 240);}
+th{height: 50px;font-weight: bold; background: #f5f2f3;}
 tr{ border-bottom: 1px solid #ededed;}
 tr:nth-child(even){background: #F9FAFC;}
 /* 从newsAdd页面拷贝过来的----end */
