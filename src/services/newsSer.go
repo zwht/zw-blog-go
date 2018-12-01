@@ -66,7 +66,7 @@ type NewsSearchVo struct {
 }
 
 func (news *News) NewsInsert() (err error) {
-	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id,see_sum,source,content_markdown,markdown,markdown,review_sum) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)"
+	sql := "insert into news(id,url_en,title,content,create_time,author,type_id,img,user_group_id,state,abstract,labels,author_id,see_sum,source,content_markdown,markdown,review_sum) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)"
 	_, err = Db.Exec(sql, news.ID, news.UrlEn, news.Title, news.Content, time.Now(), news.Author, news.TypeId, news.Img, news.UserGroupId, news.State, news.Abstract, news.Labels, news.AuthorId, news.SeeSum, news.Source, news.ContentMarkdown, news.Markdown, 0)
 	return
 }
