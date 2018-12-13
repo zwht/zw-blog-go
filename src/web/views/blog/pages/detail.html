@@ -267,6 +267,12 @@
       $("#author").val(getCookie('userName'))
       $("#url").val(getCookie('url'))
       insertCodeElement();
+      a_blank();
+    }
+    function a_blank(){
+      $('a[href^="http"]').each(function () {
+        $(this).attr('target', '_blank');
+      });
     }
     // 插入 code 标签函数,代码高亮方法
     function insertCodeElement() {
@@ -280,8 +286,8 @@
           var lan_class = 'language-' + class_arr['1'];
           var pre_content = '<code class="' + lan_class + '">' + $(this).html() + '</code>';
           $(this).html(pre_content);
-          $(this).attr("class", "line-numbers "+lan_class);
-        }else{
+          $(this).attr("class", "line-numbers " + lan_class);
+        } else {
           $(this).addClass("line-numbers");
         }
       });
