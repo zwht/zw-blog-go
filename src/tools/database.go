@@ -7,10 +7,10 @@ import (
 )
 
 const (
-	host     = "120.79.171.251"
+	host     = "192.168.31.22"
 	port     = 5432
-	user     = "zhaowei"
-	password = "123"
+	user     = "postgres"
+	password = "zw200813"
 	dbname   = "blog"
 )
 
