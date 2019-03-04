@@ -20,7 +20,7 @@
         {{range $key, $value :=.List}}
         <li>
           <h3>
-            <a href="/detail/{{$value.Year}}/{{$value.Month}}/{{$value.UrlEn}}" title="{{$value.Title}}" target="_blank">
+            <a href="/detail?year={{$value.Year}}&month={{$value.Month}}&urlEn={{$value.UrlEn}}" title="{{$value.Title}}" target="_blank">
               {{$value.Title}}
             </a>
           </h3>

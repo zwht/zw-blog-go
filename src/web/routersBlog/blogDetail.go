@@ -16,7 +16,12 @@ type TreeStruct struct {
 }
 
 // 根据月份和urlen去查询新闻详情
-func (c *BlogDetailController) GetBy(ctx iris.Context, year string, month string, urlEn string) mvc.Result {
+func (c *BlogDetailController) Get(ctx iris.Context) mvc.Result {
+
+	year := ctx.FormValue("year")
+	month := ctx.FormValue("month")
+	urlEn := ctx.FormValue("urlEn")
+
 	month1, _ := strconv.Atoi(month)
 	year1, _ := strconv.Atoi(year)
 	email := ctx.GetCookie("email")
